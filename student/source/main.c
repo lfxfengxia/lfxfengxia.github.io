@@ -18,9 +18,9 @@ void printPic(void)
     fprintf(stderr,"List  students information ---------- 0\n");
     fprintf(stderr,"Insert students information ---------- 1\n");
     fprintf(stderr,"Delete students information ---------- 2\n");
-    fprintf(stderr,"Modify students information ---------- 3\n");
-    fprintf(stderr,"Search students information ---------- 4\n");
-    fprintf(stderr,"Quit  the  system -------------------- 5\n");
+    //fprintf(stderr,"Modify students information ---------- 3\n");
+    fprintf(stderr,"Search students information ---------- 3\n");
+    fprintf(stderr,"Quit  the  system -------------------- 4\n");
     fprintf(stderr, "                                                                    xxx  liufengxia \n");
     fprintf(stderr, "                                                                    xxx  2014-09-30 \n");
     fprintf(stderr,"                                                                 ==================\n");
@@ -65,14 +65,27 @@ int main(void)
     int age = -1;
     STU *stu = NULL;
 
+    //打开文件保存学生信息
+    system("touch studentInfo");
+    FILE *fp = fopen("studentInfo","r+");
+    if (fp == NULL){
+        perror("fopen");
+        goto fopen_fail;
+    }
     //为学生信息分配内存并初始化
     stu = allocStudentsRecords(STUNUM);
     if(NULL == stu)
     {
         goto _FAIL;
     }
+
+    //从文件中读取学生信息，保存在内存中
+    fread(stu,sizeof(STU),STUNUM,fp);
+    rewind(fp);
+
     while (1) {
         printPic();
+        printf("*************************************************\n");
         // 1. 提示用户输入命令
         printf("Please input command number:\n");
         // 2. 接收用户输入的命令(怀疑用户的输入,也就是对用户输入进行检查)
@@ -122,9 +135,14 @@ _INPUTAGE:
         }
 
     }
+fopen_fail:
+    fclose(fp);
 _FAIL:
     exit(1);
 _EXIT:
+    //将学生信息从内存中写到文件中
+    fwrite(stu,sizeof(STU),STUNUM,fp);
+    fclose(fp);
     deallocStudentsRecords(stu);
     return 0;
 }
