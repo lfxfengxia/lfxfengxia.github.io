@@ -21,7 +21,7 @@
 4. NSL">
 <meta property="og:image" content="http://www.52nx.net/article/UploadPic/2011-10/2011101515463073132.png">
 <meta property="og:image" content="http://www.52nx.net/article/UploadPic/2011-7/2011772043927764.png">
-<meta property="og:image" content="http://img.ph.126.net/k770I208qtaCMUkmqZL_3Q==/93449692284723195.png">
+<meta property="og:image" content="http://s11.sinaimg.cn/middle/5f764369naf040c6ee03a&690">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="oc-notes">
 <meta name="twitter:description" content="NSLog 与 printf的不同
@@ -828,7 +828,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
     `<span class="tuple">{$  <span class="comment">%K}`</span></span>
 </code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="constant">NSPredicate *predicate</span> = [NSPredicate predicateWithFormat:@<span class="string">"age between $RANGE"</span>];</div><div class="line"><span class="constant">      NSArray *arr</span> = @[@<span class="number">20</span>,@<span class="number">50</span>];</div><div class="line"><span class="constant">      NSDictionary *dic</span> = @{@<span class="string">"RANGE"</span>:arr};</div><div class="line">      <span class="comment">//过滤 20 &gt;= age &lt;= 50的信息</span></div><div class="line"><span class="constant">      </span></div><div class="line">      NSString *keyPath = @<span class="string">"age"</span>;</div><div class="line">      predicate = [NSPredicate predicateWithFormat:@<span class="string">"%K &gt; %@"</span>,keyPath,@<span class="number">20</span>];</div><div class="line">      <span class="comment">//过滤age &gt; 20 的信息</span></div></pre></td></tr></table></figure>
 
-<p><img src="http://img.ph.126.net/k770I208qtaCMUkmqZL_3Q==/93449692284723195.png" alt="image"></p>
+<p><img src="http://s11.sinaimg.cn/middle/5f764369naf040c6ee03a&amp;690" alt="image"></p>
 
       
     </div>
