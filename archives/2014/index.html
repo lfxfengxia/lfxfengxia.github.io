@@ -67,6 +67,336 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-c-notes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/23/c-notes/" class="article-date">
+  <time datetime="2014-10-23T12:31:16.000Z" itemprop="datePublished">Oct 23 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/23/c-notes/">c-notes</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="间接_标准_统一_机制_策略">间接  标准  统一  机制  策略</h3>
+<h4 id="iTerm_的配置">iTerm 的配置</h4>
+<ol>
+<li><p>将iTerm移到应用程序</p>
+<p> 进入配置文件 </p>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> iterm<span class="variable">$zsh</span>/.oh my zsh/templates</div></pre></td></tr></table></figure>
+
+<ol>
+<li><p>ls 查看当前目录下的所有文件</p>
+<p> 拷贝当前目录下的文件 zshrc.zsh-template 到~/.zshrc 下</p>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cp zshrc.zsh-<span class="keyword">template</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>退出iterm，重启即可   </li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>q</div></pre></td></tr></table></figure>
+
+
+<h4 id="VI编辑器中的基本命令">VI编辑器中的基本命令</h4>
+<h5 id="VI编辑器中的基本内部命令">VI编辑器中的基本内部命令</h5>
+<p>在终端使用 vimtutor 命令可以查看VI编辑器中的基本命令</p>
+<ol>
+<li><p>复制命令</p>
+<p>复制单个字符: y</p>
+<p>复制一个单词: yw</p>
+<p>复制所选中的一行: yy</p>
+</li>
+<li><p>移动命令<br>移动光标到行首: ^</p>
+<p>向前移动一个单词: b</p>
+<p>向后移动一个单词: w</p>
+<p>向下翻一页: ctrl ＋ f </p>
+<p>向上翻一页: ctrl ＋ b</p>
+</li>
+<li><p>d ＋ ^ 删除光标所在位置到行首的所有字符</p>
+</li>
+<li>d ＋ $ 删除光标所在位置到行尾的所有字符</li>
+</ol>
+<h5 id="VI编辑器中的基本外部命令">VI编辑器中的基本外部命令</h5>
+<ol>
+<li><p>删除命令</p>
+<pre><code> <span class="keyword">*</span> rm ［filename］ 删除基本文件
+ <span class="keyword">*</span> rm －r ［filename］ 有提示的删除一个文件夹
+ <span class="keyword">*</span> rm －rf ［filename］ 强制删除文件夹，包括文件夹内的所有子文件夹以及自文件，且无提示 
+  <span class="keyword">*</span> rm \<span class="keyword">*</span>~   (<span class="keyword">*</span>为通配符)，即删除所有以～结尾的文件
+</code></pre></li>
+<li><p>拷贝命令</p>
+<pre><code> <span class="keyword">*</span> 若file2文件家不存在，默认将file1 拷贝一分命名为file2 
+ <span class="keyword">*</span> 若file2时文件夹，默认将file1拷贝到文件夹file2下，且名字仍为file1 
+ <span class="keyword">*</span> file1 file2 不加路径的情况下，默认是把当前路径下的文件拷贝到当前路径下 
+ <span class="keyword">*</span> ile1 file2 表示为路径的形式，则是把指定路径下的file1 拷贝到指定路径下命名为file2，或是拷贝到制定路径下的file2文件夹下命名仍然是file1 
+ <span class="keyword">*</span> cp －r/R ［file1］［file2］ 
+ <span class="keyword">*</span> 将文件夹1拷贝到文件夹2目录下 
+</code></pre></li>
+<li><p>重命名（移动命令）</p>
+<p> mv ［file1］［file2］</p><p></p>
+<ul>
+<li>若两文件在同一路径下且file2文件家不存在，默认将file1 重命名为file2</li>
+<li>若file2时文件夹，默认将file1移动到文件夹file2下，且名字仍为file1<ul>
+<li>file1 file2 不加路径的情况下，默认是把当前路径下的文件重命名为file2</li>
+</ul>
+</li>
+<li>file1 file2 表示为路径的形式，则是把指定路径下的file1 移动到指定路径下命名为file2，或是移动到指定路径下的file2文件夹下命名仍然是file1</li>
+</ul>
+</li>
+<li><p>其他命令</p>
+<ul>
+<li>ls －a列出当前目录下的所有文件及文件夹，包括隐藏文件（以 “.” 开始的文件或文件夹）其中 . 和 ..两个文件夹表示是当前路径和上级路径</li>
+<li>cd 切换路径</li>
+<li>du －h ［filename］ 默认为查看当前路径下人类可读的文件的大小，追加filename，则是查看该文件夹下的人类可读的文件的大小</li>
+<li>diff ［file1］［file2］比较两个文件内容是否相同，相同的话无显示结果；不同的话，则列出不同之处</li>
+<li>file ［file］ 查看该文件的类型（如二进制类型,ASCII,English等）</li>
+<li>!!调出上次使用的命令<br>! +   使用过的命令的首字母后第一个单词，调出最近使用过包含该字母或单词的命令<br>ctrl ＋ r 搜索使用过的命令<br>ctrl ＋ c 结束当前输入的命令，即不执行当前输入的命令</li>
+<li>gcc 执行命令时 加－g 可进行调试 （l 列出函数的源代码，b 设置断点，r 运行程序，n 执行下一步，s 进入函数内部，p ［var］ 打印变量var的值 q 退出程序 ）, 加 －save－temps 保留编译时生成的结果（即 .i, .s, .o 文件生成且被保留下来可供查看）</li>
+<li>$?(echo $? 在屏幕上显示上次命令执行的结果，若执行成功则返回0，否则返回1；若上次执行是程序且执行成功则返回return 后的返回值)<br> echo $HOME 显示当前的home路径<br> echo $USER 显示当前的用户名</li>
+<li>cat [filename] | head    查看文件的前十行内容<p></p><h4 id="注释方法">注释方法</h4>
+</li>
+<li>// 注释一行</li>
+<li><p>注释多行</p>
+<ol>
+<li>/*…*/ </li>
+<li><p>#if 0</p>
+<p> …</p>
+<p> #else</p>
+<p> …</p>
+<p> #endif</p>
+<p> 注释从 if 0 到else之间的多行，程序在编译，只编译else与endif之间的多行；若果把0换成非零值，则只</p>
+</li>
+</ol>
+</li>
+<li><p>头文件的保护</p>
+<p>  ＃ifndef ［宏名］</p>
+<p>   ＃define ［宏名］</p>
+<p>   …</p>
+<h1 id="endif">endif</h1>
+<p>   在引用头文件时，如果未定义头文件内已定义过的内容，则定义；否则，不再重复定义</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="变量的作用范围">变量的作用范围</h4>
+<ol>
+<li>函数作用域   仅限在一个函数中使用</li>
+<li>文件作用域   仅限在一个文件中使用</li>
+<li>代码快作用域  受限与“ ｛｝” 的限制</li>
+<li>原型作用域    函数声明</li>
+</ol>
+<h4 id="变量的大小">变量的大小</h4>
+<ol>
+<li>char  c 语言标准规定为1字节</li>
+<li>int 一般为4字节  规定int的大小不超过long的大小，short的大小不超过int的大小</li>
+<li>指针的大小与long的大小等于机器字长（即 32位os 其大小为4字节，64的os其大小为8字节），古可用sizeof(int)测试机器os时多少位的（sizeof只是一个操作符，并不是一个函数）。</li>
+</ol>
+<h4 id="数据类型">数据类型</h4>
+<ul>
+<li>整型：char  short  int long </li>
+<li>浮点型： float double</li>
+<li>指针</li>
+<li>聚合类型：数组，结构体，枚举类型</li>
+<li>派生类型：字符串，联合体<h4 id="赋值操作_值得注意点">赋值操作 值得注意点</h4>
+</li>
+<li>数组名是个地址，只能在初始化是对其赋值，在以后使用中，数组名是个地址常量，不能被作为左值对其赋值</li>
+<li>对字符数组初始化赋值为字符串字面常量，相当于把全局数据段的字符串复制到栈对字符数组分配的地址中去。</li>
+<li>指针是指针变量可以对其进行赋值运算</li>
+<li>结构体类型的变量可以作为左值对其进行赋值</li>
+</ul>
+<h4 id="分配内存问题">分配内存问题</h4>
+<ul>
+<li>在函数中定义变量，对其分配内存时不能太大</li>
+<li>可使用全局变量在全局数据段分配大内存</li>
+<li>可使用malloc（size）动态在堆中分配大内存，使用memset将申请的内存初始化。</li>
+</ul>
+<h4 id="字符串操作中段错误">字符串操作中段错误</h4>
+<ul>
+<li>定义一个指向NULL地址的字符串指针<br> NULL的ascii值为0，地址为0的内存不可以被访问，故对该地址进行写操作是没有权限的。</li>
+<li>在定义一个字符串数组时对其进行初始化为字符串字面常量<br> 对字符串数组定义并初始化为一个字符串字面常量时，字符数组首地址指向的是全局数据段的地址，对该段内存进行写操作是没有全县的。</li>
+<li>使用strcpy，strcat，strcmp，strcasecmp等字符串操作函数，将目标字符串读／写爆。应该使用strncpy，strncat，strncmp，strncasecmp等字符串操作函数防止读写越界。</li>
+</ul>
+<h4 id="文件操作常用函数">文件操作常用函数</h4>
+<ol>
+<li>字符读写 fgetc(FILE *fp);</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fputc(<span class="keyword">int</span> c,<span class="keyword">FILE</span>*fp);</div></pre></td></tr></table></figure>
+
+<ol>
+<li>按行读写 fgets(char <em>str,size,FILE \</em>fp);</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fputs(<span class="keyword">char</span> \*,<span class="keyword">size</span>,<span class="keyword">FILE</span> *fp);</div></pre></td></tr></table></figure>
+
+<ol>
+<li>数据块读写 fread(char *,size,number,FILE *fp);</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fwrite(<span class="keyword">char</span> \*, <span class="keyword">size</span>,number,<span class="keyword">FILE</span> \*fp);</div></pre></td></tr></table></figure>
+
+<ol>
+<li>格式化读写 fprintf(FILE *fp,format,…);</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fsanf(FILE *fp,format,<span class="keyword">...</span>);</div></pre></td></tr></table></figure>
+
+
+<h6 id="三种缓冲机制">三种缓冲机制</h6>
+<ul>
+<li>行缓冲  缓冲区存储一行信息才进行输出 eg：stdout（标准输出）</li>
+<li>全缓冲  缓冲区存储满信息才进行输出</li>
+<li>无缓冲  缓冲区只要有信息存储进去就进行输出  eg：stderr（报错）<h6 id="改变文件指针位置">改变文件指针位置</h6>
+<ul>
+<li>rewind(FILE *fp);    改变指针指向头文件</li>
+<li>fseek(FILE *fp,int length,long where);(where  可取值为SEEK_SET  SEEK_CUR   SEEK_END)   改变指针位置从（文件头部，当前位置，文件尾部）移动length个字节的位置<p></p></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/10/23/c-notes/" data-id="lv5efifed8k37tyu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git-base-operation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/23/git-base-operation/" class="article-date">
+  <time datetime="2014-10-23T11:50:57.000Z" itemprop="datePublished">Oct 23 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/23/git-base-operation/">git-base-operation</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基本操作">基本操作</h3>
+<h4 id="创建一个裸仓库">创建一个裸仓库</h4>
+<p><code>git init --bare</code></p>
+<h4 id="初始化基本仓库">初始化基本仓库</h4>
+<p><code>git init</code></p>
+<h4 id="配置作者信息">配置作者信息</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --<span class="keyword">global</span> user.name <span class="string">"liufengxia"</span></div><div class="line">git config --<span class="keyword">global</span> usr.emil <span class="number">1874962073</span>@<span class="number">163</span>.<span class="keyword">com</span></div></pre></td></tr></table></figure>
+
+<h4 id="添加文件到暂存区（跟踪文件）">添加文件到暂存区（跟踪文件）</h4>
+<p><code>git add [filename]</code></p>
+<p><code>git add *</code> // 跟踪所有已跟踪过又修改的文件</p>
+<h4 id="移除文件">移除文件</h4>
+<p><code>git rm [filename]</code></p>
+<h4 id="重命名一个文件">重命名一个文件</h4>
+<p><code>git mv [oldname] [newname]</code></p>
+<h4 id="提交暂存区">提交暂存区</h4>
+<p><code>git commit -m &quot;description information&quot;</code>//   git commmit 只提交在暂存区的内容</p>
+<p><code>git commit －a －m &quot;description information&quot;</code>//  将跟踪过又修改的为放入暂存跟踪后直接提交，已放入暂存区的也直接一起提交</p>
+<h4 id="查看工作目录的状态">查看工作目录的状态</h4>
+<p><code>git status</code></p>
+<h4 id="查看提交历史记录">查看提交历史记录</h4>
+<p><code>git log</code></p>
+<h4 id="查看文件改变">查看文件改变</h4>
+<p><code>git diff</code> //默认比较工作区下的文件与最近一次提交的不同</p>
+<p><code>git diff -- stash</code>//比较暂存区下的文件与最近一次提交的不同</p>
+<h3 id="撤销操作">撤销操作</h3>
+<h4 id="撤销加入暂存区的操作">撤销加入暂存区的操作</h4>
+<p><code>git reset -- [filename]</code></p>
+<h4 id="撤销修改的操作">撤销修改的操作</h4>
+<p><code>git checkout -- [filename]</code></p>
+<h4 id="将本地的修改放进回收站">将本地的修改放进回收站</h4>
+<p><code>git stash</code></p>
+<h4 id="从回收站中恢复本地的修改">从回收站中恢复本地的修改</h4>
+<p><code>git stash apply</code></p>
+<h3 id="Tag操作">Tag操作</h3>
+<h4 id="查看tag">查看tag</h4>
+<p><code>git tag</code></p>
+<h4 id="创建tag">创建tag</h4>
+<p><code>git tag -a tagname -m &quot;tag description information&quot;</code></p>
+<h4 id="显示tag信息">显示tag信息</h4>
+<p><code>git show tagname</code></p>
+<h4 id="对之前的提交打tag">对之前的提交打tag</h4>
+<p><code>git tag -a tagname -m &quot;tag description information&quot; commit-num</code></p>
+<h3 id="分支操作">分支操作</h3>
+<h4 id="查看分支">查看分支</h4>
+<p>// 默认查看本地分支</p>
+<p><code>git branch</code></p>
+<p>// 查看本地以及远端分支</p>
+<p><code>git branch -a</code></p>
+<p>// 查看远端分支</p>
+<p><code>git branch -r</code></p>
+<h4 id="创建分支">创建分支</h4>
+<p><code>git branch newbranchname</code></p>
+<h4 id="删除分支">删除分支</h4>
+<p><code>git branch -d/D branchname</code></p>
+<h4 id="切换分支">切换分支</h4>
+<p><code>git checkout branchname</code></p>
+<h4 id="创建分支并切换到新建的分支下">创建分支并切换到新建的分支下</h4>
+<p><code>git branch checkout -b newbranch</code></p>
+<h4 id="合并分支">合并分支</h4>
+<p><code>git merge branchname branchname</code></p>
+<h4 id="rebase操作">rebase操作</h4>
+<p><code>git rebase branchname branchname</code></p>
+<h3 id="远端仓库操作">远端仓库操作</h3>
+<h4 id="克隆一个远端仓库">克隆一个远端仓库</h4>
+<p><code>git clone URL/repodirectory</code></p>
+<h4 id="添加远端仓库">添加远端仓库</h4>
+<p><code>git remote add reponame URL/repodirectory</code></p>
+<h4 id="更新远端仓库的分支和数据">更新远端仓库的分支和数据</h4>
+<p><code>git fetch</code>   //默认更新远端master分支</p>
+<p><code>git fetch reponame branchname</code>     //更新指定远端的分支</p>
+<h4 id="获取并合并远端仓库的分支到当前分支">获取并合并远端仓库的分支到当前分支</h4>
+<p><code>git pull reponame branchname</code></p>
+<p>eg: git pull origin master</p>
+<h4 id="上传本地分支和数据到远端仓库">上传本地分支和数据到远端仓库</h4>
+<p><code>git push reponame  branchname</code></p>
+<p>eg: git push origin master</p>
+<h4 id="跟踪远端仓库上的分支">跟踪远端仓库上的分支</h4>
+<p><code>git checkout —track origin/testbranch</code></p>
+<p><code>git checkout -b test origin/testbranch</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/10/23/git-base-operation/" data-id="jjcd5kox4zsujlcu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-setUpBlog" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/10/23/setUpBlog/" class="article-date">
@@ -1398,702 +1728,6 @@ ls 查看当前目录下的所有文件
 
 
   
-    <article id="post-setUpBlog/index" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/10/23/setUpBlog/index/" class="article-date">
-  <time datetime="2014-10-23T05:15:37.000Z" itemprop="datePublished">Oct 23 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>setUpBlog | LFX&#39;s blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="安装brew
-执行命令
-$ ruby -e '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)'
-安装wget
-执行命令
- $ brew install wget
-安装nvm(node.js的版本管理工具)
-$ wget -qO- https://raw.github.com/creat">
-<meta property="og:type" content="article">
-<meta property="og:title" content="setUpBlog">
-<meta property="og:url" content="http://yoursite.com/2014/10/06/setUpBlog/">
-<meta property="og:site_name" content="LFX's blog">
-<meta property="og:description" content="安装brew
-执行命令
-$ ruby -e '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)'
-安装wget
-执行命令
- $ brew install wget
-安装nvm(node.js的版本管理工具)
-$ wget -qO- https://raw.github.com/creat">
-<meta property="og:image" content="http://smallerapp.com/favicon.ico">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="setUpBlog">
-<meta name="twitter:description" content="安装brew
-执行命令
-$ ruby -e '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)'
-安装wget
-执行命令
- $ brew install wget
-安装nvm(node.js的版本管理工具)
-$ wget -qO- https://raw.github.com/creat">
-
-  
-    <link rel="alternative" href="/atom.xml" title="LFX&#39;s blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-
-  
-
-</head>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">LFX&#39;s blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">SayingWhy&#39;s blog</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-setUpBlog" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/10/06/setUpBlog/" class="article-date">
-  <time datetime="2014-10-06T12:09:54.000Z" itemprop="datePublished">Oct 6 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      setUpBlog
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://smallerapp.com/favicon.ico" alt="Smaller icon"></p>
-<h3 id="安装brew">安装brew</h3>
-<pre><code>执行命令
-$ ruby <span class="operator">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span>
-</code></pre><h3 id="安装wget">安装wget</h3>
-<pre><code>执行命令
- <span class="variable">$ </span>brew install wget
-</code></pre><h3 id="安装nvm(node-js的版本管理工具)">安装nvm(node.js的版本管理工具)</h3>
-<pre><code>$ wget -qO- http<span class="variable">s:</span>//raw.github.<span class="keyword">com</span>/creationix/nvm/master/install.<span class="keyword">sh</span> | <span class="keyword">sh</span>
-</code></pre><h3 id="添加如下内容到~/-zshrc_配置文件">添加如下内容到~/.zshrc 配置文件</h3>
-<pre><code>[ -s <span class="string">"/Users/<span class="escape">`u</span>sers<span class="escape">`/</span>.nvm/nvm.sh"</span> ] &amp;&amp; . <span class="string">"/Users/<span class="escape">`u</span>sers<span class="escape">`/</span>.nvm/nvm.sh"</span> # This loads nvm
-</code></pre><h3 id="安装node-js(通过nvm安装)">安装node.js(通过nvm安装)</h3>
-<pre><code><span class="variable">$nvm</span> install <span class="number">0.10</span>
-</code></pre><h3 id="安装hexo">安装hexo</h3>
-<pre><code><span class="variable">$ </span>npm install -g hexo
-</code></pre><h3 id="创建hexo文件夹，并安装hexo组件">创建hexo文件夹，并安装hexo组件</h3>
-<pre><code><span class="variable">$ </span>hexo init hexo
-<span class="variable">$ </span>cd hexo
-<span class="variable">$ </span>npm install
-</code></pre><h3 id="查看本地">查看本地</h3>
-<p>输入如下命令后，打开浏览器，并输入localhost:4000来查看</p>
-<pre><code><span class="variable">$ </span>hexo g
-<span class="variable">$ </span>hexo s
-</code></pre><h3 id="登录github-com注册github账号">登录github.com注册github账号</h3>
-<h3 id="创建与github同名的repository">创建与github同名的repository</h3>
-<pre><code><span class="label">eg:</span>github账号名位<span class="escape">`l</span>fxfengxia<span class="escape">`，</span>则创建<span class="escape">`l</span>fxfengxia.github.io`
-</code></pre><h3 id="部署到github上">部署到github上</h3>
-<p>如下所示编辑_config.yml</p>
-<pre><code>    deploy:
-      <span class="built_in">type</span>: github
-      repository: git@github.com:dorayox/dorayox.github.<span class="built_in">io</span>.git
-      branch: master
-</code></pre><p>输入如下命令，完成到github得部署，之后打开浏览器并输入dorayox.github.io来查看</p>
-<pre><code><span class="variable">$ </span>hexo g
-<span class="variable">$ </span>hexo d
-</code></pre><h2 id="上传文件到blog">上传文件到blog</h2>
-<h3 id="在hexo目录下，创建新文件">在hexo目录下，创建新文件</h3>
-<pre><code>$ hexo <span class="keyword">new</span> [filename] 
-</code></pre><p> 默认创建的新文件后缀问 .md文件，存在hexo/source/_posts/目录下</p>
-<h3 id="使用MOU打开新建的文件并完成编辑">使用MOU打开新建的文件并完成编辑</h3>
-<pre><code><span class="variable">$ </span>mou [file_directory]
-</code></pre><h3 id="将新见得文件声称网页">将新见得文件声称网页</h3>
-<pre><code><span class="variable">$ </span>hexo g
-</code></pre><h3 id="上传到blog">上传到blog</h3>
-<pre><code><span class="variable">$ </span>hexo d
-</code></pre><h3 id="登录blog查看是否上传成功">登录blog查看是否上传成功</h3>
-<p><a href="http://github.com/lfxfengxia/lfxfengxia.github.io" target="_blank" rel="external">http://github.com/lfxfengxia/lfxfengxia.github.io</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/06/setUpBlog/" data-id="scmiyq9je1jas1qs" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/setUpBlog/">setUpBlog</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2014/10/07/c_notes/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          c_notes
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2014/10/06/git/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">git</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Accelerator-Key/">Accelerator Key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c-notes/">c notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setUpBlog/">setUpBlog</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Accelerator-Key/" style="font-size: NaNpx;">Accelerator Key</a><a href="/tags/c-notes/" style="font-size: NaNpx;">c notes</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/setUpBlog/" style="font-size: NaNpx;">setUpBlog</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recents</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2014/10/20/accelerator-key/">accelerator_key</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/07/c_notes/">c_notes</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/06/setUpBlog/">setUpBlog</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/06/git/">git</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/04/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2014 LiuFengxia<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
-
-
-
-<script src="/js/script.js" type="text/javascript"></script>
-
-
-  </div>
-</body>
-</html>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/23/setUpBlog/index/" data-id="0bol10dlbv36kjh2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git/index" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/10/23/git/index/" class="article-date">
-  <time datetime="2014-10-23T05:15:28.000Z" itemprop="datePublished">Oct 23 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>git | LFX&#39;s blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="基本操作
-
-初始化仓库 git init
-配置作者信息
- git config —global user.email “youremail@corp.com” git config —global user.name “yourname” 
-
-添加文件到暂存区
- git add  git add * (添加所有文件到暂存区) 
-
-移除文件
- git rm  5. 重命名一个文件 git mv">
-<meta property="og:type" content="article">
-<meta property="og:title" content="git">
-<meta property="og:url" content="http://yoursite.com/2014/10/06/git/">
-<meta property="og:site_name" content="LFX's blog">
-<meta property="og:description" content="基本操作
-
-初始化仓库 git init
-配置作者信息
- git config —global user.email “youremail@corp.com” git config —global user.name “yourname” 
-
-添加文件到暂存区
- git add  git add * (添加所有文件到暂存区) 
-
-移除文件
- git rm  5. 重命名一个文件 git mv">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git">
-<meta name="twitter:description" content="基本操作
-
-初始化仓库 git init
-配置作者信息
- git config —global user.email “youremail@corp.com” git config —global user.name “yourname” 
-
-添加文件到暂存区
- git add  git add * (添加所有文件到暂存区) 
-
-移除文件
- git rm  5. 重命名一个文件 git mv">
-
-  
-    <link rel="alternative" href="/atom.xml" title="LFX&#39;s blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-
-  
-
-</head>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">LFX&#39;s blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">SayingWhy&#39;s blog</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-git" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/10/06/git/" class="article-date">
-  <time datetime="2014-10-06T11:59:01.000Z" itemprop="datePublished">Oct 6 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      git
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="基本操作">基本操作</h3>
-<ol>
-<li>初始化仓库 git init</li>
-<li><p>配置作者信息</p>
-<p> git config —global user.email “youremail@corp.com”<br> git config —global user.name “yourname” </p>
-</li>
-<li><p>添加文件到暂存区</p>
-<p> git add <filename><br> git add * (添加所有文件到暂存区) </filename></p>
-</li>
-<li><p>移除文件</p>
-<p> git rm <filename> 5. 重命名一个文件<br> git mv <oldfilename> <newfilename> </newfilename></oldfilename></filename></p>
-</li>
-<li><p>提交暂存区</p>
-<p> git commit只会提交暂存区(staged)⾥里⾯面的⽂文件<br> git commit -m “message” </p>
-</li>
-<li><p>查看工作目录的状态</p>
-<p> git status </p>
-</li>
-<li><p>查看提交历史记录</p>
-<p> git log </p>
-</li>
-<li><p>查看文件改变 </p>
-<p> git diff</p>
-</li>
-</ol>
-<h3 id="撤销操作">撤销操作</h3>
-<ol>
-<li><p>撤销加入暂存区的操作</p>
-<p> git reset HEAD <file></file></p>
-</li>
-<li><p>撤销修改的操作</p>
-<p> git checkout — <file></file></p>
-</li>
-<li><p>将本地的修改放进回收站 </p>
-<p> git stash</p>
-</li>
-<li><p>从回收站中恢复本地的修改 </p>
-<p> git stash apply<br>￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼</p>
-</li>
-</ol>
-<h3 id="Tag操作">Tag操作</h3>
-<ol>
-<li><p>查看tag</p>
-<p> git tag</p>
-</li>
-<li><p>创建tag</p>
-<p> git tag -a v1.0 -m “my version 1.0”</p>
-</li>
-<li><p>显示tag信息</p>
-<p> git show v1.0</p>
-</li>
-<li><p>对之前的提交打tag</p>
-<p> git tag -a v0.1 -m “version 0.1”</p>
-</li>
-</ol>
-<h3 id="分支操作">分支操作</h3>
-<ol>
-<li><p>查看分支</p>
-<p> git branch</p>
-</li>
-<li><p>创建分支</p>
-<p> git branch <branchname></branchname></p>
-</li>
-<li><p>删除分支</p>
-<p> git branch -d <branchname></branchname></p>
-</li>
-<li><p>切换分支</p>
-<p> git checkout <branchname></branchname></p>
-</li>
-<li><p>合并分支</p>
-<p> git merge <branchname></branchname></p>
-</li>
-<li><p>rebase操作</p>
-<p> git rebase <basebranch> <newbranch></newbranch></basebranch></p>
-</li>
-</ol>
-<h3 id="远端仓库操作">远端仓库操作</h3>
-<ol>
-<li><p>克隆一个远端仓库 git clone URL</p>
-</li>
-<li><p>添加远端仓库</p>
-<p> git remote add <name> <url></url></name></p>
-</li>
-<li><p>更新远端仓库的分支和数据 git fetch <name></name></p>
-</li>
-<li><p>获取并合并远端仓库的分支到当前分支</p>
-<p> git pull <reponame> <branchname></branchname></reponame></p>
-<p> eg: git pull origin master </p>
-</li>
-<li><p>上传本地分支和数据到远端仓库</p>
-<p> git push <reponame> <branchname></branchname></reponame></p>
-<p> eg: git push origin master </p>
-</li>
-<li><p>跟踪远端仓库上的分支</p>
-<p> git checkout —track origin/testbranch<br>￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼<br>￼    git checkout -b test origin/testbranch</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/06/git/" data-id="crqs3ji8qygn6xou" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2014/10/06/setUpBlog/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          setUpBlog
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2014/10/04/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Accelerator-Key/">Accelerator Key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c-notes/">c notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/setUpBlog/">setUpBlog</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Accelerator-Key/" style="font-size: NaNpx;">Accelerator Key</a><a href="/tags/c-notes/" style="font-size: NaNpx;">c notes</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/setUpBlog/" style="font-size: NaNpx;">setUpBlog</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recents</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2014/10/20/accelerator-key/">accelerator_key</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/07/c_notes/">c_notes</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/06/setUpBlog/">setUpBlog</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/06/git/">git</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/04/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2014 LiuFengxia<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
-
-  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
-
-
-
-<script src="/js/script.js" type="text/javascript"></script>
-
-
-  </div>
-</body>
-</html>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/23/git/index/" data-id="wycgiryxfw00umwq" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/10/23/hello-world/" class="article-date">
@@ -2230,7 +1864,7 @@ $ ruby <span class="operator">-e</span> <span class="string">"<span class="varia
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -2239,7 +1873,7 @@ $ ruby <span class="operator">-e</span> <span class="string">"<span class="varia
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
+      <a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
     </div>
   </div>
 
@@ -2260,6 +1894,14 @@ $ ruby <span class="operator">-e</span> <span class="string">"<span class="varia
       <ul>
         
           <li>
+            <a href="/2014/10/23/c-notes/">c-notes</a>
+          </li>
+        
+          <li>
+            <a href="/2014/10/23/git-base-operation/">git-base-operation</a>
+          </li>
+        
+          <li>
             <a href="/2014/10/23/setUpBlog/">setUpBlog</a>
           </li>
         
@@ -2269,14 +1911,6 @@ $ ruby <span class="operator">-e</span> <span class="string">"<span class="varia
         
           <li>
             <a href="/2014/10/23/c_notes/index/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/23/setUpBlog/index/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/23/git/index/">(no title)</a>
           </li>
         
       </ul>
