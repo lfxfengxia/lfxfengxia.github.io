@@ -613,19 +613,10 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
 <li><p>引用计数的计算</p>
 <ul>
 <li>alloc 、new 、copy(copy生成接收对象的一个副本) //使用这三个方法创建对象时，对象的引用计数器为1<ul>
-<li><ul>
-<li>(id) retain; //给对象发送retain消息后，对象的引用计数器加1</li>
-</ul>
-</li>
-<li><ul>
-<li>(void) release; //给对像发送release消息后，对象的引用计数器减1</li>
-</ul>
-</li>
-<li>-(void)dealloc; //当一个对象的引用计数器变为0而即将被销毁时,Objective-C自动向对                             象发送一条dealloc消息，我们通常都会在自己的对象中重写dealloc方法</li>
-<li><ul>
-<li>(unsigned) retainCount;//获取当前对象的引用计数器的值</li>
-</ul>
-</li>
+<li>- (id) retain; //给对象发送retain消息后，对象的引用计数器加1</li>
+<li>- (void) release; //给对像发送release消息后，对象的引用计数器减1</li>
+<li>- (void)dealloc; //当一个对象的引用计数器变为0而即将被销毁时,Objective-C自动向对                             象发送一条dealloc消息，我们通常都会在自己的对象中重写dealloc方法</li>
+<li>- (unsigned) retainCount;//获取当前对象的引用计数器的值</li>
 </ul>
 </li>
 </ul>
@@ -791,7 +782,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
 <pre><code>* 范围运算符
 
     `<span class="javascript">{between <span class="keyword">in</span>}</span>`
-</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">predicate = [NSPredicate predicateWithFormat:@<span class="string">"age in {23,25}"</span>];</div><div class="line"><span class="comment">//仅仅过滤出 age ＝ 23 和 age ＝ 25 的信息</span></div><div class="line">predicate = [NSPredicate predicateWithFormat:@<span class="string">"age in {23,25}"</span>];</div><div class="line"><span class="comment">//过滤出 23 &gt;= age &lt;＝ 25 的信息</span></div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">predicate = [NSPredicate predicateWithFormat:@<span class="string">"age in {23,25}"</span>];</div><div class="line"><span class="comment">//仅仅过滤出 age ＝ 23 和 age ＝ 25 的信息</span></div><div class="line">predicate = [NSPredicate predicateWithFormat:@<span class="string">"age between {23,25}"</span>];</div><div class="line"><span class="comment">//过滤出 23 &gt;= age &lt;＝ 25 的信息</span></div></pre></td></tr></table></figure>
 
 <pre><code><span class="keyword">*</span> 通配符
 
