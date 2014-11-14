@@ -67,6 +67,454 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-UI-notes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/11/13/UI-notes/" class="article-date">
+  <time datetime="2014-11-13T08:20:58.000Z" itemprop="datePublished">Nov 13 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/13/UI-notes/">UI_notes</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="UIView常用属性及方法">UIView常用属性及方法</h1>
+<h3 id="常用属性">常用属性</h3>
+<p>NSInteger tag;</p>
+<p><strong>CGRect</strong> frame;</p>
+<p><strong>CGRect</strong> bounds;</p>
+<p><strong>CGPoint</strong> center;</p>
+<p><strong>CGAffineTransform</strong> transform;</p>
+<p><strong>BOOL</strong> multipleTouchEnable;</p>
+<p><strong>BOOL</strong> exclusiveTouch;</p>
+<p><strong>UIView</strong>  *superView;</p>
+<p><strong>NSArray</strong> *subViews;</p>
+<p><strong>UIWindow</strong>  *window;</p>
+<p><strong>UIColor</strong>  *backgroundColor;</p>
+<p><strong>CGFloat</strong>  alpa;</p>
+<p><strong>BOOL</strong>  opaque;</p>
+<p><strong>BOOL</strong>  hidden;</p>
+<h3 id="常用方法">常用方法</h3>
+<h4 id="类方法">类方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">id</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame;</div></pre></td></tr></table></figure>
+
+<h4 id="实例方法">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>removeFromSuperview;</span></div><div class="line">- <span class="params">(void)</span>insertSubview:<span class="params">(<span class="variable">UIView</span> *)</span>view atIndex:<span class="params">(<span class="variable">NSInteger</span>)</span>index;</div><div class="line">- <span class="params">(void)</span>exchangeSubviewAtIndex:<span class="params">(<span class="variable">NSInteger</span>)</span>index1 withSubviewAtIndex:<span class="params">(<span class="variable">NSInteger</span>)</span>index2;</div><div class="line">- <span class="params">(void)</span>addSubview:<span class="params">(<span class="variable">UIView</span> *)</span>view;</div><div class="line">- <span class="params">(void)</span>insertSubview:<span class="params">(<span class="variable">UIView</span> *)</span>view belowSubview:<span class="params">(<span class="variable">UIView</span> *)</span>siblingSubview;</div><div class="line">- <span class="params">(void)</span>insertSubview:<span class="params">(<span class="variable">UIView</span> *)</span>view aboveSubview:<span class="params">(<span class="variable">UIView</span> *)</span>siblingSubview;</div></pre></td></tr></table></figure>
+
+<h1 id="UIView常见子类">UIView常见子类</h1>
+<h2 id="UIControl">UIControl</h2>
+<h4 id="常用属性-1">常用属性</h4>
+<p><strong>BOOL</strong> enable;</p>
+<p><strong>BOOL</strong> selected;</p>
+<p><strong>BOOL</strong> highlighted;</p>
+<p><strong>UIControlState</strong> state;&lt;<code>readonly</code>&gt;</p>
+<p><strong>BOOL</strong> touchInside;&lt;<code>readonly</code>&gt;</p>
+<h4 id="实例方法-1">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>addTarget:<span class="params">(id)</span>target action:<span class="params">(<span class="variable">SEL</span>)</span>action forControlEvent:<span class="params">(<span class="variable">UIControlEvent</span>)</span>controlEvent;</span></div><div class="line">- <span class="params">(void)</span>removeTarget:<span class="params">(id)</span>target action:<span class="params">(<span class="variable">SEL</span>)</span>action forControlEvent:<span class="params">(<span class="variable">UIControlEvent</span>)</span>controlEvent;</div><div class="line">- <span class="params">(void)</span>sendAction:<span class="params">(<span class="variable">SEL</span>)</span>action to:<span class="params">(id)</span>target forEvent:<span class="params">(<span class="variable">UIEvent</span>)</span>event;</div><div class="line">- <span class="params">(void)</span>sendActionsForControlEvents:<span class="params">(<span class="variable">UIControlEvent</span>)</span>controlEvents;</div></pre></td></tr></table></figure>
+
+<h2 id="UIControl常见子类">UIControl常见子类</h2>
+<h3 id="UIButton">UIButton</h3>
+<h4 id="常用属性-2">常用属性</h4>
+<p><strong>UIButtonType</strong> buttonType;&lt;<code>readonly</code>&gt;</p>
+<p><strong>NSString</strong> *currentTitle;&lt;<code>readonly</code>&gt;</p>
+<p><strong>UIColor</strong> *currentColor;&lt;<code>readonly</code>&gt;</p>
+<p><strong>UIImage</strong> *currentImage;&lt;<code>readonly</code>&gt;</p>
+<p><strong>UIImage</strong>  *currentBackgroundImage;&lt;<code>readonly</code>&gt;</p>
+<p><strong>NSAttributedString</strong>  *currentAttributedTitle;&lt;<code>readonly</code>&gt;</p>
+<h4 id="类方法-1">类方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="addition">+ (id)buttonWithType:(UIButtonType)buttonType;</span></div></pre></td></tr></table></figure>
+
+<h4 id="实例方法-2">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>setTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</span></div><div class="line">- <span class="params">(void)</span>setTitleColor:<span class="params">(<span class="variable">UIColor</span> *)</span>color forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div><div class="line">- <span class="params">(void)</span>setImage:<span class="params">(<span class="variable">UIImage</span> *)</span>image forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div><div class="line">- <span class="params">(void)</span>setBackgroundImage:<span class="params">(<span class="variable">UIImage</span> *)</span>image forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div><div class="line">- <span class="params">(void)</span>setAttributedTitle:<span class="params">(<span class="variable">NSAttributedString</span> *)</span>title forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div><div class="line">- <span class="params">(<span class="variable">NSString</span> *)</span>titleForState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div><div class="line">- <span class="params">(<span class="variable">UIColor</span> *)</span>titleColorForState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div><div class="line">- <span class="params">(<span class="variable">UIImage</span> *)</span>imageForState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div><div class="line">- <span class="params">(<span class="variable">UIImage</span> *)</span>backgroundImageForState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div><div class="line">- <span class="params">(<span class="variable">NSAttributedString</span> *)</span>attributedStringForState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div></pre></td></tr></table></figure>
+
+<h3 id="UISlider">UISlider</h3>
+<h4 id="常见属性">常见属性</h4>
+<p><strong>float</strong>  value;</p>
+<p><strong>float</strong>  minimumValue;</p>
+<p><strong>float</strong> maximumValue;</p>
+<p><strong>UIImage</strong>  *minimumValue;</p>
+<p><strong>UIImage</strong>  *maximumValue;</p>
+<p><strong>BOOL</strong>  continuous;</p>
+<p><strong>UIColor</strong>  *minimumTrackTintColor;</p>
+<p><strong>UIColor</strong>  *maximumTrackTintColor;</p>
+<p><strong>UIColor</strong>  *thumbTintColor;</p>
+<p><code>readonly</code></p>
+<p><strong>UIImage</strong>  *currentThumbImage;</p>
+<p><strong>UIImage</strong>  *currentMinimumTrackImage;</p>
+<p><strong>UIImage</strong>  *currentMaximumTrackImage;</p>
+<h4 id="实例方法-3">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>setThumbImage:<span class="params">(<span class="variable">UIImage</span> *)</span>image forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</span></div><div class="line">- <span class="params">(void)</span>setMinimumTrackImage:<span class="params">(<span class="variable">UIImage</span> *)</span>image forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div><div class="line">- <span class="params">(void)</span>setMaximumTrackImage:<span class="params">(<span class="variable">UIImage</span> *)</span>image forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div><div class="line">- <span class="params">(<span class="variable">UIImage</span> *)</span>thumbImage forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div><div class="line">- <span class="params">(<span class="variable">UIImage</span> *)</span>minimumTrackImage forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div><div class="line">- <span class="params">(<span class="variable">UIImage</span> *)</span>maximumTrackImage forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div></pre></td></tr></table></figure>
+
+<h3 id="UITextField">UITextField</h3>
+<h4 id="常用属性-3">常用属性</h4>
+<p><strong>NSString</strong> *text;</p>
+<p><strong>UIColor</strong>  *textColor;</p>
+<p><strong>UIFont</strong>  *font;</p>
+<p><strong>NSTextAlignment</strong>  textAlignment;</p>
+<p><strong>UITextBorderStyle</strong>  borderStyle;</p>
+<p><strong>NSString</strong>   *placeholder;</p>
+<p><strong>BOOL</strong>  clearOnBeginEditing;</p>
+<p><strong>BOOL</strong>  adjustsFontSizeToFitWidth;</p>
+<p><strong>CGFloat</strong>  minimumFontSize;</p>
+<p><strong>id<uitextfielddelegate></uitextfielddelegate></strong>  delegate;</p>
+<p><strong>UIImage</strong> *background;</p>
+<p><strong>UIImage</strong>  *disabledBackground;</p>
+<p><strong>BOOL</strong>  editing;</p>
+<p><strong>UITextFieldViewMode</strong>  clearButtonMode;</p>
+<p><strong>UIView</strong> *leftView;</p>
+<p><strong>UITextFieldViewMode</strong> leftViewMode;</p>
+<p><strong>UIView</strong> *rightView;</p>
+<p><strong>UITextFieldViewMode</strong> rightViewMode;</p>
+<p><strong>UIView</strong>  *inputView;</p>
+<p><strong>UIView</strong>  *inputAccessoryView;</p>
+<h4 id="实例方法-4">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>drawPlaceholderInRect:<span class="params">(<span class="variable">CGRect</span>)</span>rect;</span></div><div class="line">- <span class="params">(void)</span>drawTextInRect:<span class="params">(<span class="variable">CGRect</span>)</span>rect;</div></pre></td></tr></table></figure>
+
+<h3 id="UISegmentedControl">UISegmentedControl</h3>
+<h4 id="常用属性-4">常用属性</h4>
+<p><strong>UISegmentedControlStyle</strong>  segmentedControlStyle;</p>
+<p><strong>NSUInteger</strong> numberOfSegments; &lt;<code>readonly</code>&gt;</p>
+<p><strong>UIColor</strong>  *tintColor;</p>
+<p><strong>NSInteger</strong>  selectedSegmentIndex;</p>
+<h4 id="实例方法-5">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(id)</span>initWithItems:<span class="params">(<span class="variable">NSArray</span> *)</span>items;</span></div><div class="line">- <span class="params">(void)</span>insertSegmentWithTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title atIndex:<span class="params">(<span class="variable">NSUInteger</span>)</span>segment animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(void)</span>insertSegmentWithImage:<span class="params">(<span class="variable">UIImage</span> *)</span>image atIndex:<span class="params">(<span class="variable">NSUInteger</span>)</span>segment animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(void)</span>removeSegmentAtIndex:<span class="params">(<span class="variable">NSUInteger</span>)</span>segment animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(void)</span>removeAllSegments;</div><div class="line">- <span class="params">(void)</span>setTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title forSegmentAtIndex:<span class="params">(<span class="variable">NSUInteger</span>)</span>segment;</div><div class="line">- <span class="params">(<span class="variable">NSString</span> *)</span>titleForSegmentAtIndex:<span class="params">(<span class="variable">NSUInteger</span>)</span>segment;</div><div class="line">- <span class="params">(void)</span>setImage:<span class="params">(<span class="variable">UIImage</span> *)</span>image forSegmentAtIndex:<span class="params">(<span class="variable">NSUInteger</span>)</span>segment;</div><div class="line">- <span class="params">(<span class="variable">UIImage</span> *)</span>imageForSegmentAtIndex:<span class="params">(<span class="variable">NSUInteger</span>)</span>segment;</div><div class="line">- <span class="params">(void)</span>setWidth:<span class="params">(<span class="variable">CGFloat</span>)</span>width forSegmentAtIndex:<span class="params">(<span class="variable">NSUInteger</span>)</span>segment;</div><div class="line">- <span class="params">(<span class="variable">CGFloat</span>)</span>widthForSegmentAtIndex:<span class="params">(<span class="variable">NSUInteger</span>)</span>segment;</div><div class="line">- <span class="params">(void)</span>setEnabled:<span class="params">(<span class="variable">BOOL</span>)</span>enabled forSegmentAtIndex:<span class="params">(<span class="variable">NSUInteger</span>)</span>segment;</div><div class="line">- <span class="params">(<span class="variable">BOOL</span>)</span>isEnabledForSegmentAtIndex:<span class="params">(<span class="variable">NSUInteger</span>)</span>segment;</div><div class="line">- <span class="params">(void)</span>setBackgroundImage:<span class="params">(<span class="variable">UIImage</span> *)</span>backgroundImage forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state barMetrics:<span class="params">(<span class="variable">UIBarMetrics</span>)</span>barMetrics;</div><div class="line">- <span class="params">(<span class="variable">UIImage</span> *)</span>backgroundImageForState:<span class="params">(<span class="variable">UIControlState</span>)</span>state barMetrics:<span class="params">(<span class="variable">UIBarMetrics</span>)</span>barMetrics;</div></pre></td></tr></table></figure>
+
+<h3 id="UIPageControl">UIPageControl</h3>
+<h4 id="常用属性-5">常用属性</h4>
+<p><strong>NSInteger</strong>  numberOfPages;</p>
+<p><strong>NSInteger</strong>  currentPage;</p>
+<p><strong>BOOL</strong> hidesForSinglePage;</p>
+<p><strong>BOOL</strong>  defersCurrentPageDisplay; //点击翻页无效</p>
+<p><strong>UIColor</strong>  *pageIndicatorTintColor;</p>
+<p><strong>UIColor</strong>  *currentPageIndicatorColor;</p>
+<h4 id="实例方法-6">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>updateCurrentPageDisplay;</span></div><div class="line">- <span class="params">(<span class="variable">CGSize</span>)</span>sizeForNumberOfPages:<span class="params">(<span class="variable">NSInteger</span>)</span>pageCount;</div></pre></td></tr></table></figure>
+
+<h3 id="UISwitch">UISwitch</h3>
+<h4 id="常用属性-6">常用属性</h4>
+<p><strong>UIColor</strong>  *onTintColor;</p>
+<p><strong>UIColor</strong>  *tintColor;</p>
+<p><strong>UIColor</strong>  *thumbColor;</p>
+<p><strong>UIImage</strong>  *onImage;</p>
+<p><strong>UIImage</strong>  *offImage;</p>
+<p><strong>BOOL</strong> on;</p>
+<h4 id="实例方法-7">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>initWithFrame:<span class="params">(<span class="variable">CGRect</span>)</span>frame;</span></div><div class="line">- <span class="params">(void)</span>setOn:<span class="params">(<span class="variable">BOOL</span>)</span>on animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div></pre></td></tr></table></figure>
+
+<h3 id="UIDatePicker">UIDatePicker</h3>
+<h4 id="常用属性-7">常用属性</h4>
+<p><strong>UIDatePicker</strong>  datePickerMode;</p>
+<p><strong>NSLocale</strong>   *locale;</p>
+<p><strong>NSTimeZone</strong>  *timeZone;</p>
+<p><strong>NSDate</strong>     *date;</p>
+<p><strong>NSDate</strong>      *minimumDate;</p>
+<p><strong>NSDate</strong>      *MaximumDate;</p>
+<p><strong>NSTimerInterval</strong>    *countDownDuration;</p>
+<p><strong>NSInteger</strong>    minuteInterval;</p>
+<h4 id="实例方法-8">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>setDate:<span class="params">(<span class="variable">NSDate</span> *)</span>date animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</span></div></pre></td></tr></table></figure>
+
+<h2 id="UILabel">UILabel</h2>
+<h4 id="常用属性-8">常用属性</h4>
+<p><strong>NSString</strong> *text;</p>
+<p><strong>UIFont</strong> *font;</p>
+<p><strong>UIColor</strong>   *color;</p>
+<p><strong>UIColor</strong>    *shadowColor;</p>
+<p><strong>CGSize</strong>     shadowOffset;</p>
+<p><strong>NSTextAlignment</strong>     textAlignment;</p>
+<p><strong>NSLineBreakMode</strong>     lineBreakMode;</p>
+<p><strong>NSAttributedString</strong>    attributedText;</p>
+<p><strong>UIColor</strong>   *highlightedTextColor;</p>
+<p><strong>BOOL</strong>  highlighted;</p>
+<p><strong>BOOL</strong>  userInteractionEnabled;</p>
+<p><strong>BOOL</strong>   enabled;</p>
+<p><strong>NSInteger</strong>    numberOfLines;</p>
+<p><strong>BOOL</strong>   adjustsFontSizeToFitWidth;</p>
+<p><strong>BOOL</strong> minimumFontSize;</p>
+<h4 id="实例方法-9">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(<span class="variable">CGRect</span>)</span>textRectForBounds:<span class="params">(<span class="variable">CGRect</span>)</span>bounds limitedToNumberOfLines:<span class="params">(<span class="variable">NSInteger</span>)</span>numberOfLines;</span></div><div class="line">- <span class="params">(void)</span>drawTextInRect:<span class="params">(<span class="variable">CGRect</span>)</span>rect;</div></pre></td></tr></table></figure>
+
+<h2 id="UIAlertView">UIAlertView</h2>
+<h4 id="常见属性-1">常见属性</h4>
+<p><strong>id<uialertviewdelegate></uialertviewdelegate></strong> delegate; </p>
+<p><strong>NSString</strong>   *title;</p>
+<p><strong>NSString</strong>   *message;</p>
+<p><strong>NSInteger</strong>  cancelButtonIndex;</p>
+<p><code>readonly</code></p>
+<p><strong>NSInteger</strong>    numberOfButtons；</p>
+<p><strong>NSInteger</strong>  firstOtherButtonIndex;</p>
+<p><strong>BOOL</strong>    visible;</p>
+<p><strong>UIAlertViewStyle</strong> alertViewStyle;</p>
+<h4 id="实例方法-10">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(id)</span>initWithTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title message:<span class="params">(<span class="variable">NSString</span> *)</span>message delegate:<span class="params">(id /*&lt;<span class="variable">UIAlertViewDelegate</span>&gt;*/)</span>delegate cancelButtonTitle:<span class="params">(<span class="variable">NSString</span> *)</span>cancelButtonTitle otherButtonTitles:<span class="params">(<span class="variable">NSString</span> *)</span>otherButtonTitles, </span>... ;</div><div class="line"><span class="pp">- <span class="params">(void)</span>show;</span></div><div class="line">- <span class="params">(void)</span>dismissWithClickEdButtonIndex:<span class="params">(<span class="variable">NSInteger</span>)</span>buttonIndex animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(<span class="variable">UITextField</span> *)</span>textFieldAtIndex:<span class="params">(<span class="variable">NSInteger</span>)</span>textFieldIndex;</div></pre></td></tr></table></figure>
+
+<h2 id="UIActionSheet">UIActionSheet</h2>
+<h4 id="常见属性-2">常见属性</h4>
+<p><strong>id<uiactionsheetdelegate></uiactionsheetdelegate></strong>  delegate;</p>
+<p><strong>NSString</strong>    *title;</p>
+<p><strong>UIActionSheetStyle</strong>      actionSheetStyle;</p>
+<p><strong>NSInteger</strong>     cancelButtonIndex;</p>
+<p><strong>NSInteger</strong>  destructiveButtonIndex;</p>
+<p><code>readonly</code></p>
+<p><strong>NSInteger</strong>   numberOfButtons;</p>
+<p><strong>NSInteger</strong>   firstOtherButtonIndex;</p>
+<p><strong>BOOL</strong>     visible;</p>
+<h4 id="实例方法-11">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(id)</span>initWithTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title delegate:<span class="params">(id&lt;<span class="variable">UIActionSheetDelegate</span>&gt;)</span>delegate cancelButtonTitle:<span class="params">(<span class="variable">NSString</span> *)</span>cancelButtonTitle destructiveButtonTitle:<span class="params">(<span class="variable">NSString</span> *)</span>destructiveButtonTitle otherButtonTitles:<span class="params">(<span class="variable">NSString</span> *)</span>otherButtonTitles, </span>... ;</div><div class="line"><span class="pp">- <span class="params">(<span class="variable">NSInteger</span>)</span>addButtonWithTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title;</span></div><div class="line">- <span class="params">(<span class="variable">NSString</span> *)</span>buttonTitleAtIndex:<span class="params">(<span class="variable">NSInteger</span>)</span>buttonIndex;</div><div class="line">- <span class="params">(void)</span>showFromToolbar:<span class="params">(<span class="variable">UIToolBar</span> *)</span>view;</div><div class="line">- <span class="params">(void)</span>showFromTabBar:<span class="params">(<span class="variable">UITabBar</span> *)</span>view;</div><div class="line">- <span class="params">(void)</span>showFromBarButtonItem:<span class="params">(<span class="variable">UIBarButtonItem</span> *)</span>item animated:<span class="params">(<span class="variable">BOOL</span>)</span>animates;</div><div class="line">- <span class="params">(void)</span>showFromRect:<span class="params">(<span class="variable">CGRect</span>)</span>rect inView:<span class="params">(<span class="variable">UIView</span> *)</span>view animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(void)</span>showInView:<span class="params">(<span class="variable">UIView</span> *)</span>view;</div><div class="line">- <span class="params">(void)</span>dismissWithClickedButtonIndex:<span class="params">(<span class="variable">NSInteger</span>)</span>buttonIndex animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div></pre></td></tr></table></figure>
+
+<h2 id="UIImageView">UIImageView</h2>
+<h4 id="常用属性-9">常用属性</h4>
+<p><strong>UIImage</strong>   *image;</p>
+<p><strong>UIImage</strong>  *highlightedImage;</p>
+<p><strong>BOOL</strong>   userInteractionEnable;</p>
+<p><strong>BOOL</strong>    highlighted;</p>
+<p><strong>NSArray</strong>    *animationImages;</p>
+<p><strong>NSArray</strong>    *highlightedAnimationImages;</p>
+<p><strong>NSTimeInterval</strong>    animationDuration;</p>
+<p><strong>NSInteger</strong>    animationRepeatCount;</p>
+<p><strong>UIColor</strong>   tintColor;</p>
+<h4 id="实例方法-12">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby"> (id)<span class="symbol">initWithImage:</span>(<span class="constant">UIImage</span> *)image;</span></div><div class="line">-<span class="ruby"> (id)<span class="symbol">initWithImage:</span>(<span class="constant">UIImage</span> *)image <span class="symbol">highlightedImage:</span>(<span class="constant">UIImage</span> *)highlightedImage;</span></div><div class="line">-<span class="ruby"> (void)startAnimating;</span></div><div class="line">-<span class="ruby"> (void)stopAnimating;</span></div><div class="line">-<span class="ruby"> (<span class="constant">BOOL</span>)isAnimating;</span></div></pre></td></tr></table></figure>
+
+<h2 id="UINavigationBar">UINavigationBar</h2>
+<h4 id="常用属性-10">常用属性</h4>
+<p><strong>UIBarStyle</strong>   barStyle;</p>
+<p><strong>id</strong>  delegate;</p>
+<p><strong>BOOL</strong> translucent;</p>
+<p><strong>NSArray</strong>  *items;</p>
+<p><strong>UIColor</strong> *tintColor;</p>
+<p><strong>UIColor</strong>  *barTintColor;</p>
+<p><strong>UIImage</strong>  *shadowImage;</p>
+<p><strong>NSDictionary</strong>  *titleTextAttributes;</p>
+<p><strong>UIImage</strong>  *backIndicatorImage;</p>
+<p><strong>UIImage</strong>  *backIndicatorTransitionMaskImage;</p>
+<p><code>readonly</code></p>
+<p><strong>UINavigationItem</strong>  *topItem;</p>
+<p><strong>UINavigationItem</strong>  *backItem;</p>
+<h4 id="实例方法-13">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>pushNavigationItem:<span class="params">(<span class="variable">UINavigationItem</span> *)</span>item animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</span></div><div class="line">- <span class="params">(<span class="variable">UINavigationItem</span> *)</span>popNavigationItemAnimated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(void)</span>setItems:<span class="params">(<span class="variable">NSArray</span> *)</span>items animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(void)</span>setBackgroundImage:<span class="params">(<span class="variable">UIImage</span> *)</span>backgroundImage forBarPosition:<span class="params">(<span class="variable">UIBarPosition</span>)</span>barPosition barMetrics:<span class="params">(<span class="variable">UIBarMetrics</span>)</span>barMetrics;</div><div class="line">- <span class="params">(<span class="variable">UIImage</span> *)</span>backgroundImageForBarPosition:<span class="params">(<span class="variable">UIBarPosition</span>)</span>barPosition barMetrics:<span class="params">(<span class="variable">UIBarMetrics</span>)</span>barMetrics;</div><div class="line">- <span class="params">(void)</span>setBackgroundImage:<span class="params">(<span class="variable">UIImage</span> *)</span>backgroundImage forBarMetrics:<span class="params">(<span class="variable">UIBarMetrics</span>)</span>barMetrics NS_AVAILABLE_IOS<span class="params">(<span class="number">5</span>_0)</span>;</div><div class="line">- <span class="params">(<span class="variable">UIImage</span> *)</span>backgroundImageForBarMetrics:<span class="params">(<span class="variable">UIBarMetrics</span>)</span>barMetrics;</div><div class="line">- <span class="params">(void)</span>setTitleVerticalPositionAdjustment:<span class="params">(<span class="variable">CGFloat</span>)</span>adjustment forBarMetrics:<span class="params">(<span class="variable">UIBarMetrics</span>)</span>barMetrics;</div><div class="line">- <span class="params">(<span class="variable">CGFloat</span>)</span>titleVerticalPositionAdjustmentForBarMetrics:<span class="params">(<span class="variable">UIBarMetrics</span>)</span>barMetrics;</div></pre></td></tr></table></figure>
+
+<h2 id="UITabBar">UITabBar</h2>
+<h4 id="常用属性-11">常用属性</h4>
+<p><strong>id<uitabbardelegate></uitabbardelegate></strong>  delegate;</p>
+<p><strong>NSArray</strong>             *items;</p>
+<p><strong>UIBarStyle</strong> barStyle  </p>
+<p><strong>UITabBarItem</strong>        *selectedItem;</p>
+<p><strong>UIColor</strong> *tintColor;</p>
+<p><strong>UIColor</strong> *barTintColor;</p>
+<p><strong>BOOL</strong> translucent;</p>
+<p><strong>UIColor</strong> *selectedImageTintColor;</p>
+<p><strong>UIImage</strong> *backgroundImage;</p>
+<p><strong>UIImage</strong> *selectionIndicatorImage;</p>
+<p><strong>UIImage</strong> *shadowImage;</p>
+<p><strong>UITabBarItemPositioning</strong> itemPositioning;</p>
+<p><strong>CGFloat</strong> itemWidth;</p>
+<p><strong>CGFloat</strong> itemSpacing;</p>
+<h4 id="实例方法-14">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>setItems:<span class="params">(<span class="variable">NSArray</span> *)</span>items animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</span></div><div class="line">- <span class="params">(void)</span>beginCustomizingItems:<span class="params">(<span class="variable">NSArray</span> *)</span>items;</div><div class="line">- <span class="params">(<span class="variable">BOOL</span>)</span>endCustomizingAnimated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(<span class="variable">BOOL</span>)</span>isCustomizing;</div></pre></td></tr></table></figure>
+
+<h2 id="UIToolbar">UIToolbar</h2>
+<h4 id="常用属性-12">常用属性</h4>
+<p><strong>UIBarStyle</strong> barStyle;</p>
+<p><strong>NSArray</strong>   *items;</p>
+<p><strong>BOOL</strong> translucent;</p>
+<p><strong>UIColor</strong> *tintColor;</p>
+<p><strong>UIColor</strong> *barTintColor;</p>
+<p><strong>id<uitoolbardelegate></uitoolbardelegate></strong> delegate;</p>
+<h4 id="实例方法-15">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>setItems:<span class="params">(<span class="variable">NSArray</span> *)</span>items animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</span></div><div class="line">- <span class="params">(void)</span>setBackgroundImage:<span class="params">(<span class="variable">UIImage</span> *)</span>backgroundImage forToolbarPosition:<span class="params">(<span class="variable">UIBarPosition</span>)</span>topOrBottom barMetrics:<span class="params">(<span class="variable">UIBarMetrics</span>)</span>barMetrics;</div><div class="line">- <span class="params">(<span class="variable">UIImage</span> *)</span>backgroundImageForToolbarPosition:<span class="params">(<span class="variable">UIBarPosition</span>)</span>topOrBottom barMetrics:<span class="params">(<span class="variable">UIBarMetrics</span>)</span>barMetrics;</div><div class="line">- <span class="params">(void)</span>setShadowImage:<span class="params">(<span class="variable">UIImage</span> *)</span>shadowImage forToolbarPosition:<span class="params">(<span class="variable">UIBarPosition</span>)</span>topOrBottom;</div><div class="line">- <span class="params">(<span class="variable">UIImage</span> *)</span>shadowImageForToolbarPosition:<span class="params">(<span class="variable">UIBarPosition</span>)</span>topOrBottom;</div></pre></td></tr></table></figure>
+
+<h2 id="UISearchBar">UISearchBar</h2>
+<h4 id="常用属性-13">常用属性</h4>
+<p><strong>UIBarStyle</strong>              barStyle; </p>
+<p><strong>id<uisearchbardelegate></uisearchbardelegate></strong> delegate;</p>
+<p><strong>NSString</strong>               *text;</p>
+<p><strong>NSString</strong>               *prompt;</p>
+<p><strong>NSString</strong>               *placeholder;</p>
+<p><strong>BOOL</strong>                    showsBookmarkButton;</p>
+<p><strong>BOOL</strong>                   showsCancelButton;</p>
+<p><strong>BOOL</strong>                    showsSearchResultsButton;</p>
+<p><strong>UIColor</strong> *tintColor;</p>
+<p><strong>UIColor</strong> *barTintColor;</p>
+<p><strong>UISearchBarStyle</strong> searchBarStyle;</p>
+<p><strong>UITextAutocapitalizationType</strong> autocapitalizationType;</p>
+<p><strong>UITextAutocorrectionType</strong>     autocorrectionType;</p>
+<p><strong>UITextSpellCheckingType</strong>      spellCheckingType;</p>
+<p><strong>UIKeyboardType</strong>               keyboardType;</p>
+<p><strong>NSArray</strong>   *scopeButtonTitles;</p>
+<p><strong>NSInteger</strong>  selectedScopeButtonIndex;</p>
+<p><strong>BOOL</strong>       showsScopeBar;</p>
+<p><strong>UIView</strong> *inputAccessoryView;</p>
+<h2 id="UIWebView">UIWebView</h2>
+<h4 id="常用属性-14">常用属性</h4>
+<p><strong>id<uiwebviewdelegate></uiwebviewdelegate></strong> delegate;</p>
+<p><code>readonly</code></p>
+<p><strong>BOOL</strong> canGoBack;</p>
+<p><strong>BOOL</strong> canGoForward;</p>
+<p><strong>BOOL</strong> loading;</p>
+<p><strong>UIScrollView</strong> *scrollView;</p>
+<p><strong>NSURLRequest</strong> *request;</p>
+<h4 id="实例方法-16">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>loadRequest:<span class="params">(<span class="variable">NSURLRequest</span> *)</span>request;</span></div><div class="line">- <span class="params">(void)</span>loadHTMLString:<span class="params">(<span class="variable">NSString</span> *)</span>string baseURL:<span class="params">(<span class="variable">NSURL</span> *)</span>baseURL;</div><div class="line">- <span class="params">(void)</span>loadData:<span class="params">(<span class="variable">NSData</span> *)</span>data MIMEType:<span class="params">(<span class="variable">NSString</span> *)</span>MIMEType textEncodingName:<span class="params">(<span class="variable">NSString</span> *)</span>textEncodingName baseURL:<span class="params">(<span class="variable">NSURL</span> *)</span>baseURL;</div><div class="line">- <span class="params">(void)</span>reload;</div><div class="line">- <span class="params">(void)</span>stopLoading;</div><div class="line">- <span class="params">(void)</span>goBack;</div><div class="line">- <span class="params">(void)</span>goForward;</div><div class="line">- <span class="params">(<span class="variable">NSString</span> *)</span>stringByEvaluatingJavaScriptFromString:<span class="params">(<span class="variable">NSString</span> *)</span>script;</div></pre></td></tr></table></figure>
+
+<h2 id="UIPickerView">UIPickerView</h2>
+<h4 id="常用属性-15">常用属性</h4>
+<p><strong>id<uipickerviewdatasource></uipickerviewdatasource></strong> dataSource;</p>
+<p><strong>id<uipickerviewdelegate></uipickerviewdelegate></strong>   delegate;</p>
+<p><strong>BOOL</strong>                       showsSelectionIndicator;</p>
+<p><strong>NSInteger</strong> numberOfComponents;&lt;<code>readonly</code>&gt;</p>
+<h4 id="实例方法-17">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(<span class="variable">NSInteger</span>)</span>numberOfRowsInComponent:<span class="params">(<span class="variable">NSInteger</span>)</span>component;</span></div><div class="line">- <span class="params">(<span class="variable">CGSize</span>)</span>rowSizeForComponent:<span class="params">(<span class="variable">NSInteger</span>)</span>component;</div><div class="line">- <span class="params">(<span class="variable">UIView</span> *)</span>viewForRow:<span class="params">(<span class="variable">NSInteger</span>)</span>row forComponent:<span class="params">(<span class="variable">NSInteger</span>)</span>component;</div><div class="line">- <span class="params">(void)</span>reloadAllComponents;</div><div class="line">- <span class="params">(void)</span>reloadComponent:<span class="params">(<span class="variable">NSInteger</span>)</span>component;</div><div class="line">- <span class="params">(void)</span>selectRow:<span class="params">(<span class="variable">NSInteger</span>)</span>row inComponent:<span class="params">(<span class="variable">NSInteger</span>)</span>component animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(<span class="variable">NSInteger</span>)</span>selectedRowInComponent:<span class="params">(<span class="variable">NSInteger</span>)</span>component;</div></pre></td></tr></table></figure>
+
+<h2 id="UITableViewCell">UITableViewCell</h2>
+<h4 id="常用属性-16">常用属性</h4>
+<p><strong>UITableViewStyle</strong>           style; &lt;<code>readonly</code>&gt;</p>
+<p><strong>id <uitableviewdatasource></uitableviewdatasource></strong> dataSource;</p>
+<p><strong>id <uitableviewdelegate></uitableviewdelegate></strong>   delegate;</p>
+<p><strong>CGFloat</strong>                     rowHeight;</p>
+<p><strong>CGFloat</strong>                     sectionHeaderHeight;</p>
+<p><strong>CGFloat</strong>                     sectionFooterHeight;</p>
+<p><strong>CGFloat</strong>                     estimatedRowHeight;</p>
+<p><strong>CGFloat</strong>                     estimatedSectionHeaderHeight;</p>
+<p><strong>CGFloat</strong>                     estimatedSectionFooterHeight;</p>
+<p><strong>UIEdgeInsets</strong>                separatorInset;</p>
+<p><strong>UIView</strong>                         *backgroundView;</p>
+<p><strong>BOOL</strong> editing;</p>
+<p><strong>BOOL</strong> allowsSelection;</p>
+<p><strong>BOOL</strong> allowsSelectionDuringEditing;</p>
+<p><strong>BOOL</strong> allowsMultipleSelection;</p>
+<p><strong>BOOL</strong> allowsMultipleSelectionDuringEditing;</p>
+<p><strong>UIView</strong> *tableHeaderView;</p>
+<p><strong>UIView</strong> *tableFooterView;</p>
+<p><strong>NSInteger</strong> sectionIndexMinimumDisplayRowCount;</p>
+<p><strong>UIColor</strong> *sectionIndexColor;</p>
+<p><strong>UIColor</strong> *sectionIndexBackgroundColor;</p>
+<p><strong>UIColor</strong> *sectionIndexTrackingBackgroundColor;</p>
+<p><strong>UITableViewCellSeparatorStyle</strong> separatorStyle;</p>
+<p><strong>UIColor</strong>               *separatorColor;</p>
+<h4 id="实例方法-18">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(id)</span>initWithFrame:<span class="params">(<span class="variable">CGRect</span>)</span>frame style:<span class="params">(<span class="variable">UITableViewStyle</span>)</span>style;</span></div><div class="line">- <span class="params">(void)</span>reloadData; </div><div class="line">- <span class="params">(void)</span>reloadSectionIndexTitles;</div><div class="line">- <span class="params">(<span class="variable">NSInteger</span>)</span>numberOfSections;</div><div class="line">- <span class="params">(<span class="variable">NSInteger</span>)</span>numberOfRowsInSection:<span class="params">(<span class="variable">NSInteger</span>)</span>section;</div><div class="line">- <span class="params">(<span class="variable">CGRect</span>)</span>rectForSection:<span class="params">(<span class="variable">NSInteger</span>)</span>section;</div><div class="line">- <span class="params">(<span class="variable">CGRect</span>)</span>rectForHeaderInSection:<span class="params">(<span class="variable">NSInteger</span>)</span>section;</div><div class="line">- <span class="params">(<span class="variable">CGRect</span>)</span>rectForFooterInSection:<span class="params">(<span class="variable">NSInteger</span>)</span>section;</div><div class="line">- <span class="params">(<span class="variable">CGRect</span>)</span>rectForRowAtIndexPath:<span class="params">(<span class="variable">NSIndexPath</span> *)</span>indexPath;</div><div class="line">- <span class="params">(<span class="variable">NSIndexPath</span> *)</span>indexPathForRowAtPoint:<span class="params">(<span class="variable">CGPoint</span>)</span>point;</div><div class="line">- <span class="params">(<span class="variable">NSIndexPath</span> *)</span>indexPathForCell:<span class="params">(<span class="variable">UITableViewCell</span> *)</span>cell;</div><div class="line">- <span class="params">(<span class="variable">NSArray</span> *)</span>indexPathsForRowsInRect:<span class="params">(<span class="variable">CGRect</span>)</span>rect;        </div><div class="line">- <span class="params">(<span class="variable">UITableViewCell</span> *)</span>cellForRowAtIndexPath:<span class="params">(<span class="variable">NSIndexPath</span> *)</span>indexPath; </div><div class="line">- <span class="params">(<span class="variable">NSArray</span> *)</span>visibleCells;</div><div class="line">- <span class="params">(<span class="variable">NSArray</span> *)</span>indexPathsForVisibleRows;</div><div class="line">- <span class="params">(<span class="variable">UITableViewHeaderFooterView</span> *)</span>headerViewForSection:<span class="params">(<span class="variable">NSInteger</span>)</span>section;</div><div class="line">- <span class="params">(<span class="variable">UITableViewHeaderFooterView</span> *)</span>footerViewForSection:<span class="params">(<span class="variable">NSInteger</span>)</span>section;</div><div class="line">- <span class="params">(void)</span>beginUpdates;</div><div class="line">- <span class="params">(void)</span>endUpdates;</div><div class="line">- <span class="params">(void)</span>insertSections:<span class="params">(<span class="variable">NSIndexSet</span> *)</span>sections withRowAnimation:<span class="params">(<span class="variable">UITableViewRowAnimation</span>)</span>animation;</div><div class="line">- <span class="params">(void)</span>deleteSections:<span class="params">(<span class="variable">NSIndexSet</span> *)</span>sections withRowAnimation:<span class="params">(<span class="variable">UITableViewRowAnimation</span>)</span>animation;</div><div class="line">- <span class="params">(void)</span>reloadSections:<span class="params">(<span class="variable">NSIndexSet</span> *)</span>sections withRowAnimation:<span class="params">(<span class="variable">UITableViewRowAnimation</span>)</span>animation;</div><div class="line">- <span class="params">(void)</span>moveSection:<span class="params">(<span class="variable">NSInteger</span>)</span>section toSection:<span class="params">(<span class="variable">NSInteger</span>)</span>newSection;</div><div class="line">- <span class="params">(void)</span>insertRowsAtIndexPaths:<span class="params">(<span class="variable">NSArray</span> *)</span>indexPaths withRowAnimation:<span class="params">(<span class="variable">UITableViewRowAnimation</span>)</span>animation;</div><div class="line">- <span class="params">(void)</span>deleteRowsAtIndexPaths:<span class="params">(<span class="variable">NSArray</span> *)</span>indexPaths withRowAnimation:<span class="params">(<span class="variable">UITableViewRowAnimation</span>)</span>animation;</div><div class="line">- <span class="params">(void)</span>reloadRowsAtIndexPaths:<span class="params">(<span class="variable">NSArray</span> *)</span>indexPaths withRowAnimation:<span class="params">(<span class="variable">UITableViewRowAnimation</span>)</span>animation;</div><div class="line">- <span class="params">(void)</span>moveRowAtIndexPath:<span class="params">(<span class="variable">NSIndexPath</span> *)</span>indexPath toIndexPath:<span class="params">(<span class="variable">NSIndexPath</span> *)</span>newIndexPath;</div><div class="line">- <span class="params">(<span class="variable">NSIndexPath</span> *)</span>indexPathForSelectedRow;</div><div class="line">- <span class="params">(<span class="variable">NSArray</span> *)</span>indexPathsForSelectedRows;</div><div class="line">- <span class="params">(id)</span>dequeueReusableCellWithIdentifier:<span class="params">(<span class="variable">NSString</span> *)</span>identifier;</div><div class="line">- <span class="params">(id)</span>dequeueReusableCellWithIdentifier:<span class="params">(<span class="variable">NSString</span> *)</span>identifier forIndexPath:<span class="params">(<span class="variable">NSIndexPath</span> *)</span>indexPath;</div><div class="line">- <span class="params">(id)</span>dequeueReusableHeaderFooterViewWithIdentifier:<span class="params">(<span class="variable">NSString</span> *)</span>identifier;</div><div class="line">- <span class="params">(void)</span>registerNib:<span class="params">(<span class="variable">UINib</span> *)</span>nib forCellReuseIdentifier:<span class="params">(<span class="variable">NSString</span> *)</span>identifier;</div><div class="line">- <span class="params">(void)</span>registerClass:<span class="params">(<span class="variable">Class</span>)</span>cellClass forCellReuseIdentifier:<span class="params">(<span class="variable">NSString</span> *)</span>identifier;</div><div class="line">- <span class="params">(void)</span>registerNib:<span class="params">(<span class="variable">UINib</span> *)</span>nib forHeaderFooterViewReuseIdentifier:<span class="params">(<span class="variable">NSString</span> *)</span>identifier;</div><div class="line">- <span class="params">(void)</span>registerClass:<span class="params">(<span class="variable">Class</span>)</span>aClass forHeaderFooterViewReuseIdentifier:<span class="params">(<span class="variable">NSString</span> *)</span>identifier;</div></pre></td></tr></table></figure>
+
+<h1 id="UIViewController">UIViewController</h1>
+<h3 id="常用属性-17">常用属性</h3>
+<p><strong>UIView</strong> *view;</p>
+<p><strong>NSString</strong> *title;</p>
+<p><code>readonly</code></p>
+<p><strong>NSString</strong> *nibName;</p>
+<p><strong>NSBundle</strong> *nibBundle;</p>
+<p><strong>UIStoryboard</strong> *storyboard;</p>
+<p><strong>UIViewController</strong> *parentViewController;</p>
+<p><strong>UIViewController</strong> *presentedViewController;</p>
+<p><strong>UIViewController</strong> *presentingViewController</p>
+<h3 id="实例方法-19">实例方法</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>loadView;</span></div></pre></td></tr></table></figure>
+
+<h1 id="UIViewController的常见子类">UIViewController的常见子类</h1>
+<h2 id="UITabBarController">UITabBarController</h2>
+<h4 id="常用属性-18">常用属性</h4>
+<p><strong>NSArray</strong> *viewControllers;</p>
+<p><strong>UIViewController</strong> *selectedViewController;</p>
+<p><strong>NSUInteger</strong> selectedIndex;</p>
+<p><strong>id<uitabbarcontrollerdelegate></uitabbarcontrollerdelegate></strong> delegate;</p>
+<p><code>readonly</code></p>
+<p><strong>UITabBar</strong> *tabBar;</p>
+<p><strong>UINavigationController</strong> *moreNavigationController;</p>
+<h4 id="实例方法-20">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>setViewControllers:<span class="params">(<span class="variable">NSArray</span> *)</span>viewControllers animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</span></div></pre></td></tr></table></figure>
+
+<h2 id="UINavigationController">UINavigationController</h2>
+<h4 id="常用属性-19">常用属性</h4>
+<p><strong>id<uinavigationcontrollerdelegate></uinavigationcontrollerdelegate></strong>  delegate;</p>
+<p><strong>NSArray</strong>   *viewControllers;</p>
+<p><strong>BOOL</strong>      toolbarHidden;</p>
+<p><code>readonly</code></p>
+<p><strong>UIViewController</strong>   *topViewController;</p>
+<p><strong>UIViewController</strong>    *visibleViewController;</p>
+<p><strong>UINavigationBar</strong> *navigationBar;</p>
+<p><strong>UIToolbar</strong>   toolbar;</p>
+<h4 id="实例方法-21">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(id)</span>initWithRootViewController:<span class="params">(<span class="variable">UIViewController</span> *)</span>rootViewController;</span></div><div class="line">- <span class="params">(void)</span>pushViewController:<span class="params">(<span class="variable">UIViewController</span> *)</span>viewController animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(<span class="variable">UIViewController</span> *)</span>popViewControllerAnimated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(<span class="variable">NSArray</span> *)</span>popToViewController:<span class="params">(<span class="variable">UIViewController</span> *)</span>viewController animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(<span class="variable">NSArray</span> *)</span>popToRootViewControllerAnimated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(void)</span>setViewControllers:<span class="params">(<span class="variable">NSArray</span> *)</span>viewControllers animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(void)</span>setNavigationBarHidden:<span class="params">(<span class="variable">BOOL</span>)</span>hidden animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(void)</span>setToolbarHidden:<span class="params">(<span class="variable">BOOL</span>)</span>hidden animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div></pre></td></tr></table></figure>
+
+<h2 id="UITableViewController">UITableViewController</h2>
+<h4 id="常用属性-20">常用属性</h4>
+<p><strong>UITableView</strong> *tableView;</p>
+<p><strong>BOOL</strong> clearsSelectionOnViewWillAppear;</p>
+<p><strong>UIRefreshControl</strong> *refreshControl;</p>
+<h4 id="实例方法-22">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(id)</span>initWithStyle:<span class="params">(<span class="variable">UITableViewStyle</span>)</span>style;</span></div></pre></td></tr></table></figure>
+
+<h1 id="UIBarItem">UIBarItem</h1>
+<h3 id="常用属性-21">常用属性</h3>
+<p><strong>BOOL</strong> enable;</p>
+<p><strong>NSString</strong>  *title;</p>
+<p><strong>UIImage</strong>  *image;</p>
+<p><strong>UIImage</strong>  *landscapeImagePhone;</p>
+<p><strong>UIEdgeInsets</strong> imageInsets;</p>
+<p><strong>UIEdgeInsets</strong> landscapeImagePhoneInsets;</p>
+<p><strong>NSInteger</strong>    tag;</p>
+<h3 id="实例方法-23">实例方法</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(void)</span>setTitleTextAttributes:<span class="params">(<span class="variable">NSDictionary</span> *)</span>attributes forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</span></div><div class="line">- <span class="params">(<span class="variable">NSDictionary</span> *)</span>titleTextAttributesForState:<span class="params">(<span class="variable">UIControlState</span>)</span>state;</div></pre></td></tr></table></figure>
+
+<h2 id="UIBarButtonItem">UIBarButtonItem</h2>
+<h4 id="常用属性-22">常用属性</h4>
+<p><strong>UIBarButtonItem</strong>  style;</p>
+<p><strong>CGFloat</strong>  width;</p>
+<p><strong>NSSet</strong>  *possibleTitles;</p>
+<p><strong>UIView</strong>  *customView;</p>
+<p><strong>SEL</strong>     action;</p>
+<p><strong>id</strong>        target;</p>
+<h4 id="实例方法-24">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(id)</span>initWithImage:<span class="params">(<span class="variable">UIImage</span> *)</span>image style:<span class="params">(<span class="variable">UIBarButtonItemStyle</span>)</span>style target:<span class="params">(id)</span>target action:<span class="params">(<span class="variable">SEL</span>)</span>action;</span></div><div class="line">- <span class="params">(id)</span>initWithImage:<span class="params">(<span class="variable">UIImage</span> *)</span>image landscapeImagePhone:<span class="params">(<span class="variable">UIImage</span> *)</span>landscapeImagePhone style:<span class="params">(<span class="variable">UIBarButtonItemStyle</span>)</span>style target:<span class="params">(id)</span>target action:<span class="params">(<span class="variable">SEL</span>)</span>action;</div><div class="line">- <span class="params">(id)</span>initWithTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title style:<span class="params">(<span class="variable">UIBarButtonItemStyle</span>)</span>style target:<span class="params">(id)</span>target action:<span class="params">(<span class="variable">SEL</span>)</span>action;</div><div class="line">- <span class="params">(id)</span>initWithBarButtonSystemItem:<span class="params">(<span class="variable">UIBarButtonSystemItem</span>)</span>systemItem target:<span class="params">(id)</span>target action:<span class="params">(<span class="variable">SEL</span>)</span>action;</div><div class="line">- <span class="params">(id)</span>initWithCustomView:<span class="params">(<span class="variable">UIView</span> *)</span>customView;</div><div class="line">- <span class="params">(void)</span>setBackgroundImage:<span class="params">(<span class="variable">UIImage</span> *)</span>backgroundImage forState:<span class="params">(<span class="variable">UIControlState</span>)</span>state barMetrics:<span class="params">(<span class="variable">UIBarMetrics</span>)</span>barMetrics;</div><div class="line">- <span class="params">(<span class="variable">UIImage</span> *)</span>backgroundImageForState:<span class="params">(<span class="variable">UIControlState</span>)</span>state barMetrics:<span class="params">(<span class="variable">UIBarMetrics</span>)</span>barMetrics</div></pre></td></tr></table></figure>
+
+<h2 id="UITabBarItem">UITabBarItem</h2>
+<h4 id="常用属性-23">常用属性</h4>
+<p><strong>UIImage</strong> selectedImage;</p>
+<p><strong>NSString</strong>  badgeValue;</p>
+<h4 id="实例方法-25">实例方法</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(id)</span>initWithTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title image:<span class="params">(<span class="variable">UIImage</span> *)</span>image tag:<span class="params">(<span class="variable">NSInteger</span>)</span>tag;</span></div><div class="line">- <span class="params">(instancetype)</span>initWithTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title image:<span class="params">(<span class="variable">UIImage</span> *)</span>image selectedImage:<span class="params">(<span class="variable">UIImage</span> *)</span>selectedImage NS_AVAILABLE_IOS<span class="params">(<span class="number">7</span>_0)</span>;</div><div class="line">- <span class="params">(id)</span>initWithTabBarSystemItem:<span class="params">(<span class="variable">UITabBarSystemItem</span>)</span>systemItem tag:<span class="params">(<span class="variable">NSInteger</span>)</span>tag;</div></pre></td></tr></table></figure>
+
+<h1 id="UINavigationItem">UINavigationItem</h1>
+<h3 id="常用属性-24">常用属性</h3>
+<p><strong>NSSting</strong> *title;</p>
+<p><strong>UIBarButtonItem</strong>  *backBarButtonItem;</p>
+<p><strong>UIView</strong>  *titleView;</p>
+<p><strong>NSString</strong>    *prompt;</p>
+<p><strong>BOOL</strong>  hidesBackButton;</p>
+<p><strong>NSArray</strong>  *leftBarButtonItems;</p>
+<p><strong>NSArray</strong>  *rightBarButtonItems;</p>
+<p><strong>BOOL</strong>  leftItemsSupplementBackButton;</p>
+<p><strong>UIBarButtonItem</strong>   *leftBarButtonItem;</p>
+<p><strong>UIBarButtonItem</strong>  *rightBarButtonItem;</p>
+<h3 id="实例方法-26">实例方法</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="pp">- <span class="params">(id)</span>initWithTitle:<span class="params">(<span class="variable">NSString</span> *)</span>title;</span></div><div class="line">- <span class="params">(void)</span>setHidesBackButton:<span class="params">(<span class="variable">BOOL</span>)</span>hidesBackButton animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(void)</span>setLeftBarButtonItems:<span class="params">(<span class="variable">NSArray</span> *)</span>items animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated; </div><div class="line">- <span class="params">(void)</span>setRightBarButtonItems:<span class="params">(<span class="variable">NSArray</span> *)</span>items animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(void)</span>setLeftBarButtonItem:<span class="params">(<span class="variable">UIBarButtonItem</span> *)</span>item animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div><div class="line">- <span class="params">(void)</span>setRightBarButtonItem:<span class="params">(<span class="variable">UIBarButtonItem</span> *)</span>item animated:<span class="params">(<span class="variable">BOOL</span>)</span>animated;</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/11/13/UI-notes/" data-id="ziu4am12p1c3dsfo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI-Notes/">UI_Notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-c-notes" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/10/23/c-notes/" class="article-date">
@@ -1387,7 +1835,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1396,7 +1844,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
+      <a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
     </div>
   </div>
 
@@ -1405,7 +1853,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -1415,6 +1863,10 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/11/13/UI-notes/">UI_notes</a>
+          </li>
         
           <li>
             <a href="/2014/10/23/c-notes/">c-notes</a>
@@ -1430,10 +1882,6 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
         
           <li>
             <a href="/2014/10/23/oc-notes/">oc-notes</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/23/hello-world/">Hello World</a>
           </li>
         
       </ul>
