@@ -1007,16 +1007,6 @@
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/23/oc-notes/">oc-notes</a>
-    </h1>
-  
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="http://www.52nx.net/article/UploadPic/2011-10/2011101515463073132.png" alt="image"></p>
@@ -1662,7 +1652,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
 </ul>
 </li>
 </ol>
-<h2 id="通配符">通配符</h2>
+<h2 id="通配符_《系统级别》">通配符 《系统级别》</h2>
 <ol>
 <li><p>{}</p>
 <p> touch {1,2,3,4,6,a,c,b,hello,t}.c</p>
@@ -1736,6 +1726,36 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
     `<span class="tuple">{$  <span class="comment">%K}`</span></span>
 </code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="constant">NSPredicate *predicate</span> = [NSPredicate predicateWithFormat:@<span class="string">"age between $RANGE"</span>];</div><div class="line"><span class="constant">      NSArray *arr</span> = @[@<span class="number">20</span>,@<span class="number">50</span>];</div><div class="line"><span class="constant">      NSDictionary *dic</span> = @{@<span class="string">"RANGE"</span>:arr};</div><div class="line">      <span class="comment">//过滤 20 &gt;= age &lt;= 50的信息</span></div><div class="line"><span class="constant">      </span></div><div class="line">      NSString *keyPath = @<span class="string">"age"</span>;</div><div class="line">      predicate = [NSPredicate predicateWithFormat:@<span class="string">"%K &gt; %@"</span>,keyPath,@<span class="number">20</span>];</div><div class="line">      <span class="comment">//过滤age &gt; 20 的信息</span></div></pre></td></tr></table></figure>
 
+<h2 id="正则表达式_《工具级别》">正则表达式 《工具级别》</h2>
+<p><strong>选择</strong></p>
+<p>| 竖直分隔符代表选择。例如，“grey | gray”可以匹配grey或gray</p>
+<p><strong>数量限定</strong></p>
+<ul>
+<li>+号代前面的字符至少要出现一次，可以出现多次。例如，“goo + gle”可以匹配google,gooogle,goooogle等</li>
+<li>？号代表前面的字符最多只能出现一次，可以不出现。例如，“colour？r”可以匹配color或者colour</li>
+<li><em>星号代表前面的字符可以不出现，可以出现一次或多次。例如，”0\</em>42”匹配42，042，0042，0004等。</li>
+<li>“{n}”代表前面的字符要出现n次，“{2，6}”代表前面的字符可以选择性的出现2-6次，例如，”go{2}gle”可以匹配google</li>
+</ul>
+<p><strong>匹配</strong><br>“（）”圆括号可以用来定义操作符的范围和优先度。例如，“gr(a|e)y”等价与“gray|grey”,”(grand)?father” 可以匹配father和grandfather。</p>
+<p><strong>^ $符号</strong></p>
+<ul>
+<li>^符号代表开始，例如，“^b”可以匹配以字符b开始的一类字符串</li>
+<li>$符号代表结束，例如，“x$”可以匹配以字符x结束的一类字符串，“^$”代表空</li>
+</ul>
+<p><strong>.符号</strong><br> .点符号，代表可以是任意字符。例如，“^a.{3}[0-9]+eh(hello)$”可以匹配ad_dehhello,a23d4ehhello,asdf345ehhello等</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">以上规则可以综合使用</div></pre></td></tr></table></figure>
+
+
+
+<h4 id="正则表达式可以用在grep，awk，sed，gas，find，等命令中，">正则表达式可以用在grep，awk，sed，gas，find，等命令中，</h4>
+<ul>
+<li>grep | ‘[a-z]{5}zsh$’ dotfiles 过滤dotifiles目录下的所有文件及目录</li>
+<li>ls | grep ‘^d’ ls命令列出当前目录下的以d开头的文件包括目录</li>
+<li>grep | -R ‘hello’ ./* 递归的查看根路径下的所有包含hello字符串的内容（-RE 递归的查找，支持正则表达式）</li>
+<li>find . -name ‘hello’查看名字为hello的文件的路径，</li>
+<li>find . -type d 查看当前目录下的所有文件夹的路径</li>
+<li>sed -RE ‘/^_.*(false)$/‘ /etc/passwd 查看passwd文件内容不是以下划线开始且以false结束的内容</li>
+</ul>
 <p><img src="http://s11.sinaimg.cn/middle/5f764369naf040c6ee03a&amp;690" alt="image"></p>
 
       
@@ -1812,6 +1832,8 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
 <p>comand + option + enter : 分栏</p>
 <p>command + enter  : 回到一栏</p>
 <p>command + ctrl +左右键 : 不同页面的切换</p>
+<p>shift + tab : 选中上一个</p>
+<p>tab : 选中下一个</p>
 
       
     </div>
