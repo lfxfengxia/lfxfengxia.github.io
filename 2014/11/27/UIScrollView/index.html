@@ -3,48 +3,44 @@
 <head>
   <meta charset="utf-8">
   
-  <title>accelerator-key | LFX‘S Blog</title>
+  <title>UIScrollView | LFX‘S Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Base Key
-command + c : 复制选中的内容
-command + v : 粘贴已复制的内容
-command + X : 剪贴已选中的内容
-command + z : 撤销最近一次执行放入操作
-command + / : 选中多行，一次注释多行
-Move Key
-ctrl + a : 移动光标到行首
-ctrl + e : 移动光标到行尾
-ctrl + p : 向上移动光标
-ctrl">
+  <meta name="description" content="ScrollView 不能滑动的常见原因
+
+contentsize 未设置
+scrollEnabled = NO;
+userInteractionEnabled = NO;
+未取消autolayout
+
+contentInset属性
+控制scrollView四周可以多出的滑动长度，默认为四个参数均为0，急不可以滑动超出contentSize以外的区域
+-（UIView ）viewForZoomin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="accelerator-key">
-<meta property="og:url" content="http://yoursite.com/2014/10/20/accelerator-key/">
+<meta property="og:title" content="UIScrollView">
+<meta property="og:url" content="http://yoursite.com/2014/11/27/UIScrollView/">
 <meta property="og:site_name" content="LFX‘S Blog">
-<meta property="og:description" content="Base Key
-command + c : 复制选中的内容
-command + v : 粘贴已复制的内容
-command + X : 剪贴已选中的内容
-command + z : 撤销最近一次执行放入操作
-command + / : 选中多行，一次注释多行
-Move Key
-ctrl + a : 移动光标到行首
-ctrl + e : 移动光标到行尾
-ctrl + p : 向上移动光标
-ctrl">
-<meta property="og:image" content="http://i.k1982.com/png/up/200712/20071206130310888.png">
+<meta property="og:description" content="ScrollView 不能滑动的常见原因
+
+contentsize 未设置
+scrollEnabled = NO;
+userInteractionEnabled = NO;
+未取消autolayout
+
+contentInset属性
+控制scrollView四周可以多出的滑动长度，默认为四个参数均为0，急不可以滑动超出contentSize以外的区域
+-（UIView ）viewForZoomin">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="accelerator-key">
-<meta name="twitter:description" content="Base Key
-command + c : 复制选中的内容
-command + v : 粘贴已复制的内容
-command + X : 剪贴已选中的内容
-command + z : 撤销最近一次执行放入操作
-command + / : 选中多行，一次注释多行
-Move Key
-ctrl + a : 移动光标到行首
-ctrl + e : 移动光标到行尾
-ctrl + p : 向上移动光标
-ctrl">
+<meta name="twitter:title" content="UIScrollView">
+<meta name="twitter:description" content="ScrollView 不能滑动的常见原因
+
+contentsize 未设置
+scrollEnabled = NO;
+userInteractionEnabled = NO;
+未取消autolayout
+
+contentInset属性
+控制scrollView四周可以多出的滑动长度，默认为四个参数均为0，急不可以滑动超出contentSize以外的区域
+-（UIView ）viewForZoomin">
 
   
     <link rel="alternative" href="/atom.xml" title="LFX‘S Blog" type="application/atom+xml">
@@ -96,10 +92,10 @@ ctrl">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-accelerator-key" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-UIScrollView" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/10/20/accelerator-key/" class="article-date">
-  <time datetime="2014-10-20T11:06:05.000Z" itemprop="datePublished">Oct 20 2014</time>
+    <a href="/2014/11/27/UIScrollView/" class="article-date">
+  <time datetime="2014-11-27T05:26:50.000Z" itemprop="datePublished">Nov 27 2014</time>
 </a>
     
   </div>
@@ -110,7 +106,7 @@ ctrl">
         
   
     <h1 class="article-title" itemprop="name">
-      accelerator-key
+      UIScrollView
     </h1>
   
 
@@ -118,56 +114,29 @@ ctrl">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://i.k1982.com/png/up/200712/20071206130310888.png" alt="image"></p>
-<h2 id="Base_Key">Base Key</h2>
-<p>command + c : 复制选中的内容</p>
-<p>command + v : 粘贴已复制的内容</p>
-<p>command + X : 剪贴已选中的内容</p>
-<p>command + z : 撤销最近一次执行放入操作</p>
-<p>command + / : 选中多行，一次注释多行</p>
-<h2 id="Move_Key">Move Key</h2>
-<p>ctrl + a : 移动光标到行首</p>
-<p>ctrl + e : 移动光标到行尾</p>
-<p>ctrl + p : 向上移动光标</p>
-<p>ctrl + n : 向下移动光标</p>
-<p>ctrl + b : 向左按字符移动光标</p>
-<p>ctrl + f : 向右按字符移动光标</p>
-<p>ctrl + option + b :  向左按符移动光标</p>
-<p>ctrl + option + f :  向右按符移动光标</p>
-<h2 id="Select_Key">Select Key</h2>
-<p>ctrl + shift + b : 从光标处向左按字符选中</p>
-<p>ctrl + shift + f : 从光标处向右按字符选中</p>
-<p>ctrl + shift + p : 从光标处向上按行选中</p>
-<p>ctrl + shift + n : 从光标处按行向上选中</p>
-<h2 id="Delete_Key">Delete Key</h2>
-<p>ctrl + d : 删除贯标右边的字符，按字符删除</p>
-<p>ctrl + h : 删除贯标左边的字符，按字符删除</p>
-<p>ctrl + k : 删除光标所在位置之后的所有内容</p>
-<h2 id="Key_—_XCode">Key — XCode</h2>
-<p>command + shift + 0 :  打开官方文档</p>
-<p>command + shift + n : 创建一个工程</p>
-<p>commanf + n : 创建一个类、协议、类别、累扩展等</p>
-<p>command + b : 编译代码</p>
-<p>command + r : 运行生成的代码</p>
-<p>command + shift + k : 清空XCode之前的编译</p>
-<p>command + shift + -&gt;/&lt;-;(左方向键) : 切换页面</p>
-<p>commang + f : 在官方文档中调出搜索栏</p>
-<p>comand + option + enter : 分栏</p>
-<p>command + enter  : 回到一栏</p>
-<p>command + ctrl +左右键 : 不同页面的切换</p>
-<p>shift + tab : 选中上一个</p>
-<p>tab : 选中下一个</p>
-<h2 id="other_key">other key</h2>
-<p>command + ctrl + f  : 切换当前应用程序界面的大小，同时将桌面背景消失，只显示当前应用程序</p>
-<p>command + option + “+” : vim终端界面的大小切换 </p>
+        <h3 id="ScrollView_不能滑动的常见原因">ScrollView 不能滑动的常见原因</h3>
+<ol>
+<li>contentsize 未设置</li>
+<li>scrollEnabled = NO;</li>
+<li>userInteractionEnabled = NO;</li>
+<li>未取消autolayout</li>
+</ol>
+<h3 id="contentInset属性">contentInset属性</h3>
+<p>控制scrollView四周可以多出的滑动长度，默认为四个参数均为0，急不可以滑动超出contentSize以外的区域</p>
+<h3 id="-（UIView_）viewForZoomingInScrollView:(UIScrollView_)scrollView;">-（UIView <em>）viewForZoomingInScrollView:(UIScrollView </em>)scrollView;</h3>
+<p>该方法实现对返回的视图进行缩放大小，放回的视图必须是scrollView的<code>子视图</code></p>
+<h3 id="diractionalLockEnabled">diractionalLockEnabled</h3>
+<p>该属性设置为YES时可以控制在滑动scrollView时不会有晃动的效果，即当用户的滑动的方向不是正方向时，scrollView仍然只是针对某一个方向滑动</p>
+<h3 id="pagingEnable">pagingEnable</h3>
+<p>该属性设置为YES时，可以控制用户滑动一下只翻一页。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/20/accelerator-key/" data-id="sl72ef48axqxerji" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2014/11/27/UIScrollView/" data-id="r4ty5naj6ljcwrzo" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/accelerator-key/">accelerator-key</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UIScorllView/">UIScorllView</a></li></ul>
 
     </footer>
   </div>
@@ -175,15 +144,11 @@ ctrl">
     
 <nav id="article-nav">
   
-    <a href="/2014/10/23/oc-notes/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
+    <a href="/2014/11/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
 </nav>
 
