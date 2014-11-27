@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>More</string>
+	<string>Favorites</string>
+	<string>Featured</string>
+	<string>TopRated</string>
+	<string>Recents</string>
+	<string>Contacts</string>
+	<string>History</string>
+	<string>Bookmarks</string>
+	<string>Search</string>
+	<string>Downloads</string>
+	<string>MostRecent</string>
+	<string>MostViewed</string>
+</array>
+</plist>

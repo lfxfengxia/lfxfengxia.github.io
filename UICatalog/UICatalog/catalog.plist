@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>desc</key>
+		<string>kinds of UIControl</string>
+		<key>icon</key>
+		<string>0.jpg</string>
+		<key>name</key>
+		<string>UIControls</string>
+		<key>nextView</key>
+		<string>QYMainViewController</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>uses of UILabel</string>
+		<key>icon</key>
+		<string>1.jpg</string>
+		<key>name</key>
+		<string>UILabel</string>
+		<key>nextView</key>
+		<string>LabelTableViewController</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>kings of color</string>
+		<key>icon</key>
+		<string>2.jpg</string>
+		<key>name</key>
+		<string>UIColor</string>
+		<key>nextView</key>
+		<string>ColorTableViewController</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>kinds of font</string>
+		<key>icon</key>
+		<string>3.jpg</string>
+		<key>name</key>
+		<string>UIFont</string>
+		<key>nextView</key>
+		<string>FontTableViewController</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>uses of UIAlertView</string>
+		<key>icon</key>
+		<string>4.jpg</string>
+		<key>name</key>
+		<string>UIAlertView</string>
+		<key>nextView</key>
+		<string>AlertTableViewController</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>uses of UIActionSheet</string>
+		<key>icon</key>
+		<string>5.jpg</string>
+		<key>name</key>
+		<string>UIActionSheet</string>
+		<key>nextView</key>
+		<string>ActionSheetTableViewController</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>pictuers skimmer</string>
+		<key>icon</key>
+		<string>6.jpg</string>
+		<key>name</key>
+		<string>UIImageView</string>
+		<key>nextView</key>
+		<string>ImageViewTableViewController</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>uses of UIActivitiyView</string>
+		<key>icon</key>
+		<string>7.jpg</string>
+		<key>name</key>
+		<string>UIActivityView</string>
+		<key>nextView</key>
+		<string>UIActivityTableViewController</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>uses of UIPickerView</string>
+		<key>icon</key>
+		<string>8.jpg</string>
+		<key>name</key>
+		<string>UIPickerView</string>
+		<key>nextView</key>
+		<string>PickerViewTableViewController</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>uses of UIWebview</string>
+		<key>icon</key>
+		<string>9.jpg</string>
+		<key>name</key>
+		<string>UIWebView</string>
+		<key>nextView</key>
+		<string>WebViewTableViewController</string>
+	</dict>
+	<dict>
+		<key>desc</key>
+		<string>uses of UISearchBar</string>
+		<key>icon</key>
+		<string>10.jpg</string>
+		<key>nextView</key>
+		<string>SearchViewTableViewController</string>
+		<key>name</key>
+		<string>UISearchBar</string>
+	</dict>
+</array>
+</plist>
