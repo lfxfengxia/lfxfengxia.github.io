@@ -67,6 +67,114 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-cocoapods" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/17/cocoapods/" class="article-date">
+  <time datetime="2015-01-17T10:55:26.000Z" itemprop="datePublished">Jan 17 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/17/cocoapods/">cocoapods</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介">简介</h1>
+<p> <a href="http://cocoapods.org" target="_blank" rel="external">cocoapods</a></p>
+<p> <a href="http://github.com/CocoaPods/CocoaPods" target="_blank" rel="external">CocoaPods项目源码</a></p>
+<h1 id="安装">安装</h1>
+<ol>
+<li>使用MAC自带的ruby下的gem命令：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>sudo gem install cocoapods</div><div class="line"><span class="variable">$ </span>pod setup</div></pre></td></tr></table></figure>
+
+<pre><code>在执行pod setup时，会输出Setting <span class="keyword">up</span> CocoaPods master repo,但是会执行很长时间，在此期间CocoaPods将它的信息下载到~/.cocoapods目录下，此时可以<span class="keyword">cd</span>到该目录，使用du -<span class="keyword">sh</span> 命令查看下载进度。使用镜像索引可以提高下载速度（下面有介绍）。
+</code></pre><ol>
+<li>将ruby源替换成国内淘宝源</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>gem sources --remove <span class="symbol">https:</span>/<span class="regexp">/rubygems.org/</span></div><div class="line"><span class="variable">$ </span>gem sources -a <span class="symbol">http:</span>/<span class="regexp">/ruby.taobao.org/</span></div><div class="line">查看源是否替换成功</div><div class="line"><span class="variable">$ </span>gem sources -l</div></pre></td></tr></table></figure>
+
+<ol>
+<li>如果安装的CocoaPods不能使用，可以尝试更新gem (sudo gem update —system),更新Iterm(删除原有的iterm,下载并安装新版本的iterm)。</li>
+</ol>
+<h1 id="镜像索引">镜像索引</h1>
+<p>所有的项目的PodSpec文件都托管在<a href="http://github.com/CocoaPods/Specs" target="_blank" rel="external">podSpec</a>。第一次执行pod setup时，将这些索引文件更新到本地~/.cocoapods/目录下。该文件比较大，所以第一次更新比较慢。</p>
+<p>akinkiu在<a href="http://gitcafe/com" target="_blank" rel="external">gitcafe</a>和<a href="http://www.oschina.net" target="_blank" rel="external">occhina</a>上建立了CocoaPods索引镜像。gitcafe和occhina都是国内服务器，在执行索引更新操作时会比较快。</p>
+<p>CoaoaPods设置成gitcafe镜像：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ pod repo <span class="built_in">remove</span> master</div><div class="line">$ pod repo <span class="built_in">add</span> master http<span class="variable">s:</span>//gitcafe.<span class="keyword">com</span>/akuandev/Specs.git</div><div class="line">$ pod repo <span class="keyword">update</span></div></pre></td></tr></table></figure>
+
+<p>将以上url改为<a href="http://git.oschina.net.akuandev/Specs.git即可使用occhina镜像。" target="_blank" rel="external">http://git.oschina.net.akuandev/Specs.git即可使用occhina镜像。</a></p>
+<h1 id="用法">用法</h1>
+<ol>
+<li><p>cd到以创建的项目的目录下执行以下命令</p>
+<ul>
+<li><p>pod init (生成Podfile文件，编辑该文件，添加所要加入的第三方库的名称版本（版本可以不用加）)</p>
+<p>  eg:</p>
+<p>  pod ‘AFNetworking’, ‘~&gt; 2.0’</p>
+<p>  pod ‘JSONKit’</p>
+</li>
+<li><p>pod install (自动将加入的第三方库源码下载下来，且为项目设置号好相应的系统依赖和编译参数)</p>
+<p><code>注意</code></p>
+</li>
+<li><p>使用CocoaPods生成的*.xcworkspace文件打开工程，而不是以前的*.xcodeproj文件。</p>
+</li>
+<li><p>每次修改了Podfile文件，都需要执行一次pod update命令。</p>
+</li>
+<li><p>pop install之后还生成的另一个文件Podfile.lock,该文件不能放在.gitignore文件中。该文件用来锁定当前各依赖库的版本，之后及时多次执行pod install也不会更改版本，只有执行pod update才会改变Podfile.lock文件。该文件可以在多人协作时，防止第三方库升级造成大家各自的第三方库的版本不一致。<a href="http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control" target="_blank" rel="external">Podfile.lock</a></p>
+</li>
+</ul>
+</li>
+<li><p>查找第三方库</p>
+</li>
+</ol>
+<p>查找CocoaPods管理是否有你想要的库，执行命令 pod search</p>
+<p>eg： pod search json 可查找与接送有关的所有库  </p>
+<ol>
+<li>生成第三方库帮助文档</li>
+</ol>
+<p>使用CocoaPods生成第三方库的帮助文档并集成到Xcode中，可使用brew安装appledoc即可：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew <span class="operator"><span class="keyword">install</span> appledoc</span></div></pre></td></tr></table></figure>
+
+<p>其优点：将帮助文档集成到Xcode中，在敲代码时可以按住opt键查看相应帮助文档</p>
+<ol>
+<li>不更新podspec</li>
+</ol>
+<p>CocoaPods在执行pod install 和 pod update 时，会默认更新podspec索引。禁止更新podspec的命令：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pod install --<span class="keyword">no</span>-repo-<span class="keyword">update</span></div><div class="line">$ pod <span class="keyword">update</span> --<span class="keyword">no</span>-repo-<span class="keyword">update</span></div></pre></td></tr></table></figure>
+
+<h1 id="原理">原理</h1>
+<p>CocoaPods的原理是将所有的依赖库都放到一个名为Pods的项目中，然互让主项目依赖Pods项目。</p>
+<ol>
+<li>Pods项目最终会编译成一个名为libPods.a的文件，主项目只需要依赖.a这个文件即可。</li>
+<li>对于资源文件，CocoaPods提供了一个名为Pods-resources.sh的bash脚本，该脚本在每次项目编译的时候都会执行，将第三方的各个资源文件复制到目标目录中。</li>
+<li>CocoaPods通过一个名为Pods.xcconfig的文件在编译的时候设置所有的参数和依赖。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/01/17/cocoapods/" data-id="2n9mzdph6beh8dcr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cocoaPods/">cocoaPods</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-viewController" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/01/17/viewController/" class="article-date">
@@ -1999,100 +2107,6 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
 
 
   
-    <article id="post-setUpBlog" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/10/23/setUpBlog/" class="article-date">
-  <time datetime="2014-10-23T11:20:14.000Z" itemprop="datePublished">Oct 23 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/23/setUpBlog/">setUpBlog</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://www.52nx.net/article/UploadPic/2011-6/2011641142825701.png" alt="image"></p>
-<h3 id="安装brew">安装brew</h3>
-<p>执行命令</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ruby <span class="operator">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
-
-<h3 id="安装wget">安装wget</h3>
-<p>执行命令</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>brew install wget</div></pre></td></tr></table></figure>
-
-<h3 id="安装nvm(node-js的版本管理工具)">安装nvm(node.js的版本管理工具)</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ wget -qO- http<span class="variable">s:</span>//raw.github.<span class="keyword">com</span>/creationix/nvm/master/install.<span class="keyword">sh</span> | <span class="keyword">sh</span></div></pre></td></tr></table></figure>
-
-<h3 id="添加如下内容到~/-zshrc_配置文件">添加如下内容到~/.zshrc 配置文件</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[ -s <span class="string">"/Users/<span class="escape">`u</span>sers<span class="escape">`/</span>.nvm/nvm.sh"</span> ] && . <span class="string">"/Users/<span class="escape">`u</span>sers<span class="escape">`/</span>.nvm/nvm.sh"</span> # This loads nvm</div></pre></td></tr></table></figure>
-
-<h3 id="安装node-js(通过nvm安装)">安装node.js(通过nvm安装)</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>nvm install <span class="number">0</span>.<span class="number">10</span></div></pre></td></tr></table></figure>
-
-<h3 id="安装hexo">安装hexo</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>npm install -g hexo</div></pre></td></tr></table></figure>
-
-<h3 id="创建hexo文件夹，并安装hexo组件">创建hexo文件夹，并安装hexo组件</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo init hexo</div><div class="line"><span class="variable">$ </span>cd hexo</div><div class="line"><span class="variable">$ </span>npm install</div></pre></td></tr></table></figure>
-
-<h3 id="查看本地">查看本地</h3>
-<p>输⼊入如下命令后,打开浏览器,并输⼊入localhost:4000来查看</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo g</div><div class="line"><span class="variable">$ </span>hexo s</div></pre></td></tr></table></figure>
-
-<h3 id="登录github-com注册github账号">登录github.com注册github账号</h3>
-<h4 id="创建与github同名的repository">创建与github同名的repository</h4>
-<p>eg : github账号名位lfxfengxia,则创建lfxfengxia.github.io</p>
-<h4 id="部署到github上">部署到github上</h4>
-<p>如下所示编辑_config.yml</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">deploy</span>: <span class="string"></span></div><div class="line">	<span class="attribute">type</span>: <span class="string">github</span></div><div class="line">	<span class="attribute">repository</span>: <span class="string">git@github.com:dorayox/dorayox.github.io.git</span></div><div class="line">	<span class="attribute">branch</span>: <span class="string">master</span></div></pre></td></tr></table></figure>
-
-<p>输入如下命令，完成到github的部署，之后打开浏览器并输入dorayox.github.io来查看</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo g</div><div class="line"><span class="variable">$ </span>hexo d</div></pre></td></tr></table></figure>
-
-<h3 id="上传文件到blog">上传文件到blog</h3>
-<p>在hexo目录下，创建新文件</p>
-<p>eg : 创建新文件test</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo <span class="keyword">new</span> test</div></pre></td></tr></table></figure>
-
-<p>默认创建的新文件后缀问 .md文件，存在hexo/source/_posts/目录下</p>
-<p>使用MOU打开新建的文件并完成编辑</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mou <span class="keyword">source</span><span class="regexp">/_posts/</span>test.md</div></pre></td></tr></table></figure>
-
-<p>将新建的文件声称网页</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo g</div></pre></td></tr></table></figure>
-
-<p>上传到blog</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo d</div></pre></td></tr></table></figure>
-
-<p>登录blog查看是否上传成功</p>
-<p><a href="http://lfxfengxia.github.io" target="_blank" rel="external">http://lfxfengxia.github.io</a></p>
-<p><img src="http://www.52nx.net/article/UploadPic/2011-8/20118241747296705.png" alt="image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/23/setUpBlog/" data-id="qbin8mk6xmio0hxk" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/set-up-blog/">set up blog</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
@@ -2108,7 +2122,7 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIScorllView/">UIScorllView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML-JSON/">XML&JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIScorllView/">UIScorllView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML-JSON/">XML&JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -2117,7 +2131,7 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AFNetworking/" style="font-size: NaNpx;">AFNetworking</a><a href="/tags/Data-Persistence/" style="font-size: NaNpx;">Data Persistence</a><a href="/tags/UIScorllView/" style="font-size: NaNpx;">UIScorllView</a><a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/XML-JSON/" style="font-size: NaNpx;">XML&JSON</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/kinds-of-viewControllers/" style="font-size: NaNpx;">kinds of viewControllers</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
+      <a href="/tags/AFNetworking/" style="font-size: NaNpx;">AFNetworking</a><a href="/tags/Data-Persistence/" style="font-size: NaNpx;">Data Persistence</a><a href="/tags/UIScorllView/" style="font-size: NaNpx;">UIScorllView</a><a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/XML-JSON/" style="font-size: NaNpx;">XML&JSON</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/cocoaPods/" style="font-size: NaNpx;">cocoaPods</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/kinds-of-viewControllers/" style="font-size: NaNpx;">kinds of viewControllers</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
     </div>
   </div>
 
@@ -2126,7 +2140,7 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -2136,6 +2150,10 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/01/17/cocoapods/">cocoapods</a>
+          </li>
         
           <li>
             <a href="/2015/01/17/viewController/">viewController</a>
@@ -2151,10 +2169,6 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
         
           <li>
             <a href="/2014/11/27/XML-JSON/">XML_JSON</a>
-          </li>
-        
-          <li>
-            <a href="/2014/11/27/UIScrollView/">UIScrollView</a>
           </li>
         
       </ul>
