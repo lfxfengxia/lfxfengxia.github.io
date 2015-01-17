@@ -67,6 +67,158 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-viewController" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/17/viewController/" class="article-date">
+  <time datetime="2015-01-17T05:43:19.000Z" itemprop="datePublished">Jan 17 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/17/viewController/">viewController</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-UIViewController生命周期几种方法调用时机">1.UIViewController生命周期几种方法调用时机</h2>
+<ol>
+<li>- (id)initWithNibName:(NSString <em>)nibNameOrNil bundle:(NSBundle </em>)nibBundleOrNil;<br>当UIViewController在初始化加载xib文件时，该方法被调用。</li>
+<li>- (void)loadView;<br>当每次访问UIViewController的view(比如controller.view,self.view)并且view为nil，该方法就会被调用。</li>
+<li>- (void)viewWillUnload; </li>
+<li>- (void)viewDidUnload;</li>
+<li>- (void)viewDidLoad;<br>不管是通过xib文件还是重写loadView创建UIViewController的view，在view创建完毕后，最终都会调用该方法。</li>
+<li>- (void)viewWillAppear:(BOOL)animated;<br>当view将要呈现在UI界面上时会调用该方法。</li>
+<li>- (void)viewDidAppear:(BOOL)animated;<br>当view已经完全过渡到屏幕上时会调用该方法。</li>
+<li>- (void)viewWillDisappear:(BOOL)animated;<br>当view将要消失，或被覆盖、隐藏时会调用该方法。</li>
+<li>- (void)viewDidDisappear:(BOOL)animated;<br>当view已经完全消失，或被覆盖、隐藏时会调用该方法。</li>
+</ol>
+<h2 id="2-UIViewController_xib的加载过程">2.UIViewController xib的加载过程</h2>
+<p>loadView默认实现就是在自定义的UIViewController类里不重写loadView方法，或者重写后只是在方法里简单实现[super loadView]。默认实现做了如下几个工作：</p>
+<ol>
+<li>它会先去查找与UIViewController相关联的xib文件，通过加载xib文件来创建UIViewController的view<br> 如果在初始化UIViewController指定了xib文件名，就会根据传入的xib文件名加载对应的xib文件<br> [[UIViewController alloc] initWithNibName:@”ViewController” bundle:nil];<br> 如果没有明显地传xib文件名，就会加载跟UIViewController同名的xib文件<br> [[UIViewController alloc] init]; // 加载UIViewController.xib </li>
+<li>如果没有找到相关联的xib文件，就会创建一个空白的UIView，然后赋值给UIViewController的view属性，大致如下：<br> self.view = [[[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame] autorelease];</li>
+</ol>
+<h2 id="3-几种控制器容器的优缺点">3.几种控制器容器的优缺点</h2>
+<h3 id="1-UITabBarController(Tabbar底部标签式:Instagram、微信、微博)">1.UITabBarController(Tabbar底部标签式:Instagram、微信、微博)</h3>
+<p>UITabBarController作为一种容器适合管理底部标签式（TabBar 如： Instagram、微信、微博）这种结构的APP</p>
+<h4 id="优点">优点</h4>
+<ol>
+<li>清楚当前所在的入口位置</li>
+<li>轻松在各入口间频繁跳转且不会迷失方向</li>
+<li>直接展现最重要入口的内容信息（默认首页）</li>
+</ol>
+<h4 id="缺点">缺点</h4>
+<p>功能入口过多时，该模式显得笨重不实用(超过5个的时候会将其他控制器添加到一个更多界面)</p>
+<h3 id="2-UINavigationController_(Springboard跳板式:星巴克)">2.UINavigationController (Springboard跳板式:星巴克)</h3>
+<p>UINavigationController作为一种容器适合管理跳板式（SpringBoard 如： 星巴克）这种结构的APP</p>
+<h4 id="优点-1">优点</h4>
+<ol>
+<li>清晰展现各入口</li>
+<li>容易记住各入口位置，方便快速找到</li>
+</ol>
+<h4 id="确定">确定</h4>
+<ol>
+<li>无法在多入口间灵活跳转，不适合任务操作</li>
+<li>容易形成更深的路径</li>
+<li>不能直接展现入口内容</li>
+<li>不能显示太多入口次级内容</li>
+</ol>
+<h3 id="3-UINavigationController做整体，融合TabBarController（List_Menu列表式：知乎）">3.UINavigationController做整体，融合TabBarController（List Menu列表式：知乎）</h3>
+<h4 id="优点-2">优点</h4>
+<ol>
+<li>层次展示清晰</li>
+<li>可展示内容较长的标题</li>
+<li>可展示标题的次级内容</li>
+</ol>
+<h4 id="缺点-1">缺点</h4>
+<ol>
+<li>同级内容过多时，用户浏览容易产生疲劳</li>
+<li>排版灵活性不是很高</li>
+<li>只能通过排列顺序、颜色来区分各入口重要程度</li>
+</ol>
+<h3 id="4-UIScrollvIewController融合pageControl_(Carousel旋转木马式:豆瓣同城)">4.UIScrollvIewController融合pageControl (Carousel旋转木马式:豆瓣同城)</h3>
+<h4 id="优点-3">优点</h4>
+<ol>
+<li>单页面内容整体性强</li>
+<li>线性的浏览方式有顺畅感、方向感</li>
+</ol>
+<h4 id="缺点-2">缺点</h4>
+<ol>
+<li>不适合展示过多页面</li>
+<li>不能跳跃性地查看间隔的页面，只能按顺序查看相邻的页面</li>
+<li>由于各页面内容结构相似，容易忽略后面的内容</li>
+</ol>
+<h3 id="5-_Drawer抽屉式：豆瓣小组">5. Drawer抽屉式：豆瓣小组</h3>
+<h4 id="优点-4">优点</h4>
+<ol>
+<li>兼容多种模式（页面内自有组织）</li>
+<li>扩展性好</li>
+</ol>
+<h4 id="缺点-3">缺点</h4>
+<ol>
+<li>隐藏框架中其他入口</li>
+<li>对入口交互的功能可见性(affordance)要求高</li>
+<li>对排版要求高</li>
+</ol>
+<h3 id="6-_Plus点聚式：Path">6. Plus点聚式：Path</h3>
+<h4 id="优点-5">优点</h4>
+<ol>
+<li>灵活</li>
+<li>展示方式有趣</li>
+<li>使界面更开阔</li>
+</ol>
+<h4 id="缺点-4">缺点</h4>
+<ol>
+<li>隐藏框架中其他入口</li>
+<li>对入口交互的功能可见性(affordance)要求高</li>
+</ol>
+<h3 id="7-Gallery陈列馆式：多看，豆瓣电影">7.Gallery陈列馆式：多看，豆瓣电影</h3>
+<h4 id="优点-6">优点</h4>
+<ol>
+<li>直观展现各项内容</li>
+<li>方便浏览经常更新的内容</li>
+</ol>
+<h4 id="缺点-5">缺点</h4>
+<ol>
+<li>不适合展现顶层入口框架</li>
+<li>容易形成界面内容过多，显得杂乱</li>
+<li>设计效果容易呆板</li>
+</ol>
+<h3 id="8-Waterfall瀑布式">8.Waterfall瀑布式</h3>
+<h4 id="优点-7">优点</h4>
+<ol>
+<li>浏览时产生流畅体验</li>
+</ol>
+<h4 id="缺点-6">缺点</h4>
+<ol>
+<li>缺乏对整体内容的体积感，容易发生空间位置迷失</li>
+<li>浏览一段时间后，容易产生疲劳感</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/01/17/viewController/" data-id="4x5ma236nanc3o87" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-data-persistence" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/12/02/data-persistence/" class="article-date">
@@ -1941,782 +2093,6 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
 
 
   
-    <article id="post-oc-notes" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/10/23/oc-notes/" class="article-date">
-  <time datetime="2014-10-23T05:17:08.000Z" itemprop="datePublished">Oct 23 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://www.52nx.net/article/UploadPic/2011-10/2011101515463073132.png" alt="image"></p>
-<h2 id="NSLog_与_printf的不同">NSLog 与 printf的不同</h2>
-<pre><code><span class="number">1.</span> <span class="built_in">NSLog</span>接收oc字符串作为参数，printf接收c语言的字符串作为参数
-<span class="number">2.</span> <span class="built_in">NSLog</span>输出后会自动换行，printf在输出后不会自动换行
-<span class="number">3.</span> 使用<span class="built_in">NSLog</span>时，需要包含头文件<span class="preprocessor">#import <span class="title">&lt;Foundition/Foundition.h&gt;</span>；而使用printf时，需要包含头文件#include<span class="title">&lt;stdio.h&gt;</span></span>
-<span class="number">4.</span> <span class="built_in">NSLog</span>可以输出日期，时间戳，进程号等信息，而printf不能输出这些信息
-</code></pre><h2 id="常用术语">常用术语</h2>
-<p>面向过程 ： Procedure Oriented</p>
-<p>面向对象 ： Object Oriented ，<strong>简称OO</strong></p>
-<p>面向编程 ： Object Oriented Programming，<strong>简称OOP</strong></p>
-<h2 id="OC_语法">OC 语法</h2>
-<ol>
-<li><strong>类的声明</strong></li>
-</ol>
-<pre><code>    <span class="class"><span class="keyword">@interface</span> 类名：父类（默认为 <span class="title">NSObject</span> 该类时根类）</span>
-
-    {
-
-        定义成员变量；（默认情况下，成员变量为protect类型，）
-
-    }    
-
-    （ 可以用<span class="keyword">@public</span>将其定义为public类型，此时定义的属性或变量允许被外界访问）
-    <span class="keyword">@property</span>(<span class="keyword">nonatomic</span>/atomic,<span class="keyword">readonly</span>/<span class="keyword">readwrite</span>,<span class="keyword">assign</span>/<span class="keyword">strong</span>/retain/wake)类型 属性名；（定义属性可以自动生成setter和getter方法）
-
-    声明类方法；（标识 ＋ 该方法向类发消息）
-
-    声明实例方法； （标识 － 该方法向对象发消息） 声明类方法时 返回值最好定义为`instancetype`类型
-
-    <span class="keyword">@end</span>
-</code></pre><ol>
-<li><p><strong>类的实现</strong></p>
-<pre><code> <span class="variable">@implemention</span> 类名
-
- － 实例方法
-｛
-        实现代码； 
- ｝
-
- ＋ 类fangfa
-｛ 
-        实现代码； 
- ｝
-
- 重写父类方法；
- 如：descripition、 dealloc、init等
-
- <span class="variable">@end</span>
-</code></pre><p>3.<strong>创建对象</strong></p>
-<pre><code> <span class="number">1</span>.包含所创建类的头文件
- <span class="number">2</span>.类名 ＊对象名；
- <span class="number">2.1</span> 类名 ＊对象名 ＝ ［［类名 alloc］<span class="keyword">init</span>］；（创建对象并为其分配内存、初始化）
- <span class="number">2.2</span> 类名 ＊对象名 ＝ ［类名 <span class="keyword">new</span>］；（每次都会创建出新的对象，并且返回对象的地址。）
- <span class="number">3</span>. 给对象赋值；（可以调用相应的类方法）；
- <span class="number">4</span>. 给对象发消息，完成所需要进行的操作；［对象 方法］；
-</code></pre></li>
-<li><p><strong>匿名对象</strong></p>
-<pre><code>    方法调用：
-
-        ［［类名 <span class="literal">new</span>］方法］；／［［［类名 alloc］init］方法］；
-
-    属性访问：
-
-        ［类名 <span class="literal">new</span>］<span class="subst">-&gt;</span>属性 ＝ 赋值；（外界访问定义为<span class="keyword">public</span>类型的属性）
-</code></pre></li>
-</ol>
-<h2 id="OC方法和函数的区别">OC方法和函数的区别</h2>
-<pre><code><span class="number">1</span>. <span class="constant">OC</span>方法的声明只能在<span class="variable">@interface</span> 和 <span class="variable">@end</span>之间，只能在<span class="variable">@implementation</span> 和 <span class="variable">@end</span>之间。即<span class="constant">OC</span>方法独立于类存在。
-<span class="number">2</span>. <span class="constant">C</span>函数不属于类，跟类没有联系，<span class="constant">C</span>函数所有权只属于定义函数的文件
-<span class="number">3</span>. <span class="constant">C</span>函数不能访问<span class="constant">OC</span>对象的成员变量。
-</code></pre><h2 id="OC语法细节">OC语法细节</h2>
-<pre><code><span class="bullet">1. </span>成员变量不能在｛｝中进行初始化、不能直接拿去访问
-<span class="bullet">2. </span>方法的声明不能写在@end之后
-<span class="bullet">3. </span>方法不能当作函数一样调用
-<span class="bullet">4. </span>成员变量、方法不能用static等关键字进行修饰
-</code></pre><h2 id="OC方法注意点">OC方法注意点</h2>
-<pre><code>方法只有声明，没有实现（经典错误，系统提示警告）
-方法没有声明，只有实现（编译器警告，但是可以调用，OC的弱语法）
-编译的时候，访问没有定义的成员变量直接报错，调用没有的方法，只是警告
-没有<span class="class"><span class="keyword">@interface</span>，纸偶@<span class="title">implemenation</span>也可以成功定义一个类</span>
-        @implemenation Dog : <span class="built_in">NSObject</span>
-        {
-            <span class="keyword">int</span> _age;
-            <span class="built_in">NSString</span> *_name;
-        }
-
-        - (<span class="keyword">void</span>)print
-        {
-            <span class="built_in">NSLog</span>(<span class="string">@"The dog's name is %@,ang de it's %d years old!"</span>,_name,_age);
-        }
-        <span class="keyword">@end</span>
-
-@implemenation 中不能声明和<span class="class"><span class="keyword">@interface</span>一样的成员变量</span>
-
-OC中有`<span class="built_in">BOOL</span>`基本数据类型，其值是`<span class="literal">YES</span>`和`<span class="literal">NO</span>`，而不是<span class="literal">true</span> 和<span class="literal">false</span>，它实际上是一种对带符号的自负类型（<span class="keyword">signed</span> <span class="keyword">char</span>）的定义（<span class="keyword">typedef</span>），它使用<span class="number">8</span>为存储空间。`<span class="literal">YES</span>定义为<span class="number">1</span>，<span class="literal">NO</span>定义为<span class="number">0</span>`；
-</code></pre><p><img src="http://www.52nx.net/article/UploadPic/2011-7/2011772043927764.png" alt="image"></p>
-<h3 id="类方法he实例方法">类方法he实例方法</h3>
-<ol>
-<li><p><strong>类方法</strong></p>
-<pre><code> ＊ 该方法是直接可以用类名来执行的方法（类本身会在内存中占据存储空间，里面有类／对象方法列表）
- ＊ 以加号 ＋ 开头
- ＊ 只能用类名调用，对象不能调用
- ＊ 类方法不能访问实例变量（成员变量）
- ＊ 使用场合：当不需要访问成员变量时，尽量使用类方法
- ＊ 类方法和对象方法可以同名
-</code></pre></li>
-<li><p><strong>实例方法</strong></p>
-<pre><code> ＊ 该方法是用对象名来执行的方法
- ＊ 以减号 — 开头
- ＊ 只能用对象名调用，类不能调用，该方法没有对象是不能被执行的
- ＊ 对象方法能访问实例变量（成员变量）
-</code></pre></li>
-</ol>
-<h3 id="setter和getter方法">setter和getter方法</h3>
-<ol>
-<li><p><strong>setter和getter方法的使用场合</strong></p>
-<pre><code> @<span class="keyword">public</span>的成员可以随意被赋植，应该使用<span class="keyword">set</span>和<span class="keyword">get</span>方法来管理成员变量的访问
-</code></pre></li>
-<li><p><strong>setter方法</strong></p>
-<pre><code>作用：用来设置成员变量，可以在方法里面过滤一些不合理的值
-命名规范：方法以<span class="keyword">set</span>开头，而且后面跟上成员变量名，成员变量名必须首字母大写，尽量形参名称不要与成员变量名重名（成员变量名最好以下划线 _ 开头）
-返回值：一般为<span class="keyword">void</span>
-</code></pre></li>
-<li><p><strong>getter方法</strong></p>
-<pre><code>作用：返回对象内部的成员变量
-命名规范：方法名和成员变量名同名
-返回值：一般与成员变量的类型相同  
-</code></pre></li>
-</ol>
-<h3 id="self关键字">self关键字</h3>
-<ol>
-<li><p><strong>成员变量和局部变量同名</strong></p>
-<pre><code> 当成员变量和局部变量同名时，采取就近原则，访问的是局部变量
- 当<span class="keyword">self</span>访问成员变量，区分同名的局部变量
-</code></pre></li>
-<li><p><strong>使用细节</strong></p>
-<pre><code> <span class="number">1.</span> 出现的地方：所有的OC方法中（对象方法／类方法），不能出现在函数
- <span class="number">2.</span> 作用：
-     使用“<span class="built_in">self</span><span class="built_in">.</span>属性”访问当前方法中的成员变量
-     使用“<span class="built_in">self</span><span class="subst">-&gt; </span>成员变量”访问当前方法中<span class="keyword">public</span>成员变量
-     使用“［<span class="built_in">self</span> 方法］”调用方法（类方法／实例方法）
- <span class="number">3.</span> 类方法中<span class="built_in">self</span>只能调用类方法，实例方法中<span class="built_in">self</span>只能调用实例方法
-</code></pre></li>
-</ol>
-<h2 id="继承">继承</h2>
-<ol>
-<li><p><strong>继承的概念</strong></p>
-<pre><code> <span class="number">1.</span> <span class="keyword">is</span>－a机制
- <span class="number">2.</span> 即当创建的多个类有共同的属性和行为时，可以抽出一个类作为父类，在父类中定义相同的属性，声明实现相同的行为（方法）；
- <span class="number">3.</span> 子类可以使用父类的所有属性和方法，并且子类可以在父类的基础上拓补自己的属性和方法，包括重写父类方法。重写父类方法时，子类对象会优先调用子类重写后的方法。
- <span class="number">4.</span> 子类属性和方法访问的过程： 如果子类没有相应的方法或属性，则去访问父类，一次递进知道找到NSObject根类，如果仍然没有找到相对应的方法和属性，则报错。
-</code></pre></li>
-<li><p><strong>继承的专业术语</strong></p>
-<pre><code> 父类／超类    <span class="keyword">super</span><span class="class"><span class="keyword">class</span>
- 子类 <span class="title">subclass</span>／<span class="title">subclasses</span></span>
-</code></pre></li>
-<li><p><strong>继承的细节</strong></p>
-<pre><code> 单继承，不支持多继承
- 子类和父类不能有相同的成员变量
- 子类可以重写父类中声明的方法（在代码运行时，oc确保调用相应类的重写方的实现）
-</code></pre></li>
-<li><p><strong>继承的优缺点</strong></p>
-<pre><code> 优点：
- 在不改变原来模型的基础上，拓充方法
- 建立了类与类的联系
- 抽取了公共代码
-
- 缺点：
- 耦合性强
-</code></pre></li>
-<li><p><strong>super关键字</strong></p>
-<pre><code> <span class="keyword">super</span>既不是参数，也不是实例变量，而是oc编译器提供的功能
- 用于提供一种在子类中显示调用父类的方法    
-</code></pre></li>
-<li><p><strong>继承的局限性</strong></p>
-<pre><code> 父类不能访问子类属性、调用子类方法
- 不能继承累簇（如 <span class="built_in">NSString</span>累簇）
-</code></pre></li>
-</ol>
-<h4 id="多态">多态</h4>
-<ol>
-<li><p><strong>多态的基本概念</strong>    </p>
-<pre><code> 某一类事物的多种形态
- OC对象具有多态性
-</code></pre></li>
-<li><p><strong>多态的体现</strong></p>
-<pre><code> 主要体现在继承下：向不同的对象发相同的消息，其呈现的行为不一样。（如DrawShape程序中，向不同图像的对象发送draw消息，其打印结果是不同的）。
- 子类对象可以赋值给父类指针；
- 如：Father *<span class="variable">f =</span> [children new];
- 父类指针可以访问对应的属性和方法
- 如： f.<span class="variable">age =</span> <span class="number">23</span>;  
-     [f study];
-</code></pre></li>
-<li><p><strong>多态的好处</strong></p>
-<pre><code> 用父类接收参数，节省代码
-</code></pre></li>
-<li><p><strong>多态的局限性</strong></p>
-<pre><code> 不能访问子类的属性（可以考虑强制转换）
-</code></pre></li>
-<li><p><strong>多态的细节</strong></p>
-<pre><code> 动态绑定，在运行时根据对象的类型确定动态调用的方法
-</code></pre></li>
-</ol>
-<h2 id="复合">复合</h2>
-<p> <strong>复合包括组合和聚合</strong></p>
-<pre><code><span class="built_in">has</span>－<span class="keyword">a</span>机制
-组合和聚合表示将各个部分组合在一起，用于表达整体与部分的关系。在面向对象的编程思想里，就是用已有类的对象封装新的类。
-</code></pre><ul>
-<li>组合 ：表示一种<code>强的、严格的</code>整体与部分的关系，部分和整体的生命周期一样。 比如：人和人头</li>
-<li>聚合 ：表示一种<code>弱的</code>整体与部分的关系，比如： 汽车和轮胎</li>
-</ul>
-<h2 id="Foundition框架">Foundition框架</h2>
-<pre><code><span class="number">1.</span> OC集合只能存储OC对象，不能存储c语言中的基本数据类型，如<span class="keyword">int</span>，<span class="keyword">float</span>，<span class="keyword">enum</span>，<span class="keyword">struct</span>，且不能在集合中存储<span class="literal">nil</span>。
-</code></pre><h4 id="字符串">字符串</h4>
-<ol>
-<li>不可变字符串 ： NSString *string1;</li>
-<li><p>可变字符串 ：  <code>NSMutableString</code> *string2;</p>
-<p> 对可变字符串的操作：</p>
-<p> 2.1 增加元素 </p>
-<p> <code>string2 appendFormat:@&quot;hello&quot;];</code></p>
-<p> 2.2 删除元素</p>
-<p> <code>[string2 replaceCharacterInRange:NAMakeRange(2,3)];</code></p>
-<p> 2.3 修改元素（替换）  </p>
-<p> <code>[string2 replaceCharacterInRange:NAMakeRange(2,3)withString:@&quot;word&quot;];</code></p>
-</li>
-<li><p>字符串的操作</p>
-<p> 3.1 比较</p>
-<p> //判断两个字符串是否相等，返回的是BOOL值</p>
-<p> <code>[str1 isEqualTo:str2];</code></p>
-<p> <code>NSCompareResult res  = [str1 copmare:str2];</code></p>
-<p> 不区分大小写的比较：<code>caseInsensitiveCompare</code></p>
-<p> 有选择参数的比较： <code>［str compare：str2 option：NSStringCompareOption］</code></p>
-<p> NSStringCompareOption选项可以传入的参数</p>
-<pre><code> <span class="class"><span class="keyword">enum</span> {</span>
-<span class="constant">            NSCaseInsensitiveSearch</span> = <span class="number">1</span>,   不区分大小写
-<span class="constant">            NSLiteralSearch</span> = <span class="number">2</span>,           对于相等的字符串逐个比较
-<span class="constant">            NSBackwardsSearch</span> = <span class="number">4</span>,         从后向前比较
-<span class="constant">           NSAnchoredSearch</span> = <span class="number">8</span>,          限制比较从开始还是结尾
-<span class="constant">            NSNumericSearch</span> = <span class="number">64</span>,          对于数字按数字比较
-<span class="constant">           NSDiacriticInsensitiveSearch</span> = <span class="number">128</span>,     不区分音节
-<span class="constant">            NSWidthInsensitiveSearch</span> = <span class="number">256</span>,         忽略full－width half－width （如 Unicode code point U+FF41 和 Unicode code point U+<span class="number">0061</span> 的字母 “a”is equal）
-<span class="constant">            NSForcedOrderingSearch</span> = <span class="number">512</span>,           对于不区分大小写比较相等的字符串，强制返回NSOderedAscending or NSOrderedDeascending （如“aa” is grater than “AA”）
-<span class="constant">            NSRegularExpressionSearch</span> = <span class="number">1024</span>        treated as an ICU－compatible regular expression
-     };
-</code></pre><p> NSCompareResult 有三种值：</p>
-<pre><code> NSOrderedSame  两字符串相等
- NSOrderedAscending  str1 <span class="tag">&lt; <span class="attribute">str2</span>
- <span class="attribute">NSOrderedDeascending</span>  <span class="attribute">str1</span> &gt;</span> str2;
-</code></pre><p> 3.2 求长度</p>
-<p> <code>NSUInteger strlen = [str1 length];</code></p>
-<p> 3.3 大小写转换</p>
-<p> <code>str2 = [str1 uupercaseString];</code></p>
-<p> <code>str2 = [str1 lowercaseString];</code></p>
-<p> 3.4 获取文件前缀、后缀</p>
-<p> <code>str2 ＝[str1 hasPrefix:@&quot;word&quot;];</code></p>
-<p> <code>str2 = [str1 hasSuffix:@&quot;txt&quot;];</code></p>
-<p> 3.5 获取子串</p>
-<p> //获取str2在str1中的位置，即range.location and range.length</p>
-<p> <code>range = [str1 rangOfString:str3];</code></p>
-<p> <code>range = [str1 rangOfString:@&quot;hello&quot;];</code></p>
-<p> //获取str1 第6个位置之后的字符串赋值给str2</p>
-<p> <code>str2 = [str1 substringFromIndex:6];</code></p>
-<p> //获取str1 从开始到第6个位置之间的字符串赋值给str2</p>
-<p> <code>str2 = [str1 substringTOIndex:6];</code></p>
-<p> //获取str1 从第6个位置开始长度为5的字符串赋值给str2</p>
-<p> <code>str2 = [str1 substringWithRange:NSMakeRange（6，7）];</code></p>
-<p> 3.6 文件路径的转换</p>
-<p> //间文件路径字符串str1 ＝ @“~/test.html”的路径转换为绝对路径赋值给str2</p>
-<p> <code>str2 = [str1 stringByExpandingTildeInPath];</code></p>
-<p> //间文件路径字符串str1 ＝ @“/users/qingyun/test.html”的路径转换为相对路径赋值给str2</p>
-<p> <code>str2 = [str1 stringByAbbreviatingWithTildeInPath];</code></p>
-<p> 3.7 文件路径的扩展名</p>
-<p> <code>str2 = [str1 pathExtension];</code>   此时 str2 ＝ @“html”；</p>
-<p> 3.7 删除文件路径的后缀</p>
-<p> <code>str2 = [str1 stringByDeletePathExtension];</code>   此时 str2 ＝ @“~/test”；</p>
-<p> 3.9 追加字符串</p>
-<p> str1 ＝ @”hello word”;</p>
-<p> <code>str2 = [str1 stringByAppendingFormat:@&quot;wellcom&quot;];</code>   此时 str2 ＝ @“hello word wellcom”;</p>
-</li>
-</ol>
-<h4 id="数组">数组</h4>
-<ol>
-<li>不可变数组 ： NSArray  *array1;</li>
-<li><p>可变数组 ： <code>NSMutableArray</code>  *array2;</p>
-<p> 数组初始化：</p>
-<p> <code>NSArray *array1 = [NSArray arrayWithObjects:@&quot;hello&quot;,@&quot;word&quot;,@&quot;two&quot;,nil];</code></p>
-<p> <code>NSArray *array1 = @[@12,@34,@&quot;hello&quot;,@&quot;error&quot;];</code></p>
-<p> //创建空数组</p>
-<p> <code>NSMutableArray  *array2 = [NSMutableArray array];</code></p>
-<p> //用已有的数组创建新数组</p>
-<p> <code>NSMutableArray  *array2 = [NSMutableArray arrayWithArray:array];</code></p>
-<p> //创建一个数组，并预分配内存</p>
-<p> <code>NSMutableArray  *array2 = [NSMutableArray arrayWithCapacity:40];</code></p>
-<p> 对可变数组的操作：</p>
-<p> 2.1 增加元素 </p>
-<p> <code>[array2 addObjects:@&quot;hello&quot;];</code></p>
-<p> 2.2 删除元素</p>
-<p> //删除下标为2的对象</p>
-<p> <code>[array2 removeObjectsAtIndex:2];</code></p>
-<p> //删除一定范围内的所有@“hello”</p>
-<p> <code>[array2 removeObject:@&quot;hello&quot; inRange:NSMakeRange(2, 3)];</code></p>
-<p> <code>[array3 removeObjectIdenticalTo:@&quot;is&quot; inRange:NSMakeRange(1, 5)];</code></p>
-<p> //删除该数组内的所有@“hello”</p>
-<p> <code>[array2 removeObjectIdenticalTo:@&quot;hello&quot;];</code></p>
-<p> 2.3 修改元素（替换）</p>
-<p> <code>[array2 removeObjectsAtIndex:2 withObject:@&quot;dog&quot;];</code></p>
-<p> <code>[array2 removeObjectsAtIndex:2 withObject:str];</code></p>
-<p> <code>[array2 removeObjectsInRange:NSMakeRang(0,2) withObjectFromArray:array];</code></p>
-<p> 2.4 插入元素</p>
-<p> <code>[array2 insertObjects:str1 AtIndex:2];</code></p>
-<p> 2.5 访问数组某个对象</p>
-<p> <code>array2［下标］</code></p>
-</li>
-</ol>
-<h4 id="字典">字典</h4>
-<ol>
-<li>不可变数组 ： NSDictionary  *dictionary1;</li>
-<li><p>可变数组 ： <code>NSMutableDictionary</code>  *dictionary2;</p>
-<p> 字典初始化：</p>
-<p> <code>Dictionary *dictionary1 = [NSDictionary dictionaryWithObjectsAndKeys:str1,@&quot;hello&quot;,str2,@&quot;word&quot;,str3,@&quot;two&quot;,nil];</code></p>
-<p> <code>Dictionary *dictionary1 = @{@&quot;num1&quot;:@12,@&quot;num2&quot;:@34,@&quot;str1&quot;:@&quot;hello&quot;,@&quot;str2&quot;:@&quot;error&quot;};</code></p>
-<p> //创建空字典</p>
-<p> <code>NSMutableDictionary  *dictionary2 = [NSMutableDictionary dictionary];</code></p>
-<p> //用已有的字典创建新字典</p>
-<p> <code>NSMutableDictionary  *dictionary2 = [NSMutableDictionary dictionaryWithDictionary:array];</code></p>
-<p> //创建一个字典，并预分配内存</p>
-<p> <code>NSMutableDictionary  *dictionary2 = [NSMutableDictionary dictionaryWithCapacity:40];</code></p>
-<p> 对可变字典的操作：</p>
-<p> 2.1 增加元素 </p>
-<p> <code>[dictionary2 addObjects:(id)forKey:@&quot;key&quot;];</code></p>
-<p> 2.2 删除元素</p>
-<p> <code>[dictionary2 removeObjectForKey:@&quot;key&quot;];</code></p>
-<p> 2.3 修改元素（替换）</p>
-<p> <code>[dictionary2 setObject:（id）forKey:@&quot;key&quot;];</code></p>
-<p> 2.4 访问字典</p>
-<p> <code>dictionary2［@“key”］;</code></p>
-<p> <code>[dictionary2 objectForKey:@&quot;key&quot;]</code></p>
-</li>
-</ol>
-<h4 id="装箱－开箱">装箱－开箱</h4>
-<ol>
-<li><p>对基本数据类型的装箱－NSNumber</p>
-<p> //装箱方法1</p>
-<p> <code>NSNumber *number = [NSNumber numberWithChar:&#39;X&#39;];</code></p>
-<p> <code>NSNumber *number = [NSNumber numberWithINT:23];</code></p>
-<p> <code>NSNumber *number = [NSNumber numberWithBOOL:YES];</code></p>
-<p> <code>NSNumber *number = [NSNumber numberWithDouble:34.5];</code></p>
-<p> //装箱方法2</p>
-<p> @23，@34.5</p>
-<p> //开箱</p>
-<p> <code>[number charValue];</code></p>
-<p> <code>[number intValue];</code></p>
-<p> <code>[number BOOLValue];</code></p>
-<p> <code>[number DoubleValue];</code>    </p>
-</li>
-<li><p>对所有非对象类型的装箱（包括基本数据类型）－ NSValue</p>
-<p> //对NSRect，NSPoint，NSRange装箱,也可以对基本数据类型进行装箱</p>
-<p> NSRect rect = NSMakeRect(10,20,30,40);</p>
-<p> <code>NSValue *value = [NSvalue valueWithBytes:&amp;rect objCType:@encode(NSRect)];</code></p>
-<p> int a ＝ 5；</p>
-<p> <code>NSValue *value = [NSvalue valueWithBytes:&amp;a objCType:@encode(int)];</code></p>
-<p> //开箱</p>
-<p> NSRect rect2 ＝ ｛0｝；</p>
-<p> <code>［value getValue:&amp;rect］;</code></p>
-<p> int b = 0;</p>
-<p> <code>[value getValue:&amp;b];</code></p>
-<p> //仅对NSRect，NSPoint，NSRange装箱</p>
-<p> <code>NSValue *value = [NSValue valueWithRect];</code></p>
-<p> <code>NSValue *value = [NSValue valueWithRange];</code></p>
-<p> <code>NSValue *value = [NSValue valueWithPoint];</code></p>
-<p> //开箱</p>
-<p> NSRect rect2 ＝ ｛0｝；</p>
-<p> <code>[value rectValue];</code></p>
-<p> NSRange range = {0};</p>
-<p> <code>[value rangeValue];</code></p>
-<p> NSPoint point = {0};</p>
-<p> <code>[value pointValue];</code></p>
-</li>
-</ol>
-<h4 id="枚举">枚举</h4>
-<pre><code><span class="comment">//normal enumerator</span>
-
-NSEnumerator *enumer = [array objectEnumerator];
-
-<span class="keyword">id</span> obj;
-<span class="keyword">while</span> (obj = [enumer nextObject]) {
-    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,obj);
-}
-
-NSEnumerator *enumer2 = [array reverseObjectEnumerator];
-<span class="keyword">while</span> (obj = [enumer2 nextObject]) {
-    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,obj);
-}
-
-<span class="comment">//fast enumerator</span>
-
-<span class="keyword">for</span> (<span class="keyword">id</span> obj2 <span class="keyword">in</span> array) {
-    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,obj2);
-}
-</code></pre><h2 id="类别">类别</h2>
-<ol>
-<li><p>类别的简述</p>
-<ul>
-<li>为现有的类（自定义的类、第三方的类或者是系统定义的类）添加一些新的行为；</li>
-<li>类别可以解决继承不能为累簇添加新方法的问题。</li>
-</ul>
-</li>
-<li><p>类别的声明和实现</p>
-<p> 格式： <code>类名 ＋ 类别名</code></p>
-<p> 如：为NSString 创建一个类别 <code>NSString＋NumberConvenience</code>；</p>
-<p> 只要保证类别名称唯一，可以向一个类中添加任意数量的类别。</p>
-<p> 声明：</p>
-<p> @interface NSString （NumberConvenience）</p>
-<p> － （NSNumber *）lengthAsNumber;</p>
-<p> @end</p>
-<p> 实现：</p>
-<p> @implementation NSString （NumberConvenience）</p>
-<p> － （NSNumber *）lengthAsNumber<br> {</p>
-<p> }</p>
-<p> @end</p>
-</li>
-<li><p>类别的优缺点</p>
-<p> 缺点：</p>
-<pre><code> <span class="keyword">*</span> 只能添加方法，只可以访问原始类的实例变量，无法向类别中添加新的实例变量
- <span class="keyword">*</span> 名称冲突。类别具有最高优先级，即当类别中定义与对应类中已有的方法同名的方法，对象调用该方法时，会优先调用类别中定义的方法。
- <span class="keyword">*</span> 多个Category中如果实现了相同的方法，只有最后一个参与编译的才会有效   
-</code></pre><p> 优点：</p>
-<pre><code> <span class="keyword">*</span> 将类的实现代码分散到多个不同文件或框架中。
- <span class="keyword">*</span> 可以创建对类中私有方法的前向引用，
- <span class="keyword">*</span> 向对象添加非正式协议。
-</code></pre></li>
-<li><p>使用类别实现类的扩展</p>
-<p>  类的扩展等同于在类声明的<code>源代码</code>中声明一个无名的（即括号“ （） ”里面为空）类别，并实现；</p>
-<ul>
-<li>类的扩展可以在<code>源代码</code>中使用</li>
-<li>可以添加实例变量作为类的私有变量和方法</li>
-<li>可以将只读权限改为读写权限</li>
-<li>创建数量不限</li>
-</ul>
-</li>
-<li><p>利用类别分散实现代码的优点</p>
-<pre><code> . 在大型的项目中， 一个类的实现可能非常大，并且.m文件不能分离。但是使用类别可以将一个类的实现分散且有规律的组织在不同的文件中。还可以将一个类的实现分散到不同的框架中。 
- . 编程人员可以更加容易阅读代码并实现多人合作编码
- . 版本管理降低冲突
- . 维护人员更容易理解代码
-</code></pre></li>
-<li><p>非常正式协议</p>
-<p> 非正式协议就是为NSObject类创建一个类别；</p>
-</li>
-<li><p>响应选择器</p>
-<ul>
-<li>使用@selector()编译指令来指定选择器,圆括号里是具体的方法名。如：</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">（有几个参数要有几个冒号“ : ”）</div><div class="line"> 如：</div><div class="line"> @selector(<span class="keyword">set</span>Engine:)</div><div class="line"> @selector(<span class="keyword">set</span>Tire:atIndex:)</div></pre></td></tr></table></figure>
-
-
-<pre><code> -<span class="ruby"> 选择器的类型关键字<span class="symbol">:SEL</span>
-</span> -<span class="ruby"> \- (<span class="constant">BOOL</span>)<span class="symbol">respondsToSelector:</span>(<span class="constant">SEL</span>)<span class="variable">@Selector</span>; 使用此方法可以判断某一对象是否可以执行指定的方法。 </span>
-</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">QYStudent *student </span>=<span class="string"> [[QYStudent alloc]init];</span></div></pre></td></tr></table></figure>
-
-<pre><code> 如： 
-</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[student respondToSelector:(SEL)<span class="variable">@selector</span>(<span class="keyword">study</span>)]; <span class="regexp">//</span>对对象student判断其是否有<span class="keyword">study</span>这个方法，有的话返回值为YES，没有的话返回值为NO。</div></pre></td></tr></table></figure>
-
-<h2 id="协议">协议</h2>
-<ol>
-<li><p>基本用途</p>
-<ul>
-<li>可以用来声明一大堆方法（不能声明成员变量）</li>
-<li>只要某个类遵守了这个协议，就相当于拥有这个协议中的所有方法声明</li>
-<li>只要父类遵守了某个协议，就相当于子类也遵守了    </li>
-</ul>
-</li>
-<li><p>格式<br> @protocol 协议名</p>
-<p> 方法声明列表</p>
-<p> @end</p>
-<p> 某个类遵守某个协议</p>
-<p> @interface 类名 : 父类名&lt;协议名&gt;</p>
-<p> @end</p>
-</li>
-<li><p>关键字</p>
-<p> 协议中有2个关键字可以控制方法是否要实现（默认是@required），在大多数情况下，用途在于程序员之间的交流</p>
-<ul>
-<li>@required: 该关键字以下且@optional关键字以上的方法必须要实现（若不实现，编译器会发出警告</li>
-<li>@optional: 该关键字以下且@required关键字以上的方法可以选择性的实现</li>
-</ul>
-</li>
-<li><p>协议遵守协议</p>
-<ul>
-<li><p>一个协议可以遵守其他多个协议，多个协议之间用逗号 , 隔开</p>
-<ul>
-<li>一个协议遵守了其他协议，就相当于拥有了其他协议中的方法声明</li>
-</ul>
-<p>@protocol 协议名称 &lt;协议1, 协议2&gt;</p>
-<p>@end</p>
-</li>
-</ul>
-</li>
-<li><p>基协议</p>
-<ul>
-<li>NSObject是一个基类，最根本最基本的类，任何其他类最终都要继承它</li>
-<li>其实还有一个协议，名字也叫NSObject，它是一个基协议，最根本最基本的协议</li>
-<li>NSObject协议中声明很多最基本的方法，比如description、retain、release等</li>
-<li>建议每个新的协议都要遵守NSObject协议</li>
-</ul>
-</li>
-<li><p>定义变量时指定协议</p>
-<p> // NSObject类型的对象，并且要遵守NSCopying协议</p>
-<ul>
-<li><p>NSObject<nscopying> *obj;</nscopying></p>
-<p>// 任何OC对象，并且要遵守NSCoding协议</p>
-</li>
-<li><p>id<nscoding> obj2;</nscoding></p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="内存管理">内存管理</h2>
-<p><strong>内存管理机制：引用计数</strong></p>
-<ol>
-<li><p>引用计数的计算</p>
-<ul>
-<li>alloc 、new 、copy(copy生成接收对象的一个副本) //使用这三个方法创建对象时，对象的引用计数器为1<ul>
-<li>- (id) retain; //给对象发送retain消息后，对象的引用计数器加1</li>
-<li>- (void) release; //给对像发送release消息后，对象的引用计数器减1</li>
-<li>- (void)dealloc; //当一个对象的引用计数器变为0而即将被销毁时,Objective-C自动向对                             象发送一条dealloc消息，我们通常都会在自己的对象中重写dealloc方法</li>
-<li>- (unsigned) retainCount;//获取当前对象的引用计数器的值</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>非ARC环境下内存的管理</p>
-<p> 当某个对象被持有有，［对象名 retain］；<br> 当某个对象不再被持有时，［对象名 release］；</p>
-</li>
-<li><p>ARC环境下内存的管理</p>
-<ul>
-<li><p>规则</p>
-<p>  只要还有一个强指针变量指向对象，对象就会保持在内存中</p>
-</li>
-<li><p>强引用，弱引用</p>
-<p>  ➢    默认所有实例变量和局部变量都是Strong指针</p>
-<p>  ➢    弱指针指向的对象被回收后，弱指针会自动变为nil指针，不会引发野指针错误。其修饰符号为__weak;</p>
-</li>
-<li><p>注意点</p>
-<pre><code>➢    不能调用<span class="operator"><span class="keyword">release</span>、retain、autorelease、retainCount</span>
-</code></pre><p> ➢    可以重写dealloc，但是不能调用[super dealloc]</p>
-<p> ➢    @property : 想长期拥有某个对象，应该用strong，其他对象用weak</p>
-<p> ➢    其他基本数据类型依然用assign</p>
-<p> ➢    两端互相引用时，一端用strong、一端用weak</p>
-<ol>
-<li>自动释放池</li>
-</ol>
-</li>
-<li>自动释放池是一个存放实体的集合，这些实体可能是对象，这些对象能够被自动释放。</li>
-<li><p>/ - (id) autorelease; //是NSObject类提供的方法，此方法在某一个预定的时候，向对象发送release消息，返回值是接收消息的对象。实际上当给一个对象发送autorelease消息的时候，就是将这个对象添加到的自动释放池(NSAutoreleasePool)中，当自动释放池销毁时，会向该池中的所有对象发送release消息。</p>
-<p>如： - (NSString <em>) description<br>{<br>  NSString </em>desc;<br>   desc = [[NSString alloc] initWithFormat: @” I am %d years old”,29];<br>   return ([desc autorelease]);<br>}</p>
-</li>
-</ul>
-</li>
-<li><p>内存管理规则</p>
-<ul>
-<li>如果我使用了new , alloc 或者copy方法获得一个对象，则我必须释放或自释放该对象。</li>
-<li>如果你对对象调用了retain消息，那么你必须负责释放(release)这个对象，保证retain和release的使用次数相等。</li>
-</ul>
-</li>
-</ol>
-<h2 id="拷贝">拷贝</h2>
-<ol>
-<li><p>浅拷贝（shallow copy）</p>
-<p> 不会复制所引用的对象，新复制的对象只会指向现有的引用对象上。（引用计数加 1 ，地址不变）</p>
-</li>
-<li><p>深拷贝（deep copy）</p>
-<p> 真正意义的复制概念。得到的结果是多个，而非只是对象的引用。（引用计数 不变 ，地址发生变化）</p>
-</li>
-<li><p>关键字</p>
-<p> <code>copy</code>：对不可变的集合copy为浅拷贝，对可变的集合copy为深拷贝</p>
-<p> <code>mutableCopy</code>：对可变的或不可变的集合mutableCopy都是深拷贝，但是对于集合内部对象的拷贝时浅拷贝。</p>
-</li>
-</ol>
-<h2 id="BLOCK">BLOCK</h2>
-<ol>
-<li><p>基本概念</p>
-<p> 代码块本质上是和其他变量类似。不同的是，代码块存储的数据是一个函数体。使用代码块时，可以像调用其他标准函数一样，传入参数数，并得到返回值。    </p>
-</li>
-</ol>
-<pre><code><span class="bullet">* </span>Block封装了一段代码,可以在任何时候执行
-<span class="bullet">* </span>Block可以作为函数参数或者函数的返回值，而其本身又可以带输入参数或返回值。
-<span class="bullet">* </span>苹果官方建议尽量多用block。在多线程、异步任务、集合遍历、集合排序、动画转场用的很多
-</code></pre><ol>
-<li><p>定义</p>
-<pre><code> <span class="keyword">int</span> (^MySum)(<span class="keyword">int</span>, <span class="keyword">int</span>) = ^(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
- <span class="keyword">return</span> a+b;
- };
-</code></pre><p>定义了一个叫MySum的blocks对象，它带有两个int参数，返回int。等式右边就是blocks的具体实现</p>
-</li>
-<li><p>对变量的访问权限</p>
-<ul>
-<li>对全局变量具有读写权限 </li>
-<li>对静态变量具有读写权限</li>
-<li>对局部变量只有访问权限（可以用<code>__block</code>修饰局部变量，这样可以对其进行修改）</li>
-</ul>
-</li>
-<li><p>与函数指针的对比</p>
-<p> <strong>定义函数指针</strong><br> int (<em>p)(int,int);<br> <em>*定义Blocks</em></em><br> int (^Blocks)(int,int);</p>
-<p> <strong>调用函数指针</strong><br> (<em>p)(10, 20);<br> <em>*调用Blocks</em></em><br> Blocks(10, 20);</p>
-</li>
-<li><p>typedef和赋值</p>
-<ul>
-<li><p>在声明的同时定义变量，然后赋值<br>int (^MySum)(int,int) = ^(int a,int b) {<br>return a + b;<br>};</p>
-</li>
-<li><p>也可先用typedef先声明类型，再定义变量进行赋值<br>typedef int (^MySum)(int,int);<br>MySum sum = ^(int a,int b) {<br>return a + b;<br>}; </p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="KVC（Key_Valuble_Coding）">KVC（Key Valuble Coding）</h2>
-<ol>
-<li>基本概念<ul>
-<li>是一种间接更改对象状态（或者说是属性值）的方式：key-value coding 简称KVC.</li>
-<li>主要本质特点是采用字符串来标识对象的属性变量，并可以利用这个标识来更改对象的状态（或者说是属性值）</li>
-</ul>
-</li>
-<li><p>基本用法</p>
-<ul>
-<li>/ - (id)valueForKey:(NSString *)key //以key作为标识符，获取其对应的属性值</li>
-<li>/ - (void)setValue:(id)value forKey:(NSString *)key //以key作为标识符设置其对应的属性值。</li>
-</ul>
-</li>
-<li><p>调用机制</p>
-<ul>
-<li>valueForKey:会首先查找以参数名命名（格式为-key或者isKey)的getter方法，如果找到的话则调用这个方法；如果没有找到这样的getter方法，它将会在对象内部寻找名称格式为_key或者key的实例变量，然后返回。</li>
-<li>setValue:forKey:的机制跟valueForKey相似。它首先查找参数名命名的setter方法，如果找到的话则完成设置；如果没有找到setter方法， 则直接在类中找到名称格式为_key或者key的实例变量， 然后将value赋值给它。</li>
-</ul>
-</li>
-<li><p>键路径</p>
-<p>键路径的概念和表示：可以在对象和不同的变量名称之间用圆点分开来表示。</p>
-<ul>
-<li>-(id)valueForKeyPath:(NSString *)keyPath //以keyPath作为标识符，获取其对应的属性值</li>
-<li>-(void)setValue:(id)value forKeyPath:(NSString *)keyPath //以keyPath为标识符，设置其对应的属性的值。</li>
-</ul>
-</li>
-</ol>
-<h2 id="通配符_《系统级别》">通配符 《系统级别》</h2>
-<ol>
-<li><p>{}</p>
-<p> touch {1,2,3,4,6,a,c,b,hello,t}.c</p>
-<p> // 同时创建 1.c,2.c,3.c,4.c,6.c,a.c,c.c,b.c,hello.c,t.c文件</p>
-</li>
-<li><p>*</p>
-<p> ls *.c</p>
-<p> //列出所有以 .c为后缀的文件</p>
-</li>
-<li><p>? </p>
-<p> ls ??h*.c</p>
-<p> //列出第三个字符为“h”，且以.c为后缀的所有文件</p>
-</li>
-<li><p>[]</p>
-<p> ls [0-9].c</p>
-<p> //列出以数字0-9为文件名的.c文件</p>
-</li>
-<li><p>!</p>
-<p> ls ![0-9].c</p>
-<p> //列出所有不是以数字0-9为文件名的.c文件</p>
-</li>
-</ol>
-<h2 id="谓词">谓词</h2>
-<ol>
-<li><p>谓词的定义</p>
-<p> 谓词使用了KVC机制。</p>
-<p> <code>NSPredicate *predicate = [[NSPredicate prdicateWithFormat:@string]];</code></p>
-<p> //实历化一个谓词对象.</p>
-<p> <code>NSArray predicateArr = [对象名 filteredArrayUsingPredicate predicate];</code></p>
-<p> //向对象发消息，过滤出满足谓词条件的内容，并存放到数组predicateArr中；   （filteredArrayPredicate:NSPredicate <em> 方法的返回值时NSArray </em>类型）</p>
-</li>
-<li><p>谓词中的操作符</p>
-<p>  <em>谓词操作符不区分大小写</em></p>
-<ul>
-<li><p>关系运算符</p>
-<p>  <code>{ &gt; &lt; &gt;= &lt;= == != }</code></p>
-</li>
-<li><p>逻辑运算符 </p>
-<p>  <code>{&amp;&amp;(and) ||(or) !}</code></p>
-</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="constant">NSPredicate *predicate</span> = [NSPredicate predicateWithFormat:@<span class="string">"name != 'lisi' and age &gt; 12"</span>];</div></pre></td></tr></table></figure>
-
-
-<pre><code>* 范围运算符
-
-    `<span class="javascript">{between <span class="keyword">in</span>}</span>`
-</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">predicate = [NSPredicate predicateWithFormat:@<span class="string">"age in {23,25}"</span>];</div><div class="line"><span class="comment">//仅仅过滤出 age ＝ 23 和 age ＝ 25 的信息</span></div><div class="line">predicate = [NSPredicate predicateWithFormat:@<span class="string">"age between {23,25}"</span>];</div><div class="line"><span class="comment">//过滤出 23 &gt;= age &lt;＝ 25 的信息</span></div></pre></td></tr></table></figure>
-
-<pre><code><span class="keyword">*</span> 通配符
-
-    `{<span class="keyword">*</span> ? 主要与like一起使用}`
-</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">predicate = [NSPredicate predicateWithFormat:@<span class="string">"name like '??a*'"</span>];</div><div class="line"><span class="comment">//过滤name第三个字母为a的信息</span></div></pre></td></tr></table></figure>
-
-
-<pre><code>* 字符串特有操作符
-
-    `｛<span class="built_in">contains</span> like endswith beginswith ［<span class="built_in">c</span>］不区分大小写［d］不区分音节［cd］｝`
-</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">predicate = <span class="matrix">[NSPredicate predicateWithFormat:@<span class="string">"name endswith[cd] '</span>u<span class="string">' and name contains[cd] '</span>ao<span class="string">'"</span>]</span>;</div><div class="line"><span class="comment">//过滤name以‘u’结尾 且 包含 “ao”的信息</span></div></pre></td></tr></table></figure>
-
-<pre><code><span class="bullet">* </span>集合中的操作符
-
-<span class="code">    `{ANY ALL}`</span>
-</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">predicate = [NSPredicate predicateWithFormat:<span class="string">@"ALL age &gt; 10"</span>];</div><div class="line">      <span class="keyword">if</span> ([predicate evaluateWithObject:Arr]) {</div><div class="line">          <span class="built_in">NSLog</span>(<span class="string">@"evaluable"</span>);</div><div class="line">      }<span class="keyword">else</span> {</div><div class="line">          <span class="built_in">NSLog</span>(<span class="string">@"It's  not evaluable "</span>);</div><div class="line">      }</div><div class="line">      <span class="comment">//判断数组Arr中的对象中age是否全部大于10</span></div></pre></td></tr></table></figure>
-
-
-<pre><code>* 谓词模板
-
-    `<span class="tuple">{$  <span class="comment">%K}`</span></span>
-</code></pre><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="constant">NSPredicate *predicate</span> = [NSPredicate predicateWithFormat:@<span class="string">"age between $RANGE"</span>];</div><div class="line"><span class="constant">      NSArray *arr</span> = @[@<span class="number">20</span>,@<span class="number">50</span>];</div><div class="line"><span class="constant">      NSDictionary *dic</span> = @{@<span class="string">"RANGE"</span>:arr};</div><div class="line">      <span class="comment">//过滤 20 &gt;= age &lt;= 50的信息</span></div><div class="line"><span class="constant">      </span></div><div class="line">      NSString *keyPath = @<span class="string">"age"</span>;</div><div class="line">      predicate = [NSPredicate predicateWithFormat:@<span class="string">"%K &gt; %@"</span>,keyPath,@<span class="number">20</span>];</div><div class="line">      <span class="comment">//过滤age &gt; 20 的信息</span></div></pre></td></tr></table></figure>
-
-<h2 id="正则表达式_《工具级别》">正则表达式 《工具级别》</h2>
-<p><strong>选择</strong></p>
-<p>| 竖直分隔符代表选择。例如，“grey | gray”可以匹配grey或gray</p>
-<p><strong>数量限定</strong></p>
-<ul>
-<li>+号代前面的字符至少要出现一次，可以出现多次。例如，“goo + gle”可以匹配google,gooogle,goooogle等</li>
-<li>？号代表前面的字符最多只能出现一次，可以不出现。例如，“colour？r”可以匹配color或者colour</li>
-<li><em>星号代表前面的字符可以不出现，可以出现一次或多次。例如，”0\</em>42”匹配42，042，0042，0004等。</li>
-<li>“{n}”代表前面的字符要出现n次，“{2，6}”代表前面的字符可以选择性的出现2-6次，例如，”go{2}gle”可以匹配google</li>
-</ul>
-<p><strong>匹配</strong><br>“（）”圆括号可以用来定义操作符的范围和优先度。例如，“gr(a|e)y”等价与“gray|grey”,”(grand)?father” 可以匹配father和grandfather。</p>
-<p><strong>^ $符号</strong></p>
-<ul>
-<li>^符号代表开始，例如，“^b”可以匹配以字符b开始的一类字符串</li>
-<li>$符号代表结束，例如，“x$”可以匹配以字符x结束的一类字符串，“^$”代表空</li>
-</ul>
-<p><strong>.符号</strong><br> .点符号，代表可以是任意字符。例如，“^a.{3}[0-9]+eh(hello)$”可以匹配ad_dehhello,a23d4ehhello,asdf345ehhello等</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">以上规则可以综合使用</div></pre></td></tr></table></figure>
-
-
-
-<h4 id="正则表达式可以用在grep，awk，sed，gas，find，等命令中，">正则表达式可以用在grep，awk，sed，gas，find，等命令中，</h4>
-<ul>
-<li>grep | ‘[a-z]{5}zsh$’ dotfiles 过滤dotifiles目录下的所有文件及目录</li>
-<li>ls | grep ‘^d’ ls命令列出当前目录下的以d开头的文件包括目录</li>
-<li>grep | -R ‘hello’ ./* 递归的查看根路径下的所有包含hello字符串的内容（-RE 递归的查找，支持正则表达式）</li>
-<li>find . -name ‘hello’查看名字为hello的文件的路径，</li>
-<li>find . -type d 查看当前目录下的所有文件夹的路径</li>
-<li>sed -RE ‘/^_.*(false)$/‘ /etc/passwd 查看passwd文件内容不是以下划线开始且以false结束的内容</li>
-</ul>
-<p><img src="http://s11.sinaimg.cn/middle/5f764369naf040c6ee03a&amp;690" alt="image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/23/oc-notes/" data-id="h6poa81twlbifcmx" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oc/">oc</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -2732,7 +2108,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIScorllView/">UIScorllView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML-JSON/">XML&JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIScorllView/">UIScorllView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML-JSON/">XML&JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -2741,7 +2117,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AFNetworking/" style="font-size: NaNpx;">AFNetworking</a><a href="/tags/Data-Persistence/" style="font-size: NaNpx;">Data Persistence</a><a href="/tags/UIScorllView/" style="font-size: NaNpx;">UIScorllView</a><a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/XML-JSON/" style="font-size: NaNpx;">XML&JSON</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
+      <a href="/tags/AFNetworking/" style="font-size: NaNpx;">AFNetworking</a><a href="/tags/Data-Persistence/" style="font-size: NaNpx;">Data Persistence</a><a href="/tags/UIScorllView/" style="font-size: NaNpx;">UIScorllView</a><a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/XML-JSON/" style="font-size: NaNpx;">XML&JSON</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/kinds-of-viewControllers/" style="font-size: NaNpx;">kinds of viewControllers</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
     </div>
   </div>
 
@@ -2750,7 +2126,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -2760,6 +2136,10 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/01/17/viewController/">viewController</a>
+          </li>
         
           <li>
             <a href="/2014/12/02/data-persistence/">data-persistence</a>
@@ -2777,10 +2157,6 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
             <a href="/2014/11/27/UIScrollView/">UIScrollView</a>
           </li>
         
-          <li>
-            <a href="/2014/11/18/hello-world/">Hello World</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -2793,7 +2169,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2014 John Doe<br>
+      &copy; 2015 John Doe<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
