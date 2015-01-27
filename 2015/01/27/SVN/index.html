@@ -3,17 +3,47 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: UIScorllView | SayingWhy’s Blog</title>
+  <title>SVN | SayingWhy’s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SayingWhy’s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/UIScorllView/">
+  <meta name="description" content="svn 查看log
+$ svn log
+查看SVN信息
+$ svn info
+查看当前SVN关联目录下的文件改动
+$ svn st
+提交代码
+$ svn ci file.m file2.m -m “提交file.m 和 file2.m”
+比较某个文件与SVN上代码的改动
+$ svn diff file.m //查看file.m 的变化，此命令只显示代码段的不同
+注释 比较两个文件或两个工程的差异，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVN">
+<meta property="og:url" content="http://yoursite.com/2015/01/27/SVN/">
 <meta property="og:site_name" content="SayingWhy’s Blog">
-<meta property="og:description">
+<meta property="og:description" content="svn 查看log
+$ svn log
+查看SVN信息
+$ svn info
+查看当前SVN关联目录下的文件改动
+$ svn st
+提交代码
+$ svn ci file.m file2.m -m “提交file.m 和 file2.m”
+比较某个文件与SVN上代码的改动
+$ svn diff file.m //查看file.m 的变化，此命令只显示代码段的不同
+注释 比较两个文件或两个工程的差异，">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SayingWhy’s Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="SVN">
+<meta name="twitter:description" content="svn 查看log
+$ svn log
+查看SVN信息
+$ svn info
+查看当前SVN关联目录下的文件改动
+$ svn st
+提交代码
+$ svn ci file.m file2.m -m “提交file.m 和 file2.m”
+比较某个文件与SVN上代码的改动
+$ svn diff file.m //查看file.m 的变化，此命令只显示代码段的不同
+注释 比较两个文件或两个工程的差异，">
 
   
     <link rel="alternative" href="/atom.xml" title="SayingWhy’s Blog" type="application/atom+xml">
@@ -65,12 +95,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-UIScrollView" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-SVN" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/11/27/UIScrollView/" class="article-date">
-  <time datetime="2014-11-27T05:26:50.000Z" itemprop="datePublished">Nov 27 2014</time>
+    <a href="/2015/01/27/SVN/" class="article-date">
+  <time datetime="2015-01-27T12:44:05.000Z" itemprop="datePublished">Jan 27 2015</time>
 </a>
     
   </div>
@@ -80,8 +108,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/27/UIScrollView/">UIScrollView</a>
+    <h1 class="article-title" itemprop="name">
+      SVN
     </h1>
   
 
@@ -89,38 +117,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="ScrollView_不能滑动的常见原因">ScrollView 不能滑动的常见原因</h3>
-<ol>
-<li>contentsize 未设置</li>
-<li>scrollEnabled = NO;</li>
-<li>userInteractionEnabled = NO;</li>
-<li>未取消autolayout</li>
-</ol>
-<h3 id="contentInset属性">contentInset属性</h3>
-<p>控制scrollView四周可以多出的滑动长度，默认为四个参数均为0，急不可以滑动超出contentSize以外的区域</p>
-<h3 id="-（UIView_）viewForZoomingInScrollView:(UIScrollView_)scrollView;">-（UIView <em>）viewForZoomingInScrollView:(UIScrollView </em>)scrollView;</h3>
-<p>该方法实现对返回的视图进行缩放大小，放回的视图必须是scrollView的<code>子视图</code></p>
-<h3 id="diractionalLockEnabled">diractionalLockEnabled</h3>
-<p>该属性设置为YES时可以控制在滑动scrollView时不会有晃动的效果，即当用户的滑动的方向不是正方向时，scrollView仍然只是针对某一个方向滑动</p>
-<h3 id="pagingEnable">pagingEnable</h3>
-<p>该属性设置为YES时，可以控制用户滑动一下只翻一页。</p>
+        <h3 id="svn_查看log">svn 查看log</h3>
+<p>$ svn log</p>
+<h3 id="查看SVN信息">查看SVN信息</h3>
+<p>$ svn info</p>
+<h3 id="查看当前SVN关联目录下的文件改动">查看当前SVN关联目录下的文件改动</h3>
+<p>$ svn st</p>
+<h3 id="提交代码">提交代码</h3>
+<p>$ svn ci file.m file2.m -m “提交file.m 和 file2.m”</p>
+<h3 id="比较某个文件与SVN上代码的改动">比较某个文件与SVN上代码的改动</h3>
+<p>$ svn diff file.m //查看file.m 的变化，此命令只显示代码段的不同</p>
+<p><strong>注释</strong> 比较两个文件或两个工程的差异，可使用Xcode工具filemerge<br>        打开方式：右击Xcode -&gt; open developer tool -&gt; filemerge</p>
+<h3 id="删除svn服务器代码的某个文件">删除svn服务器代码的某个文件</h3>
+<p>$ svn del file.m //删除file.m这个文件,之后需要svn ci -m “提交删除的文件”</p>
+<h3 id="增加一个新文件">增加一个新文件</h3>
+<p>$ svn add file.m //并提交</p>
+<p><code>注意</code><br>添加或删除某些名称中带@符号的文件，需要在其后面加个@，<br>eg：添加scree@2x.png的命令<br>    $ svn add screen@2x.png@</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/11/27/UIScrollView/" data-id="r4ty5naj6ljcwrzo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/01/27/SVN/" data-id="he6xmx5slr9te4qz" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UIScorllView/">UIScorllView</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SVN/">SVN</a></li></ul>
 
     </footer>
   </div>
   
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/01/17/cocoapods/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">cocoapods</div>
+    </a>
+  
+</nav>
+
+  
 </article>
 
-
-  
-  
 </section>
         
           <aside id="sidebar">

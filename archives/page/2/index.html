@@ -67,6 +67,125 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git-base-operation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/23/git-base-operation/" class="article-date">
+  <time datetime="2014-10-23T11:50:57.000Z" itemprop="datePublished">Oct 23 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/23/git-base-operation/">git-base-operation</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://www.52nx.net/article/UploadPic/2011-9/201191510414021305.png" alt="image"></p>
+<h3 id="基本操作">基本操作</h3>
+<h4 id="创建一个裸仓库">创建一个裸仓库</h4>
+<p><code>git init --bare</code></p>
+<h4 id="初始化基本仓库">初始化基本仓库</h4>
+<p><code>git init</code></p>
+<h4 id="配置作者信息">配置作者信息</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --<span class="keyword">global</span> user.name <span class="string">"liufengxia"</span></div><div class="line">git config --<span class="keyword">global</span> usr.emil <span class="number">1874962073</span>@<span class="number">163</span>.<span class="keyword">com</span></div></pre></td></tr></table></figure>
+
+<h4 id="添加文件到暂存区（跟踪文件）">添加文件到暂存区（跟踪文件）</h4>
+<p><code>git add [filename]</code></p>
+<p><code>git add *</code> // 跟踪所有已跟踪过又修改的文件</p>
+<h4 id="移除文件">移除文件</h4>
+<p><code>git rm [filename]</code></p>
+<h4 id="重命名一个文件">重命名一个文件</h4>
+<p><code>git mv [oldname] [newname]</code></p>
+<h4 id="提交暂存区">提交暂存区</h4>
+<p><code>git commit -m &quot;description information&quot;</code>//   git commmit 只提交在暂存区的内容</p>
+<p><code>git commit －a －m &quot;description information&quot;</code>//  将跟踪过又修改的为放入暂存跟踪后直接提交，已放入暂存区的也直接一起提交</p>
+<h4 id="查看工作目录的状态">查看工作目录的状态</h4>
+<p><code>git status</code></p>
+<h4 id="查看提交历史记录">查看提交历史记录</h4>
+<p><code>git log</code></p>
+<h4 id="查看文件改变">查看文件改变</h4>
+<p><code>git diff</code> //默认比较工作区下的文件与最近一次提交的不同</p>
+<p><code>git diff -- stash</code>//比较暂存区下的文件与最近一次提交的不同</p>
+<h3 id="撤销操作">撤销操作</h3>
+<h4 id="撤销加入暂存区的操作">撤销加入暂存区的操作</h4>
+<p><code>git reset -- [filename]</code></p>
+<h4 id="撤销修改的操作">撤销修改的操作</h4>
+<p><code>git checkout -- [filename]</code></p>
+<h4 id="将本地的修改放进回收站">将本地的修改放进回收站</h4>
+<p><code>git stash</code></p>
+<h4 id="从回收站中恢复本地的修改">从回收站中恢复本地的修改</h4>
+<p><code>git stash apply</code></p>
+<h3 id="Tag操作">Tag操作</h3>
+<h4 id="查看tag">查看tag</h4>
+<p><code>git tag</code></p>
+<h4 id="创建tag">创建tag</h4>
+<p><code>git tag -a tagname -m &quot;tag description information&quot;</code></p>
+<h4 id="显示tag信息">显示tag信息</h4>
+<p><code>git show tagname</code></p>
+<h4 id="对之前的提交打tag">对之前的提交打tag</h4>
+<p><code>git tag -a tagname -m &quot;tag description information&quot; commit-num</code></p>
+<h3 id="分支操作">分支操作</h3>
+<h4 id="查看分支">查看分支</h4>
+<p>// 默认查看本地分支</p>
+<p><code>git branch</code></p>
+<p>// 查看本地以及远端分支</p>
+<p><code>git branch -a</code></p>
+<p>// 查看远端分支</p>
+<p><code>git branch -r</code></p>
+<h4 id="创建分支">创建分支</h4>
+<p><code>git branch newbranchname</code></p>
+<h4 id="删除分支">删除分支</h4>
+<p><code>git branch -d/D branchname</code></p>
+<h4 id="切换分支">切换分支</h4>
+<p><code>git checkout branchname</code></p>
+<h4 id="创建分支并切换到新建的分支下">创建分支并切换到新建的分支下</h4>
+<p><code>git branch checkout -b newbranch</code></p>
+<h4 id="合并分支">合并分支</h4>
+<p><code>git merge branchname branchname</code></p>
+<h4 id="rebase操作">rebase操作</h4>
+<p><code>git rebase branchname branchname</code></p>
+<h3 id="远端仓库操作">远端仓库操作</h3>
+<h4 id="克隆一个远端仓库">克隆一个远端仓库</h4>
+<p><code>git clone URL/repodirectory</code></p>
+<h4 id="添加远端仓库">添加远端仓库</h4>
+<p><code>git remote add reponame URL/repodirectory</code></p>
+<h4 id="更新远端仓库的分支和数据">更新远端仓库的分支和数据</h4>
+<p><code>git fetch</code>   //默认更新远端master分支</p>
+<p><code>git fetch reponame branchname</code>     //更新指定远端的分支</p>
+<h4 id="获取并合并远端仓库的分支到当前分支">获取并合并远端仓库的分支到当前分支</h4>
+<p><code>git pull reponame branchname</code></p>
+<p>eg: git pull origin master</p>
+<h4 id="上传本地分支和数据到远端仓库">上传本地分支和数据到远端仓库</h4>
+<p><code>git push reponame  branchname</code></p>
+<p>eg: git push origin master</p>
+<h4 id="跟踪远端仓库上的分支">跟踪远端仓库上的分支</h4>
+<p><code>git checkout —track origin/testbranch</code></p>
+<p><code>git checkout -b test origin/testbranch</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2014/10/23/git-base-operation/" data-id="jjcd5kox4zsujlcu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-setUpBlog" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/10/23/setUpBlog/" class="article-date">
@@ -1037,7 +1156,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIScorllView/">UIScorllView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML-JSON/">XML&JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVN/">SVN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIScorllView/">UIScorllView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML-JSON/">XML&JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1046,7 +1165,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AFNetworking/" style="font-size: NaNpx;">AFNetworking</a><a href="/tags/Data-Persistence/" style="font-size: NaNpx;">Data Persistence</a><a href="/tags/UIScorllView/" style="font-size: NaNpx;">UIScorllView</a><a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/XML-JSON/" style="font-size: NaNpx;">XML&JSON</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/cocoaPods/" style="font-size: NaNpx;">cocoaPods</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/kinds-of-viewControllers/" style="font-size: NaNpx;">kinds of viewControllers</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
+      <a href="/tags/AFNetworking/" style="font-size: NaNpx;">AFNetworking</a><a href="/tags/Data-Persistence/" style="font-size: NaNpx;">Data Persistence</a><a href="/tags/SVN/" style="font-size: NaNpx;">SVN</a><a href="/tags/UIScorllView/" style="font-size: NaNpx;">UIScorllView</a><a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/XML-JSON/" style="font-size: NaNpx;">XML&JSON</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/cocoaPods/" style="font-size: NaNpx;">cocoaPods</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/kinds-of-viewControllers/" style="font-size: NaNpx;">kinds of viewControllers</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
     </div>
   </div>
 
@@ -1055,7 +1174,7 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -1065,6 +1184,10 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/01/27/SVN/">SVN</a>
+          </li>
         
           <li>
             <a href="/2015/01/17/cocoapods/">cocoapods</a>
@@ -1080,10 +1203,6 @@ NSEnumerator *enumer2 = [array reverseObjectEnumerator];
         
           <li>
             <a href="/2014/11/29/AFNetworking/">AFNetworking</a>
-          </li>
-        
-          <li>
-            <a href="/2014/11/27/XML-JSON/">XML_JSON</a>
           </li>
         
       </ul>
