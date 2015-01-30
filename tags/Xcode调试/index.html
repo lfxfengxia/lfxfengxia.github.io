@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: set up blog | SayingWhy’s Blog</title>
+  <title>Tag: Xcode调试 | SayingWhy’s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="SayingWhy’s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/set-up-blog/">
+<meta property="og:url" content="http://yoursite.com/tags/Xcode调试/">
 <meta property="og:site_name" content="SayingWhy’s Blog">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -67,10 +67,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-setUpBlog" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-LLDB" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/10/23/setUpBlog/" class="article-date">
-  <time datetime="2014-10-23T11:20:14.000Z" itemprop="datePublished">Oct 23 2014</time>
+    <a href="/2015/01/30/LLDB/" class="article-date">
+  <time datetime="2015-01-30T13:22:51.000Z" itemprop="datePublished">Jan 30 2015</time>
 </a>
     
   </div>
@@ -81,7 +81,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/23/setUpBlog/">setUpBlog</a>
+      <a class="article-title" href="/2015/01/30/LLDB/">LLDB</a>
     </h1>
   
 
@@ -89,70 +89,40 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://www.52nx.net/article/UploadPic/2011-6/2011641142825701.png" alt="image"></p>
-<h3 id="安装brew">安装brew</h3>
-<p>执行命令</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ruby <span class="operator">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
-
-<h3 id="安装wget">安装wget</h3>
-<p>执行命令</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>brew install wget</div></pre></td></tr></table></figure>
-
-<h3 id="安装nvm(node-js的版本管理工具)">安装nvm(node.js的版本管理工具)</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ wget -qO- http<span class="variable">s:</span>//raw.github.<span class="keyword">com</span>/creationix/nvm/master/install.<span class="keyword">sh</span> | <span class="keyword">sh</span></div></pre></td></tr></table></figure>
-
-<h3 id="添加如下内容到~/-zshrc_配置文件">添加如下内容到~/.zshrc 配置文件</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[ -s <span class="string">"/Users/<span class="escape">`u</span>sers<span class="escape">`/</span>.nvm/nvm.sh"</span> ] && . <span class="string">"/Users/<span class="escape">`u</span>sers<span class="escape">`/</span>.nvm/nvm.sh"</span> # This loads nvm</div></pre></td></tr></table></figure>
-
-<h3 id="安装node-js(通过nvm安装)">安装node.js(通过nvm安装)</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>nvm install <span class="number">0</span>.<span class="number">10</span></div></pre></td></tr></table></figure>
-
-<h3 id="安装hexo">安装hexo</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>npm install -g hexo</div></pre></td></tr></table></figure>
-
-<h3 id="创建hexo文件夹，并安装hexo组件">创建hexo文件夹，并安装hexo组件</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo init hexo</div><div class="line"><span class="variable">$ </span>cd hexo</div><div class="line"><span class="variable">$ </span>npm install</div></pre></td></tr></table></figure>
-
-<h3 id="查看本地">查看本地</h3>
-<p>输⼊入如下命令后,打开浏览器,并输⼊入localhost:4000来查看</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo g</div><div class="line"><span class="variable">$ </span>hexo s</div></pre></td></tr></table></figure>
-
-<h3 id="登录github-com注册github账号">登录github.com注册github账号</h3>
-<h4 id="创建与github同名的repository">创建与github同名的repository</h4>
-<p>eg : github账号名位lfxfengxia,则创建lfxfengxia.github.io</p>
-<h4 id="部署到github上">部署到github上</h4>
-<p>如下所示编辑_config.yml</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">deploy</span>: <span class="string"></span></div><div class="line">	<span class="attribute">type</span>: <span class="string">github</span></div><div class="line">	<span class="attribute">repository</span>: <span class="string">git@github.com:dorayox/dorayox.github.io.git</span></div><div class="line">	<span class="attribute">branch</span>: <span class="string">master</span></div></pre></td></tr></table></figure>
-
-<p>输入如下命令，完成到github的部署，之后打开浏览器并输入dorayox.github.io来查看</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo g</div><div class="line"><span class="variable">$ </span>hexo d</div></pre></td></tr></table></figure>
-
-<h3 id="上传文件到blog">上传文件到blog</h3>
-<p>在hexo目录下，创建新文件</p>
-<p>eg : 创建新文件test</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo <span class="keyword">new</span> test</div></pre></td></tr></table></figure>
-
-<p>默认创建的新文件后缀问 .md文件，存在hexo/source/_posts/目录下</p>
-<p>使用MOU打开新建的文件并完成编辑</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mou <span class="keyword">source</span><span class="regexp">/_posts/</span>test.md</div></pre></td></tr></table></figure>
-
-<p>将新建的文件声称网页</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo g</div></pre></td></tr></table></figure>
-
-<p>上传到blog</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo d</div></pre></td></tr></table></figure>
-
-<p>登录blog查看是否上传成功</p>
-<p><a href="http://lfxfengxia.github.io" target="_blank" rel="external">http://lfxfengxia.github.io</a></p>
-<p><img src="http://www.52nx.net/article/UploadPic/2011-8/20118241747296705.png" alt="image"></p>
+        <h2 id="Xcode调试基础">Xcode调试基础</h2>
+<p>如下图：调试视图包括顶部调试命令栏，左边变量视图，右边控制台。<br>调试器工具栏从左到右功能分别是：断点是否有效，跳到下一个断点，单步执行，进入方法内部，跳出当前方法到上一个方法</p>
+<p><img src="file:///Users/qingyun/Desktop/屏幕快照 2015-01-30 下午9.26.30.png" alt="image"></p>
+<h3 id="定制断点">定制断点</h3>
+<h5 id="满足条件的断点">满足条件的断点</h5>
+<p><img src="/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午10.49.42.png" alt="image"><br>i == 500 时代码暂停执行<br><img src="/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午10.32.26.png" alt="image"><br>根据以上选项可选择不同提示，Log Message 将消息写入日志，Sound 播放声音，若勾选Automatically continue after evaluating ，则会在播放声音或写入日志后不暂停执行代码</p>
+<h5 id="条件符合使用的断点">条件符合使用的断点</h5>
+<p><img src="/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午10.42.46.png" alt="image"></p>
+<p>该断点的作用是：当 i == 500，打印self.view的信息，同时ls查看根路径下的目录,输出a的值，并且播放声音且不停止执行代码</p>
+<h3 id="断点类型">断点类型</h3>
+<p><img src="/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午10.56.07.png" alt="image"></p>
+<h4 id="符号断点（Symbolic_Breakpoint）">符号断点（Symbolic Breakpoint）</h4>
+<p>该断点用于捕获特定方法或函数的所有方法<br><img src="/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午10.58.07.png" alt="image"></p>
+<p><img src="/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午11.04.00.png" alt="image"></p>
+<p>捕获viewDidLoad方法</p>
+<h4 id="异常断点_（All_Exceptions）">异常断点 （All Exceptions）</h4>
+<p><img src="/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午11.04.17.png" alt="image"><br>异常断点，在发生异常时触发。通常会通过设置一个全局的异常断点，可提供比崩溃更详细的栈跟踪信息。有时候，异常断点能直接指出崩溃的根源。调试期间可以始终确保有一个全局的异常断点是一种最佳的实践。</p>
+<h3 id="LLDB调试">LLDB调试</h3>
+<ul>
+<li>p （printf）打印标量表达式（eg a+b）或结构（CGRect）的值。po （print object）打印对象及其描述，可以查看特定内存的地址，也可以指定对象名。</li>
+<li>list X：打印指定行后的10行代码。通过参数 -X可以指定断点前多少行代码</li>
+<li>step （S）下一行</li>
+<li>continue（C）越过断点继续执行</li>
+<li>fin 执行到当前方法末尾</li>
+<li>kill 终止执行程序</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/23/setUpBlog/" data-id="qbin8mk6xmio0hxk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/01/30/LLDB/" data-id="f96i7kmcamu5it6x" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/set-up-blog/">set up blog</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xcode调试/">Xcode调试</a></li></ul>
 
     </footer>
   </div>
