@@ -3,44 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>UIScrollView | SayingWhy’s Blog</title>
+  <title>Local/Romote_Notification | SayingWhy’s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ScrollView 不能滑动的常见原因
-
-contentsize 未设置
-scrollEnabled = NO;
-userInteractionEnabled = NO;
-未取消autolayout
-
-contentInset属性
-控制scrollView四周可以多出的滑动长度，默认为四个参数均为0，急不可以滑动超出contentSize以外的区域
--（UIView ）viewForZoomin">
+  <meta name="description" content="Apple 关于本地通知和远程通知的官方文档
+简介
+远程通知（remote notification）和本地通知（local notification）是两种用户通知类型，远程通知又称为推送通知（push notification）。这两种通知都可以实现当不在前台运行的APP通知使用该APP的用户新信息，这消息可以是消息，临近的日历，或来自远端服务器的新数据等。当操作系统呈现这些通知时，可以显示一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UIScrollView">
-<meta property="og:url" content="http://yoursite.com/2014/11/27/UIScrollView/">
+<meta property="og:title" content="Local/Romote_Notification">
+<meta property="og:url" content="http://yoursite.com/2015/01/31/Local-Romote-Notification/">
 <meta property="og:site_name" content="SayingWhy’s Blog">
-<meta property="og:description" content="ScrollView 不能滑动的常见原因
-
-contentsize 未设置
-scrollEnabled = NO;
-userInteractionEnabled = NO;
-未取消autolayout
-
-contentInset属性
-控制scrollView四周可以多出的滑动长度，默认为四个参数均为0，急不可以滑动超出contentSize以外的区域
--（UIView ）viewForZoomin">
+<meta property="og:description" content="Apple 关于本地通知和远程通知的官方文档
+简介
+远程通知（remote notification）和本地通知（local notification）是两种用户通知类型，远程通知又称为推送通知（push notification）。这两种通知都可以实现当不在前台运行的APP通知使用该APP的用户新信息，这消息可以是消息，临近的日历，或来自远端服务器的新数据等。当操作系统呈现这些通知时，可以显示一">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UIScrollView">
-<meta name="twitter:description" content="ScrollView 不能滑动的常见原因
-
-contentsize 未设置
-scrollEnabled = NO;
-userInteractionEnabled = NO;
-未取消autolayout
-
-contentInset属性
-控制scrollView四周可以多出的滑动长度，默认为四个参数均为0，急不可以滑动超出contentSize以外的区域
--（UIView ）viewForZoomin">
+<meta name="twitter:title" content="Local/Romote_Notification">
+<meta name="twitter:description" content="Apple 关于本地通知和远程通知的官方文档
+简介
+远程通知（remote notification）和本地通知（local notification）是两种用户通知类型，远程通知又称为推送通知（push notification）。这两种通知都可以实现当不在前台运行的APP通知使用该APP的用户新信息，这消息可以是消息，临近的日历，或来自远端服务器的新数据等。当操作系统呈现这些通知时，可以显示一">
 
   
     <link rel="alternative" href="/atom.xml" title="SayingWhy’s Blog" type="application/atom+xml">
@@ -92,10 +71,10 @@ contentInset属性
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-UIScrollView" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Local-Romote-Notification" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/11/27/UIScrollView/" class="article-date">
-  <time datetime="2014-11-27T05:26:50.000Z" itemprop="datePublished">Nov 27 2014</time>
+    <a href="/2015/01/31/Local-Romote-Notification/" class="article-date">
+  <time datetime="2015-01-31T05:35:46.000Z" itemprop="datePublished">Jan 31 2015</time>
 </a>
     
   </div>
@@ -106,7 +85,7 @@ contentInset属性
         
   
     <h1 class="article-title" itemprop="name">
-      UIScrollView
+      Local/Romote_Notification
     </h1>
   
 
@@ -114,29 +93,20 @@ contentInset属性
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="ScrollView_不能滑动的常见原因">ScrollView 不能滑动的常见原因</h3>
-<ol>
-<li>contentsize 未设置</li>
-<li>scrollEnabled = NO;</li>
-<li>userInteractionEnabled = NO;</li>
-<li>未取消autolayout</li>
-</ol>
-<h3 id="contentInset属性">contentInset属性</h3>
-<p>控制scrollView四周可以多出的滑动长度，默认为四个参数均为0，急不可以滑动超出contentSize以外的区域</p>
-<h3 id="-（UIView_）viewForZoomingInScrollView:(UIScrollView_)scrollView;">-（UIView <em>）viewForZoomingInScrollView:(UIScrollView </em>)scrollView;</h3>
-<p>该方法实现对返回的视图进行缩放大小，放回的视图必须是scrollView的<code>子视图</code></p>
-<h3 id="diractionalLockEnabled">diractionalLockEnabled</h3>
-<p>该属性设置为YES时可以控制在滑动scrollView时不会有晃动的效果，即当用户的滑动的方向不是正方向时，scrollView仍然只是针对某一个方向滑动</p>
-<h3 id="pagingEnable">pagingEnable</h3>
-<p>该属性设置为YES时，可以控制用户滑动一下只翻一页。</p>
+        <p><a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction.html#//apple_ref/doc/uid/TP40008194-CH103-SW1" target="_blank" rel="external">Apple 关于本地通知和远程通知的官方文档</a></p>
+<h1 id="简介">简介</h1>
+<p>远程通知（remote notification）和本地通知（local notification）是两种用户通知类型，远程通知又称为推送通知（push notification）。这两种通知都可以实现当不在前台运行的APP通知使用该APP的用户新信息，这消息可以是消息，临近的日历，或来自远端服务器的新数据等。当操作系统呈现这些通知时，可以显示一个alert提醒或是app icon提醒。在提醒的时候也可以有声音的提示。</p>
+<p>当用户点击通知时可以启动APP查看通知详情，也可选择不打开APP忽略通知。</p>
+<p><code>注意</code></p>
+<p>不管是远程通知合适本地通知都与广播通知（NSNotificationCenter）和KVO（key value observe）无关。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/11/27/UIScrollView/" data-id="r4ty5naj6ljcwrzo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/01/31/Local-Romote-Notification/" data-id="s93uonssfjg6ewrr" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UIScorllView/">UIScorllView</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Local-Romote-Notification/">Local/Romote Notification</a></li></ul>
 
     </footer>
   </div>
@@ -144,19 +114,10 @@ contentInset属性
     
 <nav id="article-nav">
   
-    <a href="/2014/11/27/XML-JSON/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          XML_JSON
-        
-      </div>
-    </a>
   
-  
-    <a href="/2014/11/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/01/30/LLDB/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">LLDB</div>
     </a>
   
 </nav>

@@ -67,6 +67,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Local-Romote-Notification" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/01/31/Local-Romote-Notification/" class="article-date">
+  <time datetime="2015-01-31T05:35:46.000Z" itemprop="datePublished">Jan 31 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/31/Local-Romote-Notification/">Local/Romote_Notification</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction.html#//apple_ref/doc/uid/TP40008194-CH103-SW1" target="_blank" rel="external">Apple 关于本地通知和远程通知的官方文档</a></p>
+<h1 id="简介">简介</h1>
+<p>远程通知（remote notification）和本地通知（local notification）是两种用户通知类型，远程通知又称为推送通知（push notification）。这两种通知都可以实现当不在前台运行的APP通知使用该APP的用户新信息，这消息可以是消息，临近的日历，或来自远端服务器的新数据等。当操作系统呈现这些通知时，可以显示一个alert提醒或是app icon提醒。在提醒的时候也可以有声音的提示。</p>
+<p>当用户点击通知时可以启动APP查看通知详情，也可选择不打开APP忽略通知。</p>
+<p><code>注意</code></p>
+<p>不管是远程通知合适本地通知都与广播通知（NSNotificationCenter）和KVO（key value observe）无关。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/01/31/Local-Romote-Notification/" data-id="s93uonssfjg6ewrr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Local-Romote-Notification/">Local/Romote Notification</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LLDB" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/01/30/LLDB/" class="article-date">
@@ -91,21 +135,26 @@
       
         <h2 id="Xcode调试基础">Xcode调试基础</h2>
 <p>如下图：调试视图包括顶部调试命令栏，左边变量视图，右边控制台。<br>调试器工具栏从左到右功能分别是：断点是否有效，跳到下一个断点，单步执行，进入方法内部，跳出当前方法到上一个方法</p>
-<p><img src="file:/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午11.41.12.png" alt="image"></p>
+<p><img src="http://ww1.sinaimg.cn/mw690/bd64595djw1eospp3drwvj21240d6776.jpg" alt="image"></p>
 <h3 id="定制断点">定制断点</h3>
 <h5 id="满足条件的断点">满足条件的断点</h5>
-<p><img src="file:/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午11.40.20.png" alt="image"><br>i == 500 时代码暂停执行<br><img src="file:/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午11.42.59.png" alt="image"><br>根据以上选项可选择不同提示，Log Message 将消息写入日志，Sound 播放声音，若勾选Automatically continue after evaluating ，则会在播放声音或写入日志后不暂停执行代码</p>
+<p><img src="http://ww2.sinaimg.cn/mw690/bd64595djw1eospignjulj210e0aomzv.jpg" alt="image"></p>
+<p>i == 500 时代码暂停执行</p>
+<p><img src="http://ww2.sinaimg.cn/mw690/bd64595djw1eospoyuzrhj20oa0980um.jpg" alt="image"></p>
+<p>根据以上选项可选择不同提示，Log Message 将消息写入日志，Sound 播放声音，若勾选Automatically continue after evaluating ，则会在播放声音或写入日志后不暂停执行代码</p>
 <h5 id="条件综合使用的断点">条件综合使用的断点</h5>
-<p><img src="file:/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午10.42.46.png" alt="image"></p>
+<p><img src="http://ww1.sinaimg.cn/mw690/bd64595djw1eospow7z9uj20oq0p6n1e.jpg" alt="image"></p>
 <p>该断点的作用是：当 i == 500，打印self.view的信息，同时ls查看根路径下的目录,输出a的值，并且播放声音且不停止执行代码</p>
 <h3 id="断点类型">断点类型</h3>
-<p><img src="/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午10.56.07.png" alt="image"></p>
+<p><img src="http://ww3.sinaimg.cn/mw690/bd64595djw1eospjm6vpyj20dw06wab5.jpg" alt="image"></p>
 <h4 id="符号断点（Symbolic_Breakpoint）">符号断点（Symbolic Breakpoint）</h4>
-<p>该断点用于捕获特定方法或函数的所有方法<br><img src="/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午10.58.07.png" alt="image"></p>
-<p><img src="/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午11.04.00.png" alt="image"></p>
+<p>该断点用于捕获特定方法或函数的所有方法</p>
+<p><img src="http://ww2.sinaimg.cn/mw690/bd64595djw1eospio3xgmj20pg0b6q53.jpg" alt="image"></p>
+<p><img src="http://ww1.sinaimg.cn/mw690/bd64595djw1eospist9msj20e603mq3n.jpg" alt="image"></p>
 <p>捕获viewDidLoad方法</p>
 <h4 id="异常断点_（All_Exceptions）">异常断点 （All Exceptions）</h4>
-<p><img src="/Users/qingyun/Desktop/屏幕快照 2015-01-30 下午11.04.17.png" alt="image"><br>异常断点，在发生异常时触发。通常会通过设置一个全局的异常断点，可提供比崩溃更详细的栈跟踪信息。有时候，异常断点能直接指出崩溃的根源。调试期间可以始终确保有一个全局的异常断点是一种最佳的实践。</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/bd64595djw1eospi7dlkij20e603qq3a.jpg" alt="image"></p>
+<p>异常断点，在发生异常时触发。通常会通过设置一个全局的异常断点，可提供比崩溃更详细的栈跟踪信息。有时候，异常断点能直接指出崩溃的根源。调试期间可以始终确保有一个全局的异常断点是一种最佳的实践。</p>
 <h3 id="LLDB调试">LLDB调试</h3>
 <ul>
 <li>p （printf）打印标量表达式（eg a+b）或结构（CGRect）的值。po （print object）打印对象及其描述，可以查看特定内存的地址，也可以指定对象名。</li>
@@ -1471,60 +1520,6 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/11/18/hello-world/" class="article-date">
-  <time datetime="2014-11-18T02:34:31.000Z" itemprop="datePublished">Nov 18 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">trobuleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2>
-<h3 id="Create_a_new_post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/11/18/hello-world/" data-id="bpqb2wi3hzx9dcpn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
@@ -1540,7 +1535,7 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVN/">SVN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIScorllView/">UIScorllView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML-JSON/">XML&JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode调试/">Xcode调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/background-task/">background_task</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Local-Romote-Notification/">Local/Romote Notification</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVN/">SVN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIScorllView/">UIScorllView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML-JSON/">XML&JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode调试/">Xcode调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/background-task/">background_task</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1549,7 +1544,7 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AFNetworking/" style="font-size: NaNpx;">AFNetworking</a><a href="/tags/Data-Persistence/" style="font-size: NaNpx;">Data Persistence</a><a href="/tags/SVN/" style="font-size: NaNpx;">SVN</a><a href="/tags/UIScorllView/" style="font-size: NaNpx;">UIScorllView</a><a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/XML-JSON/" style="font-size: NaNpx;">XML&JSON</a><a href="/tags/Xcode调试/" style="font-size: NaNpx;">Xcode调试</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/background-task/" style="font-size: NaNpx;">background_task</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/cocoaPods/" style="font-size: NaNpx;">cocoaPods</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/kinds-of-viewControllers/" style="font-size: NaNpx;">kinds of viewControllers</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
+      <a href="/tags/AFNetworking/" style="font-size: NaNpx;">AFNetworking</a><a href="/tags/Data-Persistence/" style="font-size: NaNpx;">Data Persistence</a><a href="/tags/Local-Romote-Notification/" style="font-size: NaNpx;">Local/Romote Notification</a><a href="/tags/SVN/" style="font-size: NaNpx;">SVN</a><a href="/tags/UIScorllView/" style="font-size: NaNpx;">UIScorllView</a><a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/XML-JSON/" style="font-size: NaNpx;">XML&JSON</a><a href="/tags/Xcode调试/" style="font-size: NaNpx;">Xcode调试</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/background-task/" style="font-size: NaNpx;">background_task</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/cocoaPods/" style="font-size: NaNpx;">cocoaPods</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/kinds-of-viewControllers/" style="font-size: NaNpx;">kinds of viewControllers</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
     </div>
   </div>
 
@@ -1558,7 +1553,7 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -1568,6 +1563,10 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/01/31/Local-Romote-Notification/">Local/Romote_Notification</a>
+          </li>
         
           <li>
             <a href="/2015/01/30/LLDB/">LLDB</a>
@@ -1583,10 +1582,6 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
         
           <li>
             <a href="/2015/01/17/cocoapods/">cocoapods</a>
-          </li>
-        
-          <li>
-            <a href="/2015/01/17/viewController/">viewController</a>
           </li>
         
       </ul>
