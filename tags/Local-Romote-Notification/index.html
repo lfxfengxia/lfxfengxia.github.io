@@ -90,11 +90,84 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><a href="https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction.html#//apple_ref/doc/uid/TP40008194-CH103-SW1" target="_blank" rel="external">Apple 关于本地通知和远程通知的官方文档</a></p>
-<h1 id="简介">简介</h1>
+<h2 id="简介">简介</h2>
 <p>远程通知（remote notification）和本地通知（local notification）是两种用户通知类型，远程通知又称为推送通知（push notification）。这两种通知都可以实现当不在前台运行的APP通知使用该APP的用户新信息，这消息可以是消息，临近的日历，或来自远端服务器的新数据等。当操作系统呈现这些通知时，可以显示一个alert提醒或是app icon提醒。在提醒的时候也可以有声音的提示。</p>
 <p>当用户点击通知时可以启动APP查看通知详情，也可选择不打开APP忽略通知。</p>
 <p><code>注意</code></p>
 <p>不管是远程通知合适本地通知都与广播通知（NSNotificationCenter）和KVO（key value observe）无关。</p>
+<h2 id="本地通知">本地通知</h2>
+<h3 id="Xcode_6本地通知接收不到">Xcode 6本地通知接收不到</h3>
+<p>出现提示信息：</p>
+<ol>
+<li>Attempting to schedule a local notification</li>
+<li>with an alert but haven’t received permission from the user to display alerts</li>
+<li>with a sound but haven’t received permission from the user to play sounds</li>
+</ol>
+<p>原因在于在iOS8系统上需要注册本地通知，这样才能正常使用</p>
+<p>iOS8注册本地通知</p>
+<pre><code>- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions {
+
+    <span class="keyword">if</span> ([<span class="built_in">UIApplication</span> instancesRespondToSelector:<span class="keyword">@selector</span>(registerUserNotificationSettings:)]) {
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert categories:<span class="literal">nil</span>]];
+    }
+
+    <span class="keyword">return</span> <span class="literal">YES</span>;
+}
+
+- (<span class="keyword">IBAction</span>)registerLocationNotification:(<span class="keyword">id</span>)sender {
+
+<span class="built_in">UILocalNotification</span> *locationNotification = [[<span class="built_in">UILocalNotification</span> alloc]init];
+<span class="built_in">NSDate</span> *date = [<span class="built_in">NSDate</span> dateWithTimeIntervalSinceNow:<span class="number">5</span>];
+locationNotification<span class="variable">.fireDate</span> = date;
+locationNotification<span class="variable">.timeZone</span> = [NSTimeZone defaultTimeZone];
+locationNotification<span class="variable">.repeatInterval</span> = NSCalendarUnitSecond;
+locationNotification<span class="variable">.alertBody</span> = <span class="string">@"通知来了。。。"</span>;
+locationNotification<span class="variable">.alertAction</span> = <span class="string">@"通知"</span>;
+locationNotification<span class="variable">.alertLaunchImage</span> = <span class="string">@"3.png"</span>;
+locationNotification<span class="variable">.userInfo</span> = @{<span class="string">@"user"</span>:<span class="string">@"lfx"</span>};
+locationNotification<span class="variable">.soundName</span> = <span class="string">@"sound.caf"</span>;
+locationNotification<span class="variable">.applicationIconBadgeNumber</span> = <span class="number">10</span>;
+[[<span class="built_in">UIApplication</span> sharedApplication] scheduleLocalNotification:locationNotification];
+}
+</code></pre><p>回调方法</p>
+<pre><code>- (<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveLocalNotification:(<span class="built_in">UILocalNotification</span> *)notification{
+    <span class="comment">//取消通知的注册</span>
+    [application cancelLocalNotification:notification];
+}
+</code></pre><h2 id="远程通知(Push通知)">远程通知(Push通知)</h2>
+<h3 id="APNS推送机制（Apple_Push_Notification_Service）">APNS推送机制（Apple Push Notification Service）</h3>
+<p><img src="http://ww4.sinaimg.cn/mw690/bd64595dtw1eotzsizk0vj212i05qq46.jpg" alt="image"></p>
+<p>Provider：程序的后台服务器。</p>
+<p>上图分为三阶段：</p>
+<p>第一阶段：应用程序的服务器端把要发送的消息、目的iPhone的标识打包，发给APNS。</p>
+<p>第二阶段：APNS在自身的已注册Push服务的iPhone列表中，并把消息发送到iPhone。</p>
+<p>第三阶段：iPhone把发来的消息传递给应用程序，并按照规定弹出Push通知。</p>
+<h3 id="APNS推送通知的详细流程">APNS推送通知的详细流程</h3>
+<p><img src="http://ww1.sinaimg.cn/mw690/bd64595dtw1eotzsmltjmj20vw0yw78s.jpg" alt="image"></p>
+<ol>
+<li>APP注册APNS消息推送，iOS向APNS Server 请求获取device token</li>
+<li>APNS向APP发送device token ，APP接受device token</li>
+<li>APP向程序的服务器端发送device token </li>
+<li>程序服务器端发送Push通知到APNS</li>
+<li>APNS向APP发送Push通知</li>
+</ol>
+<h3 id="远程推送操作过程">远程推送操作过程</h3>
+<ol>
+<li>APP启动过程中，注册远程通知</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr_selector">[[UIApplication sharedApplication]</span> registerForRemoteNotificationTypes<span class="value">:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert| UIRemoteNotificationTypeSound];</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>若注册成功，回调方法</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="pp">-<span class="params">(void)</span>application:<span class="params">(<span class="variable">UIApplication</span> *)</span>application didRegisterForRemoteNotificationsWithDeviceToken:<span class="params">(<span class="variable">NSData</span> *)</span>deviceToken{</span></div><div class="line">NSLog<span class="params">(@<span class="string">"%@"</span>, device<span class="variable">Token</span>)</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<ol>
+<li>App获取device token 后，将device token 发送到自己的服务端。</li>
+<li>APNS服务器得到JSON串后，向App发送通知消息，App调用回调方法</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">    -(<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveRemoteNotification:(<span class="built_in">NSDictionary</span> *)userInfo{</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, userInfo);<span class="comment">//从userInfo获得推送信息内容</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
 
       
     </div>
