@@ -3,17 +3,29 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: git | SayingWhy’s Blog</title>
+  <title>create_certificate | SayingWhy’s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SayingWhy’s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/git/">
+  <meta name="description" content="others’ blog
+生成certSigningRequest文件
+该文件是MAC系统生成的，用于在Apple网站上申请推送证书文件。
+打开应“钥匙串访问”软件，菜单-&gt;钥匙串访问-&gt;证书助理-&gt;从证书颁发机构请求证书，填写邮箱和名称（随便写）,选择保存到磁盘，此时会生成一个CertificateSigningRequest.certSigningRequest文件。
+注册一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="create_certificate">
+<meta property="og:url" content="http://yoursite.com/2015/02/01/create-certificate/">
 <meta property="og:site_name" content="SayingWhy’s Blog">
-<meta property="og:description">
+<meta property="og:description" content="others’ blog
+生成certSigningRequest文件
+该文件是MAC系统生成的，用于在Apple网站上申请推送证书文件。
+打开应“钥匙串访问”软件，菜单-&gt;钥匙串访问-&gt;证书助理-&gt;从证书颁发机构请求证书，填写邮箱和名称（随便写）,选择保存到磁盘，此时会生成一个CertificateSigningRequest.certSigningRequest文件。
+注册一">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SayingWhy’s Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="create_certificate">
+<meta name="twitter:description" content="others’ blog
+生成certSigningRequest文件
+该文件是MAC系统生成的，用于在Apple网站上申请推送证书文件。
+打开应“钥匙串访问”软件，菜单-&gt;钥匙串访问-&gt;证书助理-&gt;从证书颁发机构请求证书，填写邮箱和名称（随便写）,选择保存到磁盘，此时会生成一个CertificateSigningRequest.certSigningRequest文件。
+注册一">
 
   
     <link rel="alternative" href="/atom.xml" title="SayingWhy’s Blog" type="application/atom+xml">
@@ -65,12 +77,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-git-base-operation" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-create-certificate" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/10/23/git-base-operation/" class="article-date">
-  <time datetime="2014-10-23T11:50:57.000Z" itemprop="datePublished">Oct 23 2014</time>
+    <a href="/2015/02/01/create-certificate/" class="article-date">
+  <time datetime="2015-02-01T12:05:19.000Z" itemprop="datePublished">Feb 1 2015</time>
 </a>
     
   </div>
@@ -80,8 +90,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/23/git-base-operation/">git-base-operation</a>
+    <h1 class="article-title" itemprop="name">
+      create_certificate
     </h1>
   
 
@@ -89,104 +99,83 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://www.52nx.net/article/UploadPic/2011-9/201191510414021305.png" alt="image"></p>
-<h3 id="基本操作">基本操作</h3>
-<h4 id="创建一个裸仓库">创建一个裸仓库</h4>
-<p><code>git init --bare</code></p>
-<h4 id="初始化基本仓库">初始化基本仓库</h4>
-<p><code>git init</code></p>
-<h4 id="配置作者信息">配置作者信息</h4>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --<span class="keyword">global</span> user.name <span class="string">"liufengxia"</span></div><div class="line">git config --<span class="keyword">global</span> usr.emil <span class="number">1874962073</span>@<span class="number">163</span>.<span class="keyword">com</span></div></pre></td></tr></table></figure>
+        <p><a href="http://zxs19861202.iteye.com/blog/1532460" target="_blank" rel="external">others’ blog</a></p>
+<h3 id="生成certSigningRequest文件">生成certSigningRequest文件</h3>
+<p>该文件是MAC系统生成的，用于在Apple网站上申请推送证书文件。</p>
+<pre><code>打开应“钥匙串访问”软件，菜单-&gt;钥匙串访问-&gt;证书助理-&gt;从证书颁发机构请求证书，填写邮箱和名称（随便写）,选择保存到磁盘，此时会生成一个CertificateSigningRequest.certSigningRequest文件。
+</code></pre><h3 id="注册一个支持Push的app_id">注册一个支持Push的app id</h3>
+<p>进入developer.apple.com，选择member center-certificates，Identifier &amp; profiles-identifiers-App ids，注册app id，设置app id名称。同时qpp id suffix一栏选择explicit app id，设置bundle id。勾选App Services中得Push Notifications，这样就可以注册一个支持push app id。</p>
+<h3 id="生成cer文件">生成cer文件</h3>
+<p>该文件用于生成服务端需要的文件。</p>
+<p>生成过程：进入developer.apple.com，选择member center-certificates，Identifier &amp; profiles-certificates，然后创建certificate，类型分为Development 和 Product。eg：Development，选择Apple Push Notification service SSL (Sandbox) ，选择之前生成的支持push的Appid，然后提交之前创建的CSR文件,生成cer文件，保存到本地。</p>
+<h3 id="生成服务器端的证书文件">生成服务器端的证书文件</h3>
+<p>如果使用网上的mac版PushMeBaby工具，在Mac机器上进行推送使用上面的cer就可以了，如果使用PHP、java/c#开发服务端，需要将cer转换生成pem或p12文件。</p>
+<p>在应用服务器采用php的方式将消息推送给APNS，</p>
+<pre><code>php连接APNS也是需要证书的，打开终端，对上面的证书做如下处理，
 
-<h4 id="添加文件到暂存区（跟踪文件）">添加文件到暂存区（跟踪文件）</h4>
-<p><code>git add [filename]</code></p>
-<p><code>git add *</code> // 跟踪所有已跟踪过又修改的文件</p>
-<h4 id="移除文件">移除文件</h4>
-<p><code>git rm [filename]</code></p>
-<h4 id="重命名一个文件">重命名一个文件</h4>
-<p><code>git mv [oldname] [newname]</code></p>
-<h4 id="提交暂存区">提交暂存区</h4>
-<p><code>git commit -m &quot;description information&quot;</code>//   git commmit 只提交在暂存区的内容</p>
-<p><code>git commit －a －m &quot;description information&quot;</code>//  将跟踪过又修改的为放入暂存跟踪后直接提交，已放入暂存区的也直接一起提交</p>
-<h4 id="查看工作目录的状态">查看工作目录的状态</h4>
-<p><code>git status</code></p>
-<h4 id="查看提交历史记录">查看提交历史记录</h4>
-<p><code>git log</code></p>
-<h4 id="查看文件改变">查看文件改变</h4>
-<p><code>git diff</code> //默认比较工作区下的文件与最近一次提交的不同</p>
-<p><code>git diff -- stash</code>//比较暂存区下的文件与最近一次提交的不同</p>
-<h3 id="撤销操作">撤销操作</h3>
-<h4 id="撤销加入暂存区的操作">撤销加入暂存区的操作</h4>
-<p><code>git reset -- [filename]</code></p>
-<h4 id="撤销修改的操作">撤销修改的操作</h4>
-<p><code>git checkout -- [filename]</code></p>
-<h4 id="将本地的修改放进回收站">将本地的修改放进回收站</h4>
-<p><code>git stash</code></p>
-<h4 id="从回收站中恢复本地的修改">从回收站中恢复本地的修改</h4>
-<p><code>git stash apply</code></p>
-<h3 id="Tag操作">Tag操作</h3>
-<h4 id="查看tag">查看tag</h4>
-<p><code>git tag</code></p>
-<h4 id="创建tag">创建tag</h4>
-<p><code>git tag -a tagname -m &quot;tag description information&quot;</code></p>
-<h4 id="显示tag信息">显示tag信息</h4>
-<p><code>git show tagname</code></p>
-<h4 id="对之前的提交打tag">对之前的提交打tag</h4>
-<p><code>git tag -a tagname -m &quot;tag description information&quot; commit-num</code></p>
-<h3 id="分支操作">分支操作</h3>
-<h4 id="查看分支">查看分支</h4>
-<p>// 默认查看本地分支</p>
-<p><code>git branch</code></p>
-<p>// 查看本地以及远端分支</p>
-<p><code>git branch -a</code></p>
-<p>// 查看远端分支</p>
-<p><code>git branch -r</code></p>
-<h4 id="创建分支">创建分支</h4>
-<p><code>git branch newbranchname</code></p>
-<h4 id="删除分支">删除分支</h4>
-<p><code>git branch -d/D branchname</code></p>
-<h4 id="切换分支">切换分支</h4>
-<p><code>git checkout branchname</code></p>
-<h4 id="创建分支并切换到新建的分支下">创建分支并切换到新建的分支下</h4>
-<p><code>git branch checkout -b newbranch</code></p>
-<h4 id="合并分支">合并分支</h4>
-<p><code>git merge branchname branchname</code></p>
-<h4 id="rebase操作">rebase操作</h4>
-<p><code>git rebase branchname branchname</code></p>
-<h3 id="远端仓库操作">远端仓库操作</h3>
-<h4 id="克隆一个远端仓库">克隆一个远端仓库</h4>
-<p><code>git clone URL/repodirectory</code></p>
-<h4 id="添加远端仓库">添加远端仓库</h4>
-<p><code>git remote add reponame URL/repodirectory</code></p>
-<h4 id="更新远端仓库的分支和数据">更新远端仓库的分支和数据</h4>
-<p><code>git fetch</code>   //默认更新远端master分支</p>
-<p><code>git fetch reponame branchname</code>     //更新指定远端的分支</p>
-<h4 id="获取并合并远端仓库的分支到当前分支">获取并合并远端仓库的分支到当前分支</h4>
-<p><code>git pull reponame branchname</code></p>
-<p>eg: git pull origin master</p>
-<h4 id="上传本地分支和数据到远端仓库">上传本地分支和数据到远端仓库</h4>
-<p><code>git push reponame  branchname</code></p>
-<p>eg: git push origin master</p>
-<h4 id="跟踪远端仓库上的分支">跟踪远端仓库上的分支</h4>
-<p><code>git checkout —track origin/testbranch</code></p>
-<p><code>git checkout -b test origin/testbranch</code></p>
+cd  进入证书所在目录
+
+把<span class="string">.cer</span>文件转换成<span class="string">.pem</span>文件:
+
+$ openssl x509 -<span class="keyword">in</span> aps_developer_identity.cer -inform der
+-<span class="keyword">out</span> PushCert.pem
+把私钥<span class="keyword">Push</span>.p12文件转换成<span class="string">.pem</span>文件：
+
+$ openssl pkcs12 -nocerts -<span class="keyword">out</span> PushKey.pem -<span class="keyword">in</span> <span class="keyword">Push</span>.p12
+<span class="keyword">Enter</span> Import Password:
+MAC verified OK
+<span class="keyword">Enter</span> PEM pass phrase:
+Verifying – <span class="keyword">Enter</span> PEM pass phrase:
+你首先需要为<span class="string">.p12</span>文件输入passphrase密码短语，这样OpenSSL可以读它。然后你需要键入一个新的密码短语来加密PEM文件。还是使用”pushchat”来作为PEM的密码短语。你需要选择一些更安全的密码短语。
+</code></pre><p><code>注意</code></p>
+<p>如果你没有键入一个PEM passphrase，OpenSSL将不会返回一个错误信息，但是产生的.pem文件里面将不会含有私钥。</p>
+<p>最后。把私钥和证书整合到一个.pem文件里：</p>
+<pre><code><span class="input"><span class="prompt">$ cat PushCert.pem PushKey.pem &gt;</span> ck.pem</span>
+为了测试证书是否工作，执行下面的命令：
+
+<span class="variable">$ </span>telnet gateway.sandbox.push.apple.com <span class="number">2195</span>
+<span class="constant">Trying</span> <span class="number">17.172</span>.<span class="number">232.226</span>…
+<span class="constant">Connected</span> to gateway.sandbox.push-apple.com.akadns.net.
+<span class="constant">Escape</span> character is ‘^]’.
+它将尝试发送一个规则的，不加密的连接到<span class="constant">APNS</span>服务。如果你看到上面的反馈，那说明你的<span class="constant">MAC</span>能够到达<span class="constant">APNS</span>。按下<span class="constant">Ctrl</span>+<span class="constant">C</span> 关闭连接。如果得到一个错误信息，那么你需要确保你的防火墙允许<span class="number">2195</span>端口。
+
+然后再次连接，这次用我们的<span class="constant">SSL</span>证书和私钥来设置一个安全的连接：
+
+<span class="variable">$ </span>openssl s_client -connect gateway.sandbox.push.apple.<span class="symbol">com:</span><span class="number">2195</span>
+-cert <span class="constant">PushChatCert</span>.pem -key <span class="constant">PushChatKey</span>.pem
+<span class="constant">Enter</span> pass phrase <span class="keyword">for</span> <span class="constant">PushChatKey</span>.<span class="symbol">pem:</span>
+你会看到一个完整的输出，让你明白<span class="constant">OpenSSL</span>在后台做什么。如果连接是成功的，你可以键入一些字符。当你按下回车后，服务就会断开连接。如果在建立连接时有问题，<span class="constant">OpenSSL</span>将会给你一个错误消息，
+
+ck.pem文件就是我们需要得到php连接<span class="constant">APNS</span> 的文件，将ck.pem和push.php放入同一目录上传到服务器。
+</code></pre><h3 id="生成Xcode使用的provisioning文件">生成Xcode使用的provisioning文件</h3>
+<p>该文件用于真机调试。</p>
+<p>生成过程：进入developer.apple.com，选择member center-certificates，Identifier &amp; profiles-provisioning profiles，然后创建provi file。选择iOS App Development-&gt;AppId-&gt;选中之前生成的支持push的appid-&gt;选中支持的push的certi-&gt;勾选支持的device id-&gt;设置provisioning文件的文件名，即完成provisioning文件的生成。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/23/git-base-operation/" data-id="jjcd5kox4zsujlcu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/02/01/create-certificate/" data-id="ms47von39v85z3kq" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/certificate/">certificate</a></li></ul>
 
     </footer>
   </div>
   
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/01/31/Local-Romote-Notification/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Local/Romote_Notification</div>
+    </a>
+  
+</nav>
+
+  
 </article>
 
-
-  
-  
 </section>
         
           <aside id="sidebar">
