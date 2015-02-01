@@ -258,6 +258,16 @@ locationNotification<span class="variable">.applicationIconBadgeNumber</span> = 
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">    -(<span class="keyword">void</span>)application:(<span class="built_in">UIApplication</span> *)application didReceiveRemoteNotification:(<span class="built_in">NSDictionary</span> *)userInfo{</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, userInfo);<span class="comment">//从userInfo获得推送信息内容</span></div><div class="line">}</div></pre></td></tr></table></figure>
 
 <h3 id="客户端的开发">客户端的开发</h3>
+<p><a href="http://lfxfengxia.github.io/tags/certificate/" target="_blank" rel="external">cer文件 provisioning文件的生成</a></p>
+<p>下载生成的cer文件和provi文件，双击导入Xcode，在build setting中code  signing一栏中选择这两个文件的名称，这样就可以将支持push的app部署到真机中。然后消息推送：</p>
+<h4 id="客户端对推送消息的处理分为两种情况">客户端对推送消息的处理分为两种情况</h4>
+<ol>
+<li><p>在App没有运行的情况下，系统受到推送消息，用户点击推送消息，启动App。此时，不会执行前面提到的<code>didReceiveRemoteNotification</code>方法，而是App的applicationDidFinishLaunching方法中进行推送处理，通过以下代码可以获取推送消息中数据：</p>
+<p> Dictionary *userInfo =[launchOptions objectForKey:UIApplicationLaunchOp<br>￼tionsRemoteNotificationKey];  </p>
+</li>
+<li><p>当App处于前台，系统受到推送消息，此时系统不会推送消息提示，会直接触发application:(UIApplication )application didReceiveRemoteNotification:(NSDictionary )userInfo方法，推送数据在userInfo中。<br> 当App处于后台时，如果系统收到推送消息时，当用户点击推送消息时，会执行application: (UIApplication )application didReceiveRemoteNotification:(NSDictionary )userInfo方法，此时AppDelegate中方法的执行顺序为：<code>applicationWillEnterForeground</code>，<code>applicationWillEnterForeground</code>，<code>applicationDidBecomeActive</code></p>
+</li>
+</ol>
 
       
     </div>
