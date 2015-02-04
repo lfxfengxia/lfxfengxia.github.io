@@ -67,6 +67,282 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-vim-command-sed" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/03/vim-command-sed/" class="article-date">
+  <time datetime="2015-02-03T12:33:00.000Z" itemprop="datePublished">Feb 3 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/03/vim-command-sed/">vim_command_sed</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介">简介</h1>
+<p>sed是非交互式的编辑器。它不会修改文件，除非使用shell重定向来保存结果。默认情况下，所有的输出行都被打印到屏幕上。</p>
+<p>sed编辑器逐行处理文件（或输入），并将结果发送到屏幕。具体过程如下：首先sed把当前正在处理的行保存在一个临时缓存区中（也称为模式空间），然后处理临时缓冲区中的行，完成后把该行发送到屏幕上。sed每处理完一行就将其从临时缓冲区删除，然后将下一行读入，进行处理和显示。处理完输入文件的最后一行后，sed便结束运行。sed把每一行都存在临时缓冲区中，对这个副本进行编辑，所以不会修改原文件。</p>
+<h1 id="定址">定址</h1>
+<p>定址用于决定对哪些行进行编辑。地址的形式可以是数字、正则表达式、或二者的结合。如果没有指定地址，sed将处理输入文件的所有行。</p>
+<p><strong>以下例子一下面的文件内容测试</strong></p>
+<p><code>test.vim</code></p>
+<pre><code>hello word ！
+this <span class="keyword">is</span> <span class="keyword">a</span> test ?
+asdfghjkl
+qwertyuiop
+zxcvbnm
+come <span class="keyword">on</span>
+he he he he
+<span class="keyword">ha</span> <span class="keyword">ha</span> <span class="keyword">ha</span> <span class="keyword">ha</span> 
+</code></pre><ol>
+<li>地址是一个数字，则表示行号，是“$”符号，则表示最后一行。</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sed -<span class="keyword">n</span> <span class="string">'4p'</span> test.<span class="keyword">vim</span></div><div class="line">终端只打印第四行，即：qwertyuiop</div><div class="line">sed -<span class="keyword">n</span> <span class="string">'$p'</span> test.<span class="keyword">vim</span></div><div class="line">终端只打印最后一行，即：<span class="keyword">ha</span> <span class="keyword">ha</span> <span class="keyword">ha</span> <span class="keyword">ha</span></div></pre></td></tr></table></figure>
+
+
+<ol>
+<li>只显示指定行范围内的文件内容</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sed -<span class="keyword">n</span> <span class="string">'3,6p'</span> test.<span class="keyword">vim</span></div><div class="line">只查看文件的第<span class="number">3</span>行到第<span class="number">6</span>行的文件内容</div></pre></td></tr></table></figure>
+
+
+<ol>
+<li>逗号做分隔符，对行范围内的内容的做作</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">sed <span class="string">'2,3d'</span> test.<span class="keyword">vim</span></div><div class="line">删除第二行到第五行的内容,执行命令后的结果</div><div class="line">  //hello word ！</div><div class="line">    qwertyuiop</div><div class="line">    zxcvbnm</div><div class="line">    come <span class="keyword">on</span></div><div class="line">    he he he he</div><div class="line">    <span class="keyword">ha</span> <span class="keyword">ha</span> <span class="keyword">ha</span> <span class="keyword">ha</span></div><div class="line">sed <span class="string">'/zx/,/he/d'</span> test.<span class="keyword">vim</span></div><div class="line">删除包含‘zx’的行到包含‘he’的行，执行命令后的结果</div><div class="line">  //hello word ！</div><div class="line">    this <span class="keyword">is</span> <span class="keyword">a</span> test ?</div><div class="line">    asdfghjkl</div><div class="line">    qwertyuiop</div><div class="line">    <span class="keyword">ha</span> <span class="keyword">ha</span> <span class="keyword">ha</span> <span class="keyword">ha</span></div><div class="line">sed <span class="string">'/is/,4d'</span> test.<span class="keyword">vim</span></div><div class="line">删除包含‘<span class="keyword">is</span>’的行到第四行的内容</div></pre></td></tr></table></figure>
+
+<h1 id="命令与选项">命令与选项</h1>
+<p>sed命令告诉sed如何处理由地址指定的各输入行，如果没有指定地址则处理所有的输入行。</p>
+<h3 id="1-_sed命令">1. sed命令</h3>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> a\</td>
+<td>在当前行后添加一行或多行。多行时除最后一行外，每行末尾需用“\”续行</td>
+</tr>
+<tr>
+<td> c\</td>
+<td>用此符号后的新文本替换当前行中的文本。多行时除最后一行外，每行末尾需用”\”续行</td>
+</tr>
+<tr>
+<td> i\</td>
+<td>在当前行之前插入文本。多行时除最后一行外，每行末尾需用”\”续行</td>
+</tr>
+<tr>
+<td> d</td>
+<td>删除行</td>
+</tr>
+<tr>
+<td> h</td>
+<td>把模式空间里的内容复制到暂存缓冲区</td>
+</tr>
+<tr>
+<td> H</td>
+<td>把模式空间里的内容追加到暂存缓冲区</td>
+</tr>
+<tr>
+<td> g</td>
+<td>把暂存缓冲区里的内容复制到模式空间，覆盖原有的内容</td>
+</tr>
+<tr>
+<td> G</td>
+<td>把暂存缓冲区的内容追加到模式空间里，追加在原有内容的后面</td>
+</tr>
+<tr>
+<td> I</td>
+<td>列出非打印字符</td>
+</tr>
+<tr>
+<td> p</td>
+<td>打印行</td>
+</tr>
+<tr>
+<td> n</td>
+<td>读入下一输入行，并从下一条命令而不是第一条命令开始对其的处理</td>
+</tr>
+<tr>
+<td> q</td>
+<td>结束或退出sed</td>
+</tr>
+<tr>
+<td> r</td>
+<td>从文件中读取输入行</td>
+</tr>
+<tr>
+<td> !</td>
+<td>对所选行以外的所有行应用命令</td>
+</tr>
+<tr>
+<td> s</td>
+<td>用一个字符串替换另一个</td>
+</tr>
+<tr>
+<td> g</td>
+<td>在行内进行全局替换</td>
+</tr>
+<tr>
+<td> w</td>
+<td>将所选的行写入文件</td>
+</tr>
+<tr>
+<td> x</td>
+<td>交换暂存缓冲区与模式空间的内容</td>
+</tr>
+<tr>
+<td> y</td>
+<td>将字符替换为另一字符（不能对正则表达式使用y命令）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-_sed选项">2. sed选项</h3>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-e</td>
+<td>进行多项编辑，即对输入行应用多条sed命令时使用</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>取消默认的输出 //无-n时默认打印出文件的全部内容</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>指定sed脚本的文件名</td>
+</tr>
+</tbody>
+</table>
+<h1 id="退出状态">退出状态</h1>
+<p><strong>sed不向grep一样，不管是否找到指定的模式，它的退出状态都是0。只有当命令存在语法错误时，sed的退出状态才不是0。</strong></p>
+<h1 id="正则表达式元字符">正则表达式元字符</h1>
+<p>与grep一样，sed也支持特殊元字符，来进行模式查找、替换。不同的是，sed使用的正则表达式是括在斜杠线”/“之间的模式。</p>
+<p>如果要把正则表达式分隔符”/“改为另一个字符，比如o，只要在这个字符前加一个反斜线，在字符后跟上正则表达式，再跟上这个字符即可。例如：sed -n ‘\o^Myop’ datafile</p>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>功能</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^</td>
+<td>行首定位符</td>
+<td>/^me/ 匹配所有以me开头的行</td>
+</tr>
+<tr>
+<td>$</td>
+<td>行尾定位符</td>
+<td>/me$/ 匹配所有以me结束的行</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配换行符以外的单个字符</td>
+<td>/m..e/ 匹配包含字母m，后跟两个任意字符，再跟字母y的行</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配零个或多个前导字符</td>
+<td>/my*/  匹配包含字母m,后跟零个或多个e字母的行</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>匹配指定字符组内的任一字符</td>
+<td>/[Mm]y/  匹配包含My或my的行</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>匹配不在指定字符组内的任一字符</td>
+<td>/[^Mm]y/  匹配包含y，但y之前的那个字符不是M或m的行</td>
+</tr>
+<tr>
+<td>\(..\)</td>
+<td>保存已匹配的字符</td>
+<td>1,20s/(you)self/\1r/  标记元字符之间的模式，并将其保存为标签1，之后可以使用\1来引用它。最多可以定义9个标签，从左边开始编号，最左边的是第一个。此例中，对第1到第20行进行处理，you被保存为标签1，如果发现youself，则替换为your。</td>
+</tr>
+<tr>
+<td>    &amp;</td>
+<td>保存查找串以便在替换串中引用</td>
+<td>s/my/<code>**&amp;**</code>/  符号&amp;代表查找串。my将被替换为<code>**my**</code></td>
+</tr>
+<tr>
+<td>\&lt;</td>
+<td>词首定位符</td>
+<td>/\&lt;my/  匹配包含以my开头的单词的行</td>
+</tr>
+<tr>
+<td> \&gt;</td>
+<td>词尾定位符</td>
+<td>/my>/  匹配包含以my结尾的单词的行</td>
+</tr>
+<tr>
+<td>x\{m\}</td>
+<td>连续m个x</td>
+<td>/9{5}/ 匹配包含连续5个9的行</td>
+</tr>
+<tr>
+<td>x\{m,\}</td>
+<td>至少m个x</td>
+<td>/9{5,}/  匹配包含至少连续5个9的行</td>
+</tr>
+<tr>
+<td>x{m,n\}</td>
+<td>至少m个，但不超过n个</td>
+<td>/9{5,7}/  匹配包含连续5到7个9的行</td>
+</tr>
+</tbody>
+</table>
+<h1 id="范例">范例</h1>
+<p> <code>eg:</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"> //-n 取消默认输出 分隔符也可以用</div><div class="line"> //<span class="keyword">s</span> 命令的分隔符可以用除反斜杠，换行符以外的字符代替</div><div class="line"> </div><div class="line"> sed <span class="string">'/he/p'</span> test.vim //默认情况，sed把文件的所有输入行都打印在标准输出上，如果匹配he，p命令在把符合匹配规则的行再打印一便</div><div class="line"> sed -n <span class="string">'/he/p'</span> test.vim //只打印匹配行</div><div class="line"> </div><div class="line"> sed -n <span class="string">'$d'</span> test.vim  //删除最后一行</div><div class="line"> sed -n <span class="string">'/he/d'</span> test.vim //删除包含 he 的行</div><div class="line"> </div><div class="line"> sed -n <span class="string">'s/^he/me/g'</span> test.vim （或sed -n <span class="string">'s#^he#me#g'</span> test.vim ）//g：全局查找，将以he开头的he替换成me</div><div class="line"> sed -n <span class="string">'s/he/me/g'</span> test.vim  //全局查找，将所有的he替换成me</div><div class="line"> sed -n ’<span class="number">1</span>,<span class="number">4</span><span class="keyword">s</span>/he<span class="variable">$/</span>me/gp<span class="string">' test.vim  //将第一行到第四行所有以he结尾的行最后的最后一个he替换成me，并打印到屏幕上</span></div><div class="line"> </div><div class="line"> sed -n '<span class="number">1</span>,<span class="number">4</span>d<span class="string">' -e '</span><span class="keyword">s</span>/me/he/g<span class="string">' test.vim //e多重编译，先删除第一行到第四行的所有内容，在将所有me替换为he 注意：顺序影响最终输出结果</span></div><div class="line"> </div><div class="line"> sed -n '/he/r text.txt<span class="string">' test.vim  //-r 指定在特定位置读入新内容。该行命令表示：在test.vim中所有he所在行后读入text.txt文件的内容</span></div><div class="line"> </div><div class="line"> sed -n '/he/w me.text<span class="string">' test.vim  //将test.vim文件中包含he行写入me.txt文件中，文件me.txt不存在则创建</span></div><div class="line"> </div><div class="line"> sed -n '/^he/a\ </div><div class="line">         &gt;adfsaf</div><div class="line">         &gt;sdfsgf<span class="string">' test.vim  //在以he开头的行后追加两行</span></div><div class="line">         </div><div class="line">sed '/hrwang/{n;<span class="regexp">s/My/Your/</span>;}<span class="string">' test.vim  //sed使用该命令获取输入文件的下一行，并将其读入到模式缓冲区中，任何sed命令都将应用到匹配行紧接着的下一行上。注：如果需要使用多条命令，或者需要在某个地址范围内嵌套地址，就必须用花括号将命令括起来，每行只写一条命令，或这用分号分割同一行中的多条命令。</span></div><div class="line"></div><div class="line">sed '<span class="number">1</span>,<span class="number">20</span><span class="keyword">y</span>/hrwang12/HRWANG^<span class="variable">$/</span><span class="string">' test.vim  //该命令与UNIX/Linux中的tr命令类似，字符按照一对一的方式从左到右进行转换。例如，y/abc/ABC/将把所有小写的a转换成A，小写的b转换成B，小写的c转换成C. 将1到20行内，所有的小写hrwang转换成大写，将1转换成^,将2转换成$。正则表达式元字符对y命令不起作用。与s命令的分隔符一样，斜线可以被替换成其它的字符。         </span></div><div class="line"> sed -e '/hrwang/h<span class="string">' -e '</span><span class="variable">$G</span><span class="string">' test.vim</span></div><div class="line"> sed -e '/hrwang/H<span class="string">' -e '</span><span class="variable">$G</span><span class="string">' test.vim  //通过上面两条命令，你会发现h会把原来暂存缓冲区的内容清除，只保存最近一次执行h时保存进去的模式空间的内容。而H命令则把每次匹配hrwnag的行都追加保存在暂存缓冲区。</span></div><div class="line"> sed -e '/hrwang/H<span class="string">' -e '</span><span class="variable">$g</span><span class="string">' test.vim</span></div><div class="line"> sed -e '/hrwang/H<span class="string">' -e '</span><span class="variable">$G</span><span class="string">' test.vim  //通过上面两条命令，你会发现g把暂存缓冲区中的内容替换掉了模式空间中当前行的内容，此处即替换了最后一行。而G命令则把暂存缓冲区的内容追加到了模式空间的当前行后。此处即追加到了末尾。</span></div><div class="line"></div><div class="line"> sed '/hrwang/{<span class="regexp">s/hrwang/HRWANG/</span>;<span class="keyword">q</span>;}<span class="string">' test.vim //q命令将导致sed程序退出，不再进行其它的处理。</span></div></pre></td></tr></table></figure>
+
+
+<h3 id="sed_脚本">sed 脚本</h3>
+<p>sed脚本就是写在文件中的一列sed命令。脚本中，要求命令的末尾不能有任何多余的空格或文本。如果在一行中有多个命令，要用分号分隔。执行脚本时，sed先将输入文件中第一行复制到模式缓冲区，然后对其执行脚本中所有的命令。每一行处理完毕后，sed再复制文件中下一行到模式缓冲区，对其执行脚本中所有命令。使用sed脚本时，不再用引号来确保sed命令不被shell解释。例如sed脚本script：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#handle test.vim</div><div class="line"><span class="header">3i\</span></div><div class="line">~~~~~~~~~~~~~~~~~~~~~</div><div class="line">3,$s/\(hrwang\) is \(mjfan\)/\2 is \1/</div><div class="line">$a\</div><div class="line">We will love eachother forever！！</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#sed -f script test.vim</div><div class="line">My name is hrwang</div><div class="line"><span class="header">Your name is mjfan</span></div><div class="line">~~~~~~~~~~~~~~~~~~~~~</div><div class="line">mjfan is hrwang's husband.          ＃啦啦～～～</div><div class="line">mjfan is hrwang's wife.</div><div class="line">We will love eachother forever！！</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/03/vim-command-sed/" data-id="jg6julda82dswzv9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VIM-Sed/">VIM_Sed</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-create-certificate" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/02/01/create-certificate/" class="article-date">
@@ -761,7 +1037,7 @@ locationNotification<span class="variable">.applicationIconBadgeNumber</span> = 
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Local-Romote-Notification/">Local/Romote Notification</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVN/">SVN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIScorllView/">UIScorllView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML-JSON/">XML&JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode调试/">Xcode调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/background-task/">background_task</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/certificate/">certificate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Local-Romote-Notification/">Local/Romote Notification</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVN/">SVN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIScorllView/">UIScorllView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VIM-Sed/">VIM_Sed</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML-JSON/">XML&JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode调试/">Xcode调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/background-task/">background_task</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/certificate/">certificate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -770,7 +1046,7 @@ locationNotification<span class="variable">.applicationIconBadgeNumber</span> = 
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AFNetworking/" style="font-size: NaNpx;">AFNetworking</a><a href="/tags/Data-Persistence/" style="font-size: NaNpx;">Data Persistence</a><a href="/tags/Local-Romote-Notification/" style="font-size: NaNpx;">Local/Romote Notification</a><a href="/tags/SVN/" style="font-size: NaNpx;">SVN</a><a href="/tags/UIScorllView/" style="font-size: NaNpx;">UIScorllView</a><a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/XML-JSON/" style="font-size: NaNpx;">XML&JSON</a><a href="/tags/Xcode调试/" style="font-size: NaNpx;">Xcode调试</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/background-task/" style="font-size: NaNpx;">background_task</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/certificate/" style="font-size: NaNpx;">certificate</a><a href="/tags/cocoaPods/" style="font-size: NaNpx;">cocoaPods</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/kinds-of-viewControllers/" style="font-size: NaNpx;">kinds of viewControllers</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
+      <a href="/tags/AFNetworking/" style="font-size: NaNpx;">AFNetworking</a><a href="/tags/Data-Persistence/" style="font-size: NaNpx;">Data Persistence</a><a href="/tags/Local-Romote-Notification/" style="font-size: NaNpx;">Local/Romote Notification</a><a href="/tags/SVN/" style="font-size: NaNpx;">SVN</a><a href="/tags/UIScorllView/" style="font-size: NaNpx;">UIScorllView</a><a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/VIM-Sed/" style="font-size: NaNpx;">VIM_Sed</a><a href="/tags/XML-JSON/" style="font-size: NaNpx;">XML&JSON</a><a href="/tags/Xcode调试/" style="font-size: NaNpx;">Xcode调试</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/background-task/" style="font-size: NaNpx;">background_task</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/certificate/" style="font-size: NaNpx;">certificate</a><a href="/tags/cocoaPods/" style="font-size: NaNpx;">cocoaPods</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/kinds-of-viewControllers/" style="font-size: NaNpx;">kinds of viewControllers</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
     </div>
   </div>
 
@@ -779,7 +1055,7 @@ locationNotification<span class="variable">.applicationIconBadgeNumber</span> = 
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -789,6 +1065,10 @@ locationNotification<span class="variable">.applicationIconBadgeNumber</span> = 
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/02/03/vim-command-sed/">vim_command_sed</a>
+          </li>
         
           <li>
             <a href="/2015/02/01/create-certificate/">create_certificate</a>
@@ -804,10 +1084,6 @@ locationNotification<span class="variable">.applicationIconBadgeNumber</span> = 
         
           <li>
             <a href="/2015/01/30/background-task/">background_task</a>
-          </li>
-        
-          <li>
-            <a href="/2015/01/27/SVN/">SVN</a>
           </li>
         
       </ul>

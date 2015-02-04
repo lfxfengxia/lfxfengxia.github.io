@@ -3,17 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015/2 | SayingWhy’s Blog</title>
+  <title>vim_command_sed | SayingWhy’s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SayingWhy’s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2015/02/">
+  <meta name="description" content="简介
+sed是非交互式的编辑器。它不会修改文件，除非使用shell重定向来保存结果。默认情况下，所有的输出行都被打印到屏幕上。
+sed编辑器逐行处理文件（或输入），并将结果发送到屏幕。具体过程如下：首先sed把当前正在处理的行保存在一个临时缓存区中（也称为模式空间），然后处理临时缓冲区中的行，完成后把该行发送到屏幕上。sed每处理完一行就将其从临时缓冲区删除，然后将下一行读入，进行处理和显示。处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim_command_sed">
+<meta property="og:url" content="http://yoursite.com/2015/02/03/vim-command-sed/">
 <meta property="og:site_name" content="SayingWhy’s Blog">
-<meta property="og:description">
+<meta property="og:description" content="简介
+sed是非交互式的编辑器。它不会修改文件，除非使用shell重定向来保存结果。默认情况下，所有的输出行都被打印到屏幕上。
+sed编辑器逐行处理文件（或输入），并将结果发送到屏幕。具体过程如下：首先sed把当前正在处理的行保存在一个临时缓存区中（也称为模式空间），然后处理临时缓冲区中的行，完成后把该行发送到屏幕上。sed每处理完一行就将其从临时缓冲区删除，然后将下一行读入，进行处理和显示。处理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SayingWhy’s Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="vim_command_sed">
+<meta name="twitter:description" content="简介
+sed是非交互式的编辑器。它不会修改文件，除非使用shell重定向来保存结果。默认情况下，所有的输出行都被打印到屏幕上。
+sed编辑器逐行处理文件（或输入），并将结果发送到屏幕。具体过程如下：首先sed把当前正在处理的行保存在一个临时缓存区中（也称为模式空间），然后处理临时缓冲区中的行，完成后把该行发送到屏幕上。sed每处理完一行就将其从临时缓冲区删除，然后将下一行读入，进行处理和显示。处理">
 
   
     <link rel="alternative" href="/atom.xml" title="SayingWhy’s Blog" type="application/atom+xml">
@@ -65,9 +71,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-vim-command-sed" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-vim-command-sed" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/02/03/vim-command-sed/" class="article-date">
   <time datetime="2015-02-03T12:33:00.000Z" itemprop="datePublished">Feb 3 2015</time>
@@ -80,8 +84,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/02/03/vim-command-sed/">vim_command_sed</a>
+    <h1 class="article-title" itemprop="name">
+      vim_command_sed
     </h1>
   
 
@@ -339,100 +343,20 @@ he he he he
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-create-certificate" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/02/01/create-certificate/" class="article-date">
-  <time datetime="2015-02-01T12:05:19.000Z" itemprop="datePublished">Feb 1 2015</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/02/01/create-certificate/">create_certificate</a>
-    </h1>
+    <a href="/2015/02/01/create-certificate/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">create_certificate</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://zxs19861202.iteye.com/blog/1532460" target="_blank" rel="external">others’ blog</a></p>
-<h3 id="生成certSigningRequest文件">生成certSigningRequest文件</h3>
-<p>该文件是MAC系统生成的，用于在Apple网站上申请推送证书文件。</p>
-<pre><code>打开应“钥匙串访问”软件，菜单-&gt;钥匙串访问-&gt;证书助理-&gt;从证书颁发机构请求证书，填写邮箱和名称（随便写）,选择保存到磁盘，此时会生成一个CertificateSigningRequest.certSigningRequest文件。
-</code></pre><h3 id="注册一个支持Push的app_id">注册一个支持Push的app id</h3>
-<p>进入developer.apple.com，选择member center-certificates，Identifier &amp; profiles-identifiers-App ids，注册app id，设置app id名称。同时qpp id suffix一栏选择explicit app id，设置bundle id。勾选App Services中得Push Notifications，这样就可以注册一个支持push app id。</p>
-<h3 id="生成cer文件">生成cer文件</h3>
-<p>该文件用于生成服务端需要的文件。</p>
-<p>生成过程：进入developer.apple.com，选择member center-certificates，Identifier &amp; profiles-certificates，然后创建certificate，类型分为Development 和 Product。eg：Development，选择Apple Push Notification service SSL (Sandbox) ，选择之前生成的支持push的Appid，然后提交之前创建的CSR文件,生成cer文件，保存到本地。</p>
-<h3 id="生成服务器端的证书文件">生成服务器端的证书文件</h3>
-<p>如果使用网上的mac版PushMeBaby工具，在Mac机器上进行推送使用上面的cer就可以了，如果使用PHP、java/c#开发服务端，需要将cer转换生成pem或p12文件。</p>
-<p>在应用服务器采用php的方式将消息推送给APNS，</p>
-<pre><code>php连接APNS也是需要证书的，打开终端，对上面的证书做如下处理，
-
-cd  进入证书所在目录
-
-把<span class="string">.cer</span>文件转换成<span class="string">.pem</span>文件:
-
-$ openssl x509 -<span class="keyword">in</span> aps_developer_identity.cer -inform der
--<span class="keyword">out</span> PushCert.pem
-把私钥<span class="keyword">Push</span>.p12文件转换成<span class="string">.pem</span>文件：
-
-$ openssl pkcs12 -nocerts -<span class="keyword">out</span> PushKey.pem -<span class="keyword">in</span> <span class="keyword">Push</span>.p12
-<span class="keyword">Enter</span> Import Password:
-MAC verified OK
-<span class="keyword">Enter</span> PEM pass phrase:
-Verifying – <span class="keyword">Enter</span> PEM pass phrase:
-你首先需要为<span class="string">.p12</span>文件输入passphrase密码短语，这样OpenSSL可以读它。然后你需要键入一个新的密码短语来加密PEM文件。还是使用”pushchat”来作为PEM的密码短语。你需要选择一些更安全的密码短语。
-</code></pre><p><code>注意</code></p>
-<p>如果你没有键入一个PEM passphrase，OpenSSL将不会返回一个错误信息，但是产生的.pem文件里面将不会含有私钥。</p>
-<p>最后。把私钥和证书整合到一个.pem文件里：</p>
-<pre><code><span class="input"><span class="prompt">$ cat PushCert.pem PushKey.pem &gt;</span> ck.pem</span>
-为了测试证书是否工作，执行下面的命令：
-
-<span class="variable">$ </span>telnet gateway.sandbox.push.apple.com <span class="number">2195</span>
-<span class="constant">Trying</span> <span class="number">17.172</span>.<span class="number">232.226</span>…
-<span class="constant">Connected</span> to gateway.sandbox.push-apple.com.akadns.net.
-<span class="constant">Escape</span> character is ‘^]’.
-它将尝试发送一个规则的，不加密的连接到<span class="constant">APNS</span>服务。如果你看到上面的反馈，那说明你的<span class="constant">MAC</span>能够到达<span class="constant">APNS</span>。按下<span class="constant">Ctrl</span>+<span class="constant">C</span> 关闭连接。如果得到一个错误信息，那么你需要确保你的防火墙允许<span class="number">2195</span>端口。
-
-然后再次连接，这次用我们的<span class="constant">SSL</span>证书和私钥来设置一个安全的连接：
-
-<span class="variable">$ </span>openssl s_client -connect gateway.sandbox.push.apple.<span class="symbol">com:</span><span class="number">2195</span>
--cert <span class="constant">PushChatCert</span>.pem -key <span class="constant">PushChatKey</span>.pem
-<span class="constant">Enter</span> pass phrase <span class="keyword">for</span> <span class="constant">PushChatKey</span>.<span class="symbol">pem:</span>
-你会看到一个完整的输出，让你明白<span class="constant">OpenSSL</span>在后台做什么。如果连接是成功的，你可以键入一些字符。当你按下回车后，服务就会断开连接。如果在建立连接时有问题，<span class="constant">OpenSSL</span>将会给你一个错误消息，
-
-ck.pem文件就是我们需要得到php连接<span class="constant">APNS</span> 的文件，将ck.pem和push.php放入同一目录上传到服务器。
-</code></pre><h3 id="生成Xcode使用的provisioning文件">生成Xcode使用的provisioning文件</h3>
-<p>该文件用于真机调试。</p>
-<p>生成过程：进入developer.apple.com，选择member center-certificates，Identifier &amp; profiles-provisioning profiles，然后创建provi file。选择iOS App Development-&gt;AppId-&gt;选中之前生成的支持push的appid-&gt;选中支持的push的certi-&gt;勾选支持的device id-&gt;设置provisioning文件的文件名，即完成provisioning文件的生成。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/02/01/create-certificate/" data-id="ms47von39v85z3kq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/certificate/">certificate</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-  
 </section>
         
           <aside id="sidebar">
