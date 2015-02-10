@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: git | SayingWhy’s Blog</title>
+  <title>Archives | SayingWhy’s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="SayingWhy’s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/git/">
+<meta property="og:url" content="http://yoursite.com/archives/page/3/">
 <meta property="og:site_name" content="SayingWhy’s Blog">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -67,10 +67,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-git-base-operation" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-accelerator-key" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/10/23/git-base-operation/" class="article-date">
-  <time datetime="2014-10-23T11:50:57.000Z" itemprop="datePublished">Oct 23 2014</time>
+    <a href="/2014/10/20/accelerator-key/" class="article-date">
+  <time datetime="2014-10-20T11:06:05.000Z" itemprop="datePublished">Oct 20 2014</time>
 </a>
     
   </div>
@@ -81,7 +81,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/23/git-base-operation/">git-base-operation</a>
+      <a class="article-title" href="/2014/10/20/accelerator-key/">accelerator-key</a>
     </h1>
   
 
@@ -89,95 +89,61 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://www.52nx.net/article/UploadPic/2011-9/201191510414021305.png" alt="image"></p>
-<h3 id="基本操作">基本操作</h3>
-<h4 id="创建一个裸仓库">创建一个裸仓库</h4>
-<p><code>git init --bare</code></p>
-<h4 id="初始化基本仓库">初始化基本仓库</h4>
-<p><code>git init</code></p>
-<h4 id="配置作者信息">配置作者信息</h4>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --<span class="keyword">global</span> user.name <span class="string">"liufengxia"</span></div><div class="line">git config --<span class="keyword">global</span> usr.emil <span class="number">1874962073</span>@<span class="number">163</span>.<span class="keyword">com</span></div></pre></td></tr></table></figure>
-
-<h4 id="添加文件到暂存区（跟踪文件）">添加文件到暂存区（跟踪文件）</h4>
-<p><code>git add [filename]</code></p>
-<p><code>git add *</code> // 跟踪所有已跟踪过又修改的文件</p>
-<h4 id="移除文件">移除文件</h4>
-<p><code>git rm [filename]</code></p>
-<h4 id="重命名一个文件">重命名一个文件</h4>
-<p><code>git mv [oldname] [newname]</code></p>
-<h4 id="提交暂存区">提交暂存区</h4>
-<p><code>git commit -m &quot;description information&quot;</code>//   git commmit 只提交在暂存区的内容</p>
-<p><code>git commit －a －m &quot;description information&quot;</code>//  将跟踪过又修改的为放入暂存跟踪后直接提交，已放入暂存区的也直接一起提交</p>
-<h4 id="查看工作目录的状态">查看工作目录的状态</h4>
-<p><code>git status</code></p>
-<h4 id="查看提交历史记录">查看提交历史记录</h4>
-<p><code>git log</code></p>
-<h4 id="查看文件改变">查看文件改变</h4>
-<p><code>git diff</code> //默认比较工作区下的文件与最近一次提交的不同</p>
-<p><code>git diff -- stash</code>//比较暂存区下的文件与最近一次提交的不同</p>
-<h3 id="撤销操作">撤销操作</h3>
-<h4 id="撤销加入暂存区的操作">撤销加入暂存区的操作</h4>
-<p><code>git reset -- [filename]</code></p>
-<h4 id="撤销修改的操作">撤销修改的操作</h4>
-<p><code>git checkout -- [filename]</code></p>
-<h4 id="将本地的修改放进回收站">将本地的修改放进回收站</h4>
-<p><code>git stash</code></p>
-<h4 id="从回收站中恢复本地的修改">从回收站中恢复本地的修改</h4>
-<p><code>git stash apply</code></p>
-<h3 id="Tag操作">Tag操作</h3>
-<h4 id="查看tag">查看tag</h4>
-<p><code>git tag</code></p>
-<h4 id="创建tag">创建tag</h4>
-<p><code>git tag -a tagname -m &quot;tag description information&quot;</code></p>
-<h4 id="显示tag信息">显示tag信息</h4>
-<p><code>git show tagname</code></p>
-<h4 id="对之前的提交打tag">对之前的提交打tag</h4>
-<p><code>git tag -a tagname -m &quot;tag description information&quot; commit-num</code></p>
-<h3 id="分支操作">分支操作</h3>
-<h4 id="查看分支">查看分支</h4>
-<p>// 默认查看本地分支</p>
-<p><code>git branch</code></p>
-<p>// 查看本地以及远端分支</p>
-<p><code>git branch -a</code></p>
-<p>// 查看远端分支</p>
-<p><code>git branch -r</code></p>
-<h4 id="创建分支">创建分支</h4>
-<p><code>git branch newbranchname</code></p>
-<h4 id="删除分支">删除分支</h4>
-<p><code>git branch -d/D branchname</code></p>
-<h4 id="切换分支">切换分支</h4>
-<p><code>git checkout branchname</code></p>
-<h4 id="创建分支并切换到新建的分支下">创建分支并切换到新建的分支下</h4>
-<p><code>git branch checkout -b newbranch</code></p>
-<h4 id="合并分支">合并分支</h4>
-<p><code>git merge branchname branchname</code></p>
-<h4 id="rebase操作">rebase操作</h4>
-<p><code>git rebase branchname branchname</code></p>
-<h3 id="远端仓库操作">远端仓库操作</h3>
-<h4 id="克隆一个远端仓库">克隆一个远端仓库</h4>
-<p><code>git clone URL/repodirectory</code></p>
-<h4 id="添加远端仓库">添加远端仓库</h4>
-<p><code>git remote add reponame URL/repodirectory</code></p>
-<h4 id="更新远端仓库的分支和数据">更新远端仓库的分支和数据</h4>
-<p><code>git fetch</code>   //默认更新远端master分支</p>
-<p><code>git fetch reponame branchname</code>     //更新指定远端的分支</p>
-<h4 id="获取并合并远端仓库的分支到当前分支">获取并合并远端仓库的分支到当前分支</h4>
-<p><code>git pull reponame branchname</code></p>
-<p>eg: git pull origin master</p>
-<h4 id="上传本地分支和数据到远端仓库">上传本地分支和数据到远端仓库</h4>
-<p><code>git push reponame  branchname</code></p>
-<p>eg: git push origin master</p>
-<h4 id="跟踪远端仓库上的分支">跟踪远端仓库上的分支</h4>
-<p><code>git checkout —track origin/testbranch</code></p>
-<p><code>git checkout -b test origin/testbranch</code></p>
+        <p><img src="http://i.k1982.com/png/up/200712/20071206130310888.png" alt="image"></p>
+<h2 id="Base_Key">Base Key</h2>
+<p>command + c : 复制选中的内容</p>
+<p>command + v : 粘贴已复制的内容</p>
+<p>command + X : 剪贴已选中的内容</p>
+<p>command + z : 撤销最近一次执行放入操作</p>
+<p>command + / : 选中多行，一次注释多行</p>
+<h2 id="Move_Key">Move Key</h2>
+<p>ctrl + a : 移动光标到行首</p>
+<p>ctrl + e : 移动光标到行尾</p>
+<p>ctrl + p : 向上移动光标</p>
+<p>ctrl + n : 向下移动光标</p>
+<p>ctrl + b : 向左按字符移动光标</p>
+<p>ctrl + f : 向右按字符移动光标</p>
+<p>ctrl + option + b :  向左按符移动光标</p>
+<p>ctrl + option + f :  向右按符移动光标</p>
+<h2 id="Select_Key">Select Key</h2>
+<p>ctrl + shift + b : 从光标处向左按字符选中</p>
+<p>ctrl + shift + f : 从光标处向右按字符选中</p>
+<p>ctrl + shift + p : 从光标处向上按行选中</p>
+<p>ctrl + shift + n : 从光标处按行向上选中</p>
+<h2 id="Delete_Key">Delete Key</h2>
+<p>ctrl + d : 删除贯标右边的字符，按字符删除</p>
+<p>ctrl + h : 删除贯标左边的字符，按字符删除</p>
+<p>ctrl + k : 删除光标所在位置之后的所有内容</p>
+<h2 id="Key_—_XCode">Key — XCode</h2>
+<p>command + shift + 0 :  打开官方文档</p>
+<p>command + shift + n : 创建一个工程</p>
+<p>commanf + n : 创建一个类、协议、类别、累扩展等</p>
+<p>command + b : 编译代码</p>
+<p>command + r : 运行生成的代码</p>
+<p>command + shift + k : 清空XCode之前的编译</p>
+<p>command + shift + -&gt;/&lt;-;(左方向键) : 切换页面</p>
+<p>commang + f : 在官方文档中调出搜索栏</p>
+<p>comand + option + enter : 分栏</p>
+<p>command + enter  : 回到一栏</p>
+<p>command + ctrl +左右键 : 不同页面的切换</p>
+<p>shift + tab : 选中上一个</p>
+<p>tab : 选中下一个</p>
+<h2 id="other_key">other key</h2>
+<p>command + ctrl + f  : 切换当前应用程序界面的大小，同时将桌面背景消失，只显示当前应用程序</p>
+<p>command + option + “+” : vim终端界面的大小切换 </p>
+<p>ctrl + 左右键 : 桌面快速切换</p>
+<p>ctrl + 上键 : 已开应用程序，分布呈现在当前桌面</p>
+<p>ctrl + 下键 : 呈现当前应用程序已开启的所有窗口，以及使用当前应用程序开启的历史文件</p>
+<p>command + tab : 快速向后选择桌面已开启的应用程序</p>
+<p>command + tab + shift : 快速向前选择桌面已开启的应用程序</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/23/git-base-operation/" data-id="jjcd5kox4zsujlcu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2014/10/20/accelerator-key/" data-id="sl72ef48axqxerji" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/accelerator-key/">accelerator-key</a></li></ul>
 
     </footer>
   </div>
@@ -186,6 +152,10 @@
 
 
   
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
   
 </section>
         

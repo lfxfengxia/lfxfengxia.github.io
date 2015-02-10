@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: kinds of viewControllers | SayingWhy’s Blog</title>
+  <title>Tag: AWK | SayingWhy’s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="SayingWhy’s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/kinds-of-viewControllers/">
+<meta property="og:url" content="http://yoursite.com/tags/AWK/">
 <meta property="og:site_name" content="SayingWhy’s Blog">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -67,10 +67,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-viewController" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell-command-awk" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/01/17/viewController/" class="article-date">
-  <time datetime="2015-01-17T05:43:19.000Z" itemprop="datePublished">Jan 17 2015</time>
+    <a href="/2015/02/04/shell-command-awk/" class="article-date">
+  <time datetime="2015-02-04T14:10:53.000Z" itemprop="datePublished">Feb 4 2015</time>
 </a>
     
   </div>
@@ -81,7 +81,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/17/viewController/">viewController</a>
+      <a class="article-title" href="/2015/02/04/shell-command-awk/">shell_command_awk</a>
     </h1>
   
 
@@ -89,128 +89,78 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-UIViewController生命周期几种方法调用时机">1.UIViewController生命周期几种方法调用时机</h2>
+        <h1 id="简介">简介</h1>
+<p>awk是一个强大的文本分析工具，相对于grep的查找，sed的编辑，awk在其对数据分析并生成报告时，显得尤为强大。简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。</p>
+<p>awk有3个不同版本: awk、nawk和gawk，未作特别说明，一般指gawk，gawk 是 AWK 的 GNU 版本。</p>
+<p>awk其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Kernighan 姓氏的首个字母。实际上 AWK 的确拥有自己的语言： AWK 程序设计语言 ， 三位创建者已将它正式定义为“样式扫描和处理语言”。它允许您创建简短的程序，这些程序读取输入文件、为数据排序、处理数据、对输入执行计算以及生成报表，还有无数其他的功能。</p>
+<h1 id="使用方法">使用方法</h1>
+<pre><code>awk <span class="string">'{pattern + action}'</span> <span class="list">{filenames}</span>
+</code></pre><p>尽管操作可能会很复杂，但语法总是这样，其中 pattern 表示 AWK 在数据中查找的内容，而 action 是在找到匹配内容时所执行的一系列命令。花括号（{}）不需要在程序中始终出现，但它们用于根据特定的模式对一系列指令进行分组。 pattern就是要表示的正则表达式，用斜杠括起来。</p>
+<p>awk语言的最基本功能是在文件或者字符串中基于指定规则浏览和抽取信息，awk抽取信息后，才能进行其他文本操作。完整的awk脚本通常用来格式化文本文件中的信息。</p>
+<p>通常，awk是以文件的一行为处理单位的。awk每接收文件的一行，然后执行相应的命令，来处理文本。</p>
+<h1 id="条用awk的三种方式">条用awk的三种方式</h1>
 <ol>
-<li>- (id)initWithNibName:(NSString <em>)nibNameOrNil bundle:(NSBundle </em>)nibBundleOrNil;<br>当UIViewController在初始化加载xib文件时，该方法被调用。</li>
-<li>- (void)loadView;<br>当每次访问UIViewController的view(比如controller.view,self.view)并且view为nil，该方法就会被调用。</li>
-<li>- (void)viewWillUnload; </li>
-<li>- (void)viewDidUnload;</li>
-<li>- (void)viewDidLoad;<br>不管是通过xib文件还是重写loadView创建UIViewController的view，在view创建完毕后，最终都会调用该方法。</li>
-<li>- (void)viewWillAppear:(BOOL)animated;<br>当view将要呈现在UI界面上时会调用该方法。</li>
-<li>- (void)viewDidAppear:(BOOL)animated;<br>当view已经完全过渡到屏幕上时会调用该方法。</li>
-<li>- (void)viewWillDisappear:(BOOL)animated;<br>当view将要消失，或被覆盖、隐藏时会调用该方法。</li>
-<li>- (void)viewDidDisappear:(BOOL)animated;<br>当view已经完全消失，或被覆盖、隐藏时会调用该方法。</li>
+<li>命令行方式</li>
 </ol>
-<h2 id="2-UIViewController_xib的加载过程">2.UIViewController xib的加载过程</h2>
-<p>loadView默认实现就是在自定义的UIViewController类里不重写loadView方法，或者重写后只是在方法里简单实现[super loadView]。默认实现做了如下几个工作：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk [-F  field-separator]  <span class="string">'commands'</span>  <span class="built_in">input</span>-<span class="keyword">file</span>(<span class="keyword">s</span>)</div></pre></td></tr></table></figure>
+
+
+<p>其中，commands 是真正awk命令，[-F域分隔符]是可选的。 input-file(s) 是待处理的文件。<br>在awk中，文件的每一行中，由域分隔符分开的每一项称为一个域。通常，在不指名-F域分隔符的情况下，默认的域分隔符是空格。</p>
 <ol>
-<li>它会先去查找与UIViewController相关联的xib文件，通过加载xib文件来创建UIViewController的view<br> 如果在初始化UIViewController指定了xib文件名，就会根据传入的xib文件名加载对应的xib文件<br> [[UIViewController alloc] initWithNibName:@”ViewController” bundle:nil];<br> 如果没有明显地传xib文件名，就会加载跟UIViewController同名的xib文件<br> [[UIViewController alloc] init]; // 加载UIViewController.xib </li>
-<li>如果没有找到相关联的xib文件，就会创建一个空白的UIView，然后赋值给UIViewController的view属性，大致如下：<br> self.view = [[[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame] autorelease];</li>
+<li><p>shell脚本方式<br>将所有的awk命令插入一个文件，并使awk程序可执行，然后awk命令解释器作为脚本的首行，一遍通过键入脚本名称来调用。<br>相当于shell脚本首行的：#!/bin/sh<br>可以换成：#!/bin/awk</p>
+</li>
+<li><p>将所有的awk命令插入一个单独文件，然后调用：</p>
+</li>
 </ol>
-<h2 id="3-几种控制器容器的优缺点">3.几种控制器容器的优缺点</h2>
-<h3 id="1-UITabBarController(Tabbar底部标签式:Instagram、微信、微博)">1.UITabBarController(Tabbar底部标签式:Instagram、微信、微博)</h3>
-<p>UITabBarController作为一种容器适合管理底部标签式（TabBar 如： Instagram、微信、微博）这种结构的APP</p>
-<h4 id="优点">优点</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk -<span class="keyword">f</span> awk-script-<span class="keyword">file</span> <span class="built_in">input</span>-<span class="keyword">file</span>(<span class="keyword">s</span>)</div></pre></td></tr></table></figure>
+
+<p>其中，-f选项加载awk-script-file中的awk脚本，input-file(s)跟上面的是一样的。</p>
+<h1 id="范例">范例</h1>
 <ol>
-<li>清楚当前所在的入口位置</li>
-<li>轻松在各入口间频繁跳转且不会迷失方向</li>
-<li>直接展现最重要入口的内容信息（默认首页）</li>
+<li>如果只是显示最近登录的5个帐号</li>
 </ol>
-<h4 id="缺点">缺点</h4>
-<p>功能入口过多时，该模式显得笨重不实用(超过5个的时候会将其他控制器添加到一个更多界面)</p>
-<h3 id="2-UINavigationController_(Springboard跳板式:星巴克)">2.UINavigationController (Springboard跳板式:星巴克)</h3>
-<p>UINavigationController作为一种容器适合管理跳板式（SpringBoard 如： 星巴克）这种结构的APP</p>
-<h4 id="优点-1">优点</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="array">#last </span>-n <span class="number">5</span> | awk  <span class="string">'{print $1}'</span></div><div class="line">root</div><div class="line">root</div><div class="line">root</div><div class="line">dmtsai</div><div class="line">root</div></pre></td></tr></table></figure>
+
+<p>awk工作流程是这样的：读入有’\n’换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域。默认域分隔符是”空白键” 或 “[tab]键”,所以$1表示登录用户，$3表示登录用户ip,以此类推。</p>
 <ol>
-<li>清晰展现各入口</li>
-<li>容易记住各入口位置，方便快速找到</li>
+<li>如果只是显示/etc/passwd的账户</li>
 </ol>
-<h4 id="确定">确定</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="array">#cat </span>/etc/passwd |awk  -F <span class="string">':'</span>  <span class="string">'{print $1}'</span>  </div><div class="line">root</div><div class="line">daemon</div><div class="line">bin</div><div class="line">sys</div></pre></td></tr></table></figure>
+
+<p>这种是awk+action的示例，每行都会执行action{print $1}。</p>
+<p>-F指定域分隔符为’:’。</p>
 <ol>
-<li>无法在多入口间灵活跳转，不适合任务操作</li>
-<li>容易形成更深的路径</li>
-<li>不能直接展现入口内容</li>
-<li>不能显示太多入口次级内容</li>
+<li>如果只是显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以tab键分割</li>
 </ol>
-<h3 id="3-UINavigationController做整体，融合TabBarController（List_Menu列表式：知乎）">3.UINavigationController做整体，融合TabBarController（List Menu列表式：知乎）</h3>
-<h4 id="优点-2">优点</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#cat <span class="regexp">/etc/</span>passwd |awk  -F <span class="string">':'</span>  <span class="string">'{print $1"\t"$7}'</span></div><div class="line">root    <span class="regexp">/bin/</span>bash</div><div class="line">daemon  <span class="regexp">/bin/</span>sh</div><div class="line">bin     <span class="regexp">/bin/</span>sh</div><div class="line">sys     <span class="regexp">/bin/</span>sh</div></pre></td></tr></table></figure>
+
 <ol>
-<li>层次展示清晰</li>
-<li>可展示内容较长的标题</li>
-<li>可展示标题的次级内容</li>
+<li>如果只是显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以逗号分割,而且在所有行添加列名name,shell,在最后一行添加”blue,/bin/nosh”。</li>
 </ol>
-<h4 id="缺点-1">缺点</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat /etc/passwd |awk  -F ':'  'BEGIN {<span class="literal">print</span> <span class="string">"name,shell"</span>}  {<span class="literal">print</span> <span class="variable">$1</span><span class="string">","</span><span class="variable">$7</span>} END {<span class="literal">print</span> <span class="string">"blue,/bin/nosh"</span>}'</div><div class="line">name,shell</div><div class="line">root,/bin/bash</div><div class="line">daemon,/bin/sh</div><div class="line">bin,/bin/sh</div><div class="line">sys,/bin/sh</div><div class="line">....</div><div class="line">blue,/bin/nosh</div></pre></td></tr></table></figure>
+
+<p>awk工作流程是这样的：先执行BEGING，然后读取文件，读入有/n换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域,随后开始执行模式所对应的动作action。接着开始读入第二条记录······直到所有的记录都读完，最后执行END操作。</p>
 <ol>
-<li>同级内容过多时，用户浏览容易产生疲劳</li>
-<li>排版灵活性不是很高</li>
-<li>只能通过排列顺序、颜色来区分各入口重要程度</li>
+<li>搜索/etc/passwd有root关键字的所有行</li>
 </ol>
-<h3 id="4-UIScrollvIewController融合pageControl_(Carousel旋转木马式:豆瓣同城)">4.UIScrollvIewController融合pageControl (Carousel旋转木马式:豆瓣同城)</h3>
-<h4 id="优点-3">优点</h4>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#awk -F: '/root/' /etc/passwd</span></div><div class="line"><span class="symbol">root:</span><span class="symbol">x:</span><span class="number">0</span><span class="symbol">:</span><span class="number">0</span><span class="symbol">:root</span><span class="symbol">:/root</span><span class="symbol">:/bin/bash</span></div></pre></td></tr></table></figure>
+
+<p>这种是pattern的使用示例，匹配了pattern(这里是root)的行才会执行action(没有指定action，默认输出每行的内容)。</p>
+<p>搜索支持正则，例如找root开头的: awk -F: ‘/^root/‘ /etc/passwd</p>
 <ol>
-<li>单页面内容整体性强</li>
-<li>线性的浏览方式有顺畅感、方向感</li>
+<li>搜索/etc/passwd有root关键字的所有行，并显示对应的shell</li>
 </ol>
-<h4 id="缺点-2">缺点</h4>
-<ol>
-<li>不适合展示过多页面</li>
-<li>不能跳跃性地查看间隔的页面，只能按顺序查看相邻的页面</li>
-<li>由于各页面内容结构相似，容易忽略后面的内容</li>
-</ol>
-<h3 id="5-_Drawer抽屉式：豆瓣小组">5. Drawer抽屉式：豆瓣小组</h3>
-<h4 id="优点-4">优点</h4>
-<ol>
-<li>兼容多种模式（页面内自有组织）</li>
-<li>扩展性好</li>
-</ol>
-<h4 id="缺点-3">缺点</h4>
-<ol>
-<li>隐藏框架中其他入口</li>
-<li>对入口交互的功能可见性(affordance)要求高</li>
-<li>对排版要求高</li>
-</ol>
-<h3 id="6-_Plus点聚式：Path">6. Plus点聚式：Path</h3>
-<h4 id="优点-5">优点</h4>
-<ol>
-<li>灵活</li>
-<li>展示方式有趣</li>
-<li>使界面更开阔</li>
-</ol>
-<h4 id="缺点-4">缺点</h4>
-<ol>
-<li>隐藏框架中其他入口</li>
-<li>对入口交互的功能可见性(affordance)要求高</li>
-</ol>
-<h3 id="7-Gallery陈列馆式：多看，豆瓣电影">7.Gallery陈列馆式：多看，豆瓣电影</h3>
-<h4 id="优点-6">优点</h4>
-<ol>
-<li>直观展现各项内容</li>
-<li>方便浏览经常更新的内容</li>
-</ol>
-<h4 id="缺点-5">缺点</h4>
-<ol>
-<li>不适合展现顶层入口框架</li>
-<li>容易形成界面内容过多，显得杂乱</li>
-<li>设计效果容易呆板</li>
-</ol>
-<h3 id="8-Waterfall瀑布式">8.Waterfall瀑布式</h3>
-<h4 id="优点-7">优点</h4>
-<ol>
-<li>浏览时产生流畅体验</li>
-</ol>
-<h4 id="缺点-6">缺点</h4>
-<ol>
-<li>缺乏对整体内容的体积感，容易发生空间位置迷失</li>
-<li>浏览一段时间后，容易产生疲劳感</li>
-</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># awk -F: <span class="string">'/root/{print $7}'</span> <span class="regexp">/etc/</span>passwd             </div><div class="line"><span class="regexp">/bin/</span>bash</div></pre></td></tr></table></figure>
+
+<p> 这里指定了action{print $7}</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/01/17/viewController/" data-id="4x5ma236nanc3o87" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/02/04/shell-command-awk/" data-id="9rss8j4h44p2g1fc" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AWK/">AWK</a></li></ul>
 
     </footer>
   </div>

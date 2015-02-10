@@ -67,6 +67,240 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-shel-command-grep" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/10/shel-command-grep/" class="article-date">
+  <time datetime="2015-02-10T02:12:47.000Z" itemprop="datePublished">Feb 10 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/10/shel-command-grep/">shel_command_grep</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="作用">作用</h1>
+<p>Linux系统中grep命令是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹 配的行打印出来。grep全称是Global Regular Expression Print，表示全局正则表达式版本，它的使用权限是所有用户。</p>
+<h1 id="格式">格式</h1>
+<p>grep [options]</p>
+<p>options 主要参数：</p>
+<ol>
+<li>－c：只输出匹配行的计数。</li>
+<li>－I：不区分大 小写(只适用于单字符)。</li>
+<li>－h：查询多文件时不显示文件名。</li>
+<li>－l：查询多文件时只输出包含匹配字符的文件名。</li>
+<li>－n：显示匹配行及 行号。</li>
+<li>－s：不显示不存在或无匹配文本的错误信息。</li>
+<li>－v：显示不包含匹配文本的所有行。</li>
+<li>-E 使用扩展正则表达式</li>
+<li>pattern正则表达式主要参数：</li>
+<li>\： 忽略正则表达式中特殊字符的原有含义。</li>
+<li>^：匹配正则表达式的开始行。</li>
+<li>$: 匹配正则表达式的结束行。</li>
+<li>\&lt;：从匹配正则表达 式的行开始。</li>
+<li>>：到匹配正则表达式的行结束。</li>
+<li>[ ]：单个字符，如[A]即A符合要求 。</li>
+<li>[ - ]：范围，如[A-Z]，即A、B、C一直到Z都符合要求 。</li>
+<li>。：所有的单个字符。</li>
+<li>* ：有字符，长度可以为0。</li>
+</ol>
+<h1 id="grep命令的简单实例">grep命令的简单实例</h1>
+<ol>
+<li><p>$ grep ‘test’ d*</p>
+<p> 显示当前目录下所有以d开头的文件中包含test的行</p>
+</li>
+<li><p>$ grep ‘test’ file1 file2 file3</p>
+<p> 显示指定文件file1，file2，file3中包含test的行</p>
+</li>
+<li><p>$ grep ‘[a-z]{5}‘ file</p>
+<p> 显示指定文件file中至少包含连续5个小写字母的行</p>
+</li>
+<li><p>$ grep ‘w(es)t.*\1’ file</p>
+<p> 如果west被匹配，则es就被存储到内存中，并标记为1，然后搜索任意个字符(.*)，这些字符后面紧跟着 另外一个es(\1)，找到就显示该行。如果用egrep或grep -E，就不用”\”号进行转义，直接写成’w(es)t.*\1′就可以了。</p>
+</li>
+</ol>
+<p>5.简单实例</p>
+<pre><code><span class="comment"># grep 'the' size.txt </span>
+<span class="operator">the</span> test <span class="built_in">file</span> 
+their are <span class="built_in">files</span> 
+
+<span class="comment"># grep '\&lt;the' size.txt </span>
+<span class="operator">the</span> test <span class="built_in">file</span> 
+their are <span class="built_in">files</span> 
+
+<span class="comment"># grep 'the\&gt;' size.txt </span>
+<span class="operator">the</span> test <span class="built_in">file</span> 
+
+<span class="comment"># grep '\&lt;the\&gt;' size.txt </span>
+<span class="operator">the</span> test <span class="built_in">file</span> 
+
+I<span class="comment"># grep '\&lt;[Tt]he\&gt;' size.txt </span>
+<span class="operator">the</span> test <span class="built_in">file</span>
+</code></pre><h1 id="grep命令的复杂实例">grep命令的复杂实例</h1>
+<ol>
+<li><p>$ grep xm ~/Desktop/*</p>
+<p> 在’~/Desktop’目录下搜索带字符串’xm’的文件,结果如下：</p>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">./xmpp.txt~:<span class="preprocessor">&lt;?</span>xmlversion=<span class="string">'1.0'</span><span class="preprocessor">?&gt;</span></div><div class="line">./xmpp.txt~:xmlns=<span class="string">'jabber:client'</span></div><div class="line">./xmpp.txt~:xmlns:stream=<span class="string">'http_etherx_jabber_org/streams'</span></div><div class="line">grep: ./you-第三阶段: Is <span class="operator">a</span> <span class="built_in">directory</span></div><div class="line">grep: ./服装搭配资料: Is <span class="operator">a</span> <span class="built_in">directory</span></div><div class="line">grep: ./毕设: Is <span class="operator">a</span> <span class="built_in">directory</span></div><div class="line">Binary <span class="built_in">file</span> ./毕设文档.docx matches</div><div class="line">Binary <span class="built_in">file</span> ./王志飞论文.doc matches</div><div class="line">grep: ./简历: Is <span class="operator">a</span> <span class="built_in">directory</span></div><div class="line">grep: ./课件: Is <span class="operator">a</span> <span class="built_in">directory</span></div><div class="line">grep: ./项目: Is <span class="operator">a</span> <span class="built_in">directory</span></div></pre></td></tr></table></figure>
+
+<pre><code>默认情况下，’<span class="keyword">grep</span>’只搜索当前目录。如果 此目录下有许多子目录，’<span class="keyword">grep</span>’会以如下形式列出：
+</code></pre><p>grep: sound: Is a directory</p>
+<pre><code>明确要求搜索子目录：<span class="keyword">grep</span> -r
+或忽略子目录：<span class="keyword">grep</span> -d skip
+
+如果有很多 输出时，您可以通过管道将其转到’less’上阅读：
+$ <span class="keyword">grep</span> magic <span class="regexp">/usr/</span>src<span class="regexp">/Linux/</span>Documentation<span class="comment">/* | less</span>
+</code></pre><ol>
+<li><p>命令行参数</p>
+<p> grep -i pattern files ：不区分大小写地搜索。默认情况区分大小写，</p>
+<p> grep -l pattern files ：只列出匹配的文件名，</p>
+<p> grep -L pattern files ：列出不匹配的文件名，</p>
+<p> grep -w pattern files ：只匹配整个单词，而不是字符串的一部分(如匹配’magic’，而不是’magical’)，</p>
+<p> grep -C number pattern files ：匹配的上下文分别显示[number]行，</p>
+<p> grep pattern1 | pattern2 files ：显示匹配 pattern1 或 pattern2 的行，</p>
+<p> grep pattern1 files | grep pattern2 ：显示既匹配 pattern1 又匹配 pattern2 的行。</p>
+<p> grep -n pattern files  即可显示行号信息</p>
+<p> grep -c pattern files  即可查找总行数</p>
+<p> 这里还有些用于搜索的特殊符号：</p>
+<p> \&lt; 和 > 分别标注单词的开始与结尾。</p>
+<p> 例如：</p>
+<p> grep man * 会匹配 ‘Batman’、’manic’、’man’等，</p>
+<p> grep ‘\&lt;man’ * 匹配’manic’和’man’，但不是’Batman’，</p>
+<p> grep ‘\<man\>’ 只匹配’man’，而不是’Batman’或’manic’等其他的字符串。</man\></p>
+<p> ‘^’：指匹配的字符串在行首，</p>
+<p> ‘$’：指匹配的字符串在行 尾，</p>
+<h1 id="grep命令参数">grep命令参数</h1>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/10/shel-command-grep/" data-id="tifq3dawbhd4rq28" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grep/">Grep</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell-command-awk" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/04/shell-command-awk/" class="article-date">
+  <time datetime="2015-02-04T14:10:53.000Z" itemprop="datePublished">Feb 4 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/02/04/shell-command-awk/">shell_command_awk</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介">简介</h1>
+<p>awk是一个强大的文本分析工具，相对于grep的查找，sed的编辑，awk在其对数据分析并生成报告时，显得尤为强大。简单来说awk就是把文件逐行的读入，以空格为默认分隔符将每行切片，切开的部分再进行各种分析处理。</p>
+<p>awk有3个不同版本: awk、nawk和gawk，未作特别说明，一般指gawk，gawk 是 AWK 的 GNU 版本。</p>
+<p>awk其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Kernighan 姓氏的首个字母。实际上 AWK 的确拥有自己的语言： AWK 程序设计语言 ， 三位创建者已将它正式定义为“样式扫描和处理语言”。它允许您创建简短的程序，这些程序读取输入文件、为数据排序、处理数据、对输入执行计算以及生成报表，还有无数其他的功能。</p>
+<h1 id="使用方法">使用方法</h1>
+<pre><code>awk <span class="string">'{pattern + action}'</span> <span class="list">{filenames}</span>
+</code></pre><p>尽管操作可能会很复杂，但语法总是这样，其中 pattern 表示 AWK 在数据中查找的内容，而 action 是在找到匹配内容时所执行的一系列命令。花括号（{}）不需要在程序中始终出现，但它们用于根据特定的模式对一系列指令进行分组。 pattern就是要表示的正则表达式，用斜杠括起来。</p>
+<p>awk语言的最基本功能是在文件或者字符串中基于指定规则浏览和抽取信息，awk抽取信息后，才能进行其他文本操作。完整的awk脚本通常用来格式化文本文件中的信息。</p>
+<p>通常，awk是以文件的一行为处理单位的。awk每接收文件的一行，然后执行相应的命令，来处理文本。</p>
+<h1 id="条用awk的三种方式">条用awk的三种方式</h1>
+<ol>
+<li>命令行方式</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk [-F  field-separator]  <span class="string">'commands'</span>  <span class="built_in">input</span>-<span class="keyword">file</span>(<span class="keyword">s</span>)</div></pre></td></tr></table></figure>
+
+
+<p>其中，commands 是真正awk命令，[-F域分隔符]是可选的。 input-file(s) 是待处理的文件。<br>在awk中，文件的每一行中，由域分隔符分开的每一项称为一个域。通常，在不指名-F域分隔符的情况下，默认的域分隔符是空格。</p>
+<ol>
+<li><p>shell脚本方式<br>将所有的awk命令插入一个文件，并使awk程序可执行，然后awk命令解释器作为脚本的首行，一遍通过键入脚本名称来调用。<br>相当于shell脚本首行的：#!/bin/sh<br>可以换成：#!/bin/awk</p>
+</li>
+<li><p>将所有的awk命令插入一个单独文件，然后调用：</p>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">awk -<span class="keyword">f</span> awk-script-<span class="keyword">file</span> <span class="built_in">input</span>-<span class="keyword">file</span>(<span class="keyword">s</span>)</div></pre></td></tr></table></figure>
+
+<p>其中，-f选项加载awk-script-file中的awk脚本，input-file(s)跟上面的是一样的。</p>
+<h1 id="范例">范例</h1>
+<ol>
+<li>如果只是显示最近登录的5个帐号</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="array">#last </span>-n <span class="number">5</span> | awk  <span class="string">'{print $1}'</span></div><div class="line">root</div><div class="line">root</div><div class="line">root</div><div class="line">dmtsai</div><div class="line">root</div></pre></td></tr></table></figure>
+
+<p>awk工作流程是这样的：读入有’\n’换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域。默认域分隔符是”空白键” 或 “[tab]键”,所以$1表示登录用户，$3表示登录用户ip,以此类推。</p>
+<ol>
+<li>如果只是显示/etc/passwd的账户</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="array">#cat </span>/etc/passwd |awk  -F <span class="string">':'</span>  <span class="string">'{print $1}'</span>  </div><div class="line">root</div><div class="line">daemon</div><div class="line">bin</div><div class="line">sys</div></pre></td></tr></table></figure>
+
+<p>这种是awk+action的示例，每行都会执行action{print $1}。</p>
+<p>-F指定域分隔符为’:’。</p>
+<ol>
+<li>如果只是显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以tab键分割</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#cat <span class="regexp">/etc/</span>passwd |awk  -F <span class="string">':'</span>  <span class="string">'{print $1"\t"$7}'</span></div><div class="line">root    <span class="regexp">/bin/</span>bash</div><div class="line">daemon  <span class="regexp">/bin/</span>sh</div><div class="line">bin     <span class="regexp">/bin/</span>sh</div><div class="line">sys     <span class="regexp">/bin/</span>sh</div></pre></td></tr></table></figure>
+
+<ol>
+<li>如果只是显示/etc/passwd的账户和账户对应的shell,而账户与shell之间以逗号分割,而且在所有行添加列名name,shell,在最后一行添加”blue,/bin/nosh”。</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat /etc/passwd |awk  -F ':'  'BEGIN {<span class="literal">print</span> <span class="string">"name,shell"</span>}  {<span class="literal">print</span> <span class="variable">$1</span><span class="string">","</span><span class="variable">$7</span>} END {<span class="literal">print</span> <span class="string">"blue,/bin/nosh"</span>}'</div><div class="line">name,shell</div><div class="line">root,/bin/bash</div><div class="line">daemon,/bin/sh</div><div class="line">bin,/bin/sh</div><div class="line">sys,/bin/sh</div><div class="line">....</div><div class="line">blue,/bin/nosh</div></pre></td></tr></table></figure>
+
+<p>awk工作流程是这样的：先执行BEGING，然后读取文件，读入有/n换行符分割的一条记录，然后将记录按指定的域分隔符划分域，填充域，$0则表示所有域,$1表示第一个域,$n表示第n个域,随后开始执行模式所对应的动作action。接着开始读入第二条记录······直到所有的记录都读完，最后执行END操作。</p>
+<ol>
+<li>搜索/etc/passwd有root关键字的所有行</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#awk -F: '/root/' /etc/passwd</span></div><div class="line"><span class="symbol">root:</span><span class="symbol">x:</span><span class="number">0</span><span class="symbol">:</span><span class="number">0</span><span class="symbol">:root</span><span class="symbol">:/root</span><span class="symbol">:/bin/bash</span></div></pre></td></tr></table></figure>
+
+<p>这种是pattern的使用示例，匹配了pattern(这里是root)的行才会执行action(没有指定action，默认输出每行的内容)。</p>
+<p>搜索支持正则，例如找root开头的: awk -F: ‘/^root/‘ /etc/passwd</p>
+<ol>
+<li>搜索/etc/passwd有root关键字的所有行，并显示对应的shell</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># awk -F: <span class="string">'/root/{print $7}'</span> <span class="regexp">/etc/</span>passwd             </div><div class="line"><span class="regexp">/bin/</span>bash</div></pre></td></tr></table></figure>
+
+<p> 这里指定了action{print $7}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/02/04/shell-command-awk/" data-id="9rss8j4h44p2g1fc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AWK/">AWK</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-vim-command-sed" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/02/03/vim-command-sed/" class="article-date">
@@ -1026,771 +1260,9 @@ locationNotification<span class="variable">.applicationIconBadgeNumber</span> = 
 
 
   
-    <article id="post-data-persistence" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/12/02/data-persistence/" class="article-date">
-  <time datetime="2014-12-02T05:28:50.000Z" itemprop="datePublished">Dec 2 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/12/02/data-persistence/">data-persistence</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Sandbox（沙盒机制）">Sandbox（沙盒机制）</h1>
-<blockquote>
-<p>iOS中得沙盒机制（sandbox）是一种安全体系，它规定了应用程序只能在为该应用程序创建的文件夹内读取文件，不可以访问其他地方的内容。所有的非代码文件都保存在这个地方，如图片，声音，属性列表和文本文件等。</p>
-</blockquote>
-<ul>
-<li>每个应用程序都在自己的沙盒内</li>
-<li>不能随意跨越自己的沙盒去访问别的应用程序的沙盒内容</li>
-<li><p>应用程序向外请求或接受数据都需要经过权限认证</p>
-<p>  <strong>一个沙盒中包含四部分</strong>    </p>
-<ul>
-<li>.app文件，即可运行的应用文件；</li>
-<li>Document，苹果建议将程序创建或程序浏览的文件数据保存在该目录下，iTunes备份和恢复时会包括该目录；</li>
-<li>Library，存储程序的默认设置或其它状态信息；</li>
-<li>Library/Caches，存放缓存文件，iTunes不会备份此目录，此目录下的文件不会在应用退出删除；</li>
-<li>tmp，创建和存放临时文件的地方，iTu不会备份此目录。</li>
-</ul>
-</li>
-</ul>
-<p><strong>代码获取沙盒路径的方法</strong></p>
-<ol>
-<li><p>获取根目录</p>
-<p> NSString *homePath = NSHomeDirectory();</p>
-</li>
-<li><p>获取Document目录<br> NSString *docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES)[0];</p>
-</li>
-<li><p>获取Cache目录<br> NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES)[0];</p>
-</li>
-<li><p>获取Library目录<br> NSString *libPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES)[0];</p>
-</li>
-<li>获取tmp目录<br> NSString *tmpPath = NSTemporaryDirectory();</li>
-</ol>
-<h1 id="iOS数据持久化技术">iOS数据持久化技术</h1>
-<p>数据持久化既是，能将内存中的<code>数据模型</code>转换为<code>存储模型</code>，并能在将来需要时将<code>存储模型</code>还原为<code>数据模型</code>的一种机制。</p>
-<p><strong>说明 ：</strong> 通俗的讲，也就是将数据保存在非易失性的设备中，并且能在需要时恢复。针对苹果设备来说，就是从闪存到内存的过程。</p>
-<h2 id="iOS开发中数据持久化的方法">iOS开发中数据持久化的方法</h2>
-<ul>
-<li>Row File APIs(C语言的文件操作，iOS的NSFilemanager)</li>
-<li>NSUserDefaults （默认保存文件在对应的程序包sandbox的目录下的library/Preferences）</li>
-<li>Plist(属性列表)</li>
-<li>NSCoding + Archiver&amp;Unarchiver (对象归档)</li>
-<li>SQLite （数据库）</li>
-<li>FMDB (对SQLite的封装)</li>
-</ul>
-<hr>
-<h5 id="@property_(nonatomic,_strong)_NSString_*filePath;">@property (nonatomic, strong) NSString *filePath;</h5>
-<h5 id="@property_(nonatomic,_strong)_UITextField_*textField;">@property (nonatomic, strong) UITextField *textField;</h5>
-<h3 id="#define_kFileName_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@”test-txt”">#define kFileName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@”test.txt”</h3>
-<hr>
-<h3 id="ROW_APIs">ROW APIs</h3>
-<h4 id="C语言文件操作###_ROW_APIs">C语言文件操作### ROW APIs</h4>
-<ol>
-<li>创建文件路径</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建文件存放路径（一般需要保存的文件存放在sandbox的Document目录下）</span></div><div class="line">- (<span class="keyword">void</span>)setupPath</div><div class="line">{</div><div class="line">	<span class="built_in">NSString</span> *documentDirectory = NSSearchPathForDirectorieInDomains(NSDocumentDirectory,NSUserDomainMask,<span class="literal">YES</span>)[<span class="number">0</span>];</div><div class="line">	<span class="keyword">self</span><span class="variable">.filePath</span> = [documentDirectory stringByAppendingPathComponent:kFileName];	</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<ol>
-<li>文件的写入</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">￼- (void)saveData</div><div class="line">￼{</div><div class="line">	￼// oc文件路径转化为c</div><div class="line">	￼const char *filePath = [_filePath UTF8String];</div><div class="line">	￼// 打开文件</div><div class="line">	￼FILE *fp = fopen(filePath, <span class="string">"w+"</span>);</div><div class="line">	￼if (NULL == fp) {</div><div class="line">		perror(<span class="string">"fopen"</span>);</div><div class="line">		￼return;</div><div class="line">	}</div><div class="line">	￼￼// 将_textFiled的内容写到文件</div><div class="line">	￼const char *content = [_textField.text UTF8String];</div><div class="line">	￼size_t size = fwrite(content, BUFSIZE, 1, fp);</div><div class="line">	￼fclose(fp);</div><div class="line">	￼if (size &gt; 0) {</div><div class="line">	￼	NSLog(@<span class="string">"Saved data successfully"</span>);</div><div class="line">	￼}</div><div class="line">￼}</div></pre></td></tr></table></figure>
-
-<ol>
-<li>文件的读取</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">- (void)loadData</div><div class="line">{</div><div class="line">	￼// 文件路径</div><div class="line">	￼const char *filePath = [_path UTF8String];</div><div class="line">	￼NSLog(@<span class="string">"%s"</span>, filePath);</div><div class="line">	￼// 打开文件</div><div class="line">	￼FILE *fp = fopen(filePath, <span class="string">"r"</span>);</div><div class="line">	￼if (fp == NULL) {</div><div class="line">		perror(<span class="string">"fopen"</span>);</div><div class="line">		return;</div><div class="line">	￼}</div><div class="line">	//读取文件内容到内存</div><div class="line">	char buf[BUSIZ] = {0};</div><div class="line">	//获取文件大小</div><div class="line">	fseek(fp,SEEK_END);</div><div class="line">	long size = ftell(fp);</div><div class="line">	fread(fp,size,1,buf);</div><div class="line">	//赋值给_textField</div><div class="line">	NSString *str = [NSString stringWithUTFString:str];</div><div class="line">	if(str != NULL && ![str isEqualToString:@<span class="string">""</span>]);{</div><div class="line">		_textField.text = str;</div><div class="line">	}</div><div class="line">	fclose(fp);</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<h4 id="OC_NSFileManager文件管理器操作">OC NSFileManager文件管理器操作</h4>
-<ol>
-<li>创建文件路径</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建文件存放路径（一般需要保存的文件存放在sandbox的Document目录下）</span></div><div class="line">- (<span class="keyword">void</span>)setupPath</div><div class="line">{</div><div class="line">	<span class="built_in">NSFileManager</span> *fileManager = [<span class="built_in">NSFileManager</span> defaultManager];</div><div class="line">	<span class="built_in">NSString</span> *documentDirectory = NSSearchPathForDirectorieInDomains(NSDocumentDirectory,NSUserDomainMask,<span class="literal">YES</span>)[<span class="number">0</span>];</div><div class="line">	<span class="comment">//创建文件目录</span></div><div class="line">	<span class="built_in">NSString</span> *test = [documentDirectory stringByAppendingPathComponent:<span class="string">@"test"</span>];</div><div class="line">	[fileManager createDirectoryAtPath:test withIntermediateDirectories:<span class="literal">YES</span> attributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</div><div class="line">	<span class="keyword">self</span><span class="variable">.filePath</span> = [documentDirectory stringByAppendingPathComponent:kFileName];	</div><div class="line">	<span class="built_in">NSString</span> *content = <span class="literal">nil</span>;</div><div class="line">	<span class="keyword">if</span>(![fileManager fileExistsAtPath:<span class="keyword">self</span><span class="variable">.filePAth</span>]){</div><div class="line">		[fileManager createFileAtPath:<span class="keyword">self</span><span class="variable">.filePath</span> contents:[content dataUsingEncoding:NSUTF*String] attributes:<span class="literal">nil</span>];</div><div class="line">	}</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<ol>
-<li>文件的写入</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)saveData</div><div class="line">{</div><div class="line">	<span class="built_in">NSError</span> *error;</div><div class="line">	[<span class="keyword">self</span><span class="variable">.textField</span><span class="variable">.text</span> writeToFile:<span class="keyword">self</span><span class="variable">.filePath</span> atomically:YE];</div><div class="line">	<span class="keyword">if</span>(error){</div><div class="line">		<span class="built_in">NSLog</span>(<span class="string">@"Error : %@"</span>,error);</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	}</div><div class="line">	<span class="built_in">NSLog</span>(<span class="string">@"save data successfully"</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<ol>
-<li>文件的读取</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)loadData</div><div class="line">{</div><div class="line">	<span class="built_in">NSError</span> *error;</div><div class="line">	<span class="built_in">NSString</span> *content = [[<span class="built_in">NSString</span> alloc]initWithContentsOfFile:<span class="keyword">self</span><span class="variable">.filePath</span> encoding:NSUTF*String error:&error];</div><div class="line">	<span class="keyword">if</span>(error){</div><div class="line">		<span class="built_in">NSLog</span>(<span class="string">@"Error : %@"</span>,error);</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	}</div><div class="line">	<span class="keyword">self</span><span class="variable">.textField</span><span class="variable">.text</span> = content;</div><div class="line">	<span class="built_in">NSLog</span>(<span class="string">@"load data successfully"</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<h3 id="NSUserDefaults">NSUserDefaults</h3>
-<p>&gt;</p>
-<ul>
-<li>直接使用原始的文件操作API,不管是C语言的还是OC的都不太方便</li>
-<li><p>Cocoa会为每个app自动创建一个数据库,用来存储App本身的偏好设置,如:开关<br>值,音量值之类的少量信息</p>
-</li>
-<li><p>NSUserDefaults使用时用 [NSUserDefaults standardUserDefaults] 接口获取单例对象</p>
-</li>
-<li>NSUserDefaults本质上是以Key-Value形式存成plist文件,放在App的 Library/Preferences目录下</li>
-<li>这个文件是<code>不安全</code>的,所以千万不要用NSUserDefaults来存储密码之类的敏感信息,<code>用户名和密码应该使用KeyChains来存储</code></li>
-</ul>
-<ol>
-<li>文件的写入</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">	- (void)saveData</div><div class="line">	{</div><div class="line">		￼NSUserDefaults *userDefaults = [NSUserDefaults</div><div class="line">	￼standardUserDefaults];</div><div class="line">		float progress = [self.progressTextField.text floatValue];</div><div class="line">		￼[userDefaults setFloat:progress forKey:@<span class="string">"progress"</span>];</div><div class="line">		￼[userDefaults setObject:self.inputTextField.text</div><div class="line">		￼forKey:@<span class="string">"input"</span>];</div><div class="line">		￼database</div><div class="line">		// keeps the in-memory cache in sync with a user’s defaults</div><div class="line">		￼￼[userDefaults synchronize];</div><div class="line">￼￼	}</div></pre></td></tr></table></figure>
-
-<ol>
-<li>文件的读取</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)loadConfig</div><div class="line">￼{</div><div class="line">	￼<span class="built_in">NSUserDefaults</span> *userDefaults = [<span class="built_in">NSUserDefaults</span></div><div class="line">	￼standardUserDefaults];</div><div class="line">	￼<span class="keyword">self</span><span class="variable">.toggle</span><span class="variable">.on</span> = [userDefaults boolForKey:<span class="string">@"toggle"</span>];</div><div class="line">	<span class="keyword">self</span><span class="variable">.progressView</span><span class="variable">.progress</span> = [userDefaults</div><div class="line">	floatForKey:<span class="string">@"progress"</span>];</div><div class="line">	<span class="keyword">self</span><span class="variable">.progressTextField</span><span class="variable">.text</span> = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%.2f"</span>,</div><div class="line">	<span class="keyword">self</span><span class="variable">.progressView</span><span class="variable">.progress</span>];</div><div class="line">	<span class="keyword">self</span><span class="variable">.inputTextField</span><span class="variable">.text</span> = [userDefaults stringForKey:<span class="string">@"input"</span>];</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<pre><code><span class="keyword">*</span><span class="keyword">*</span>说明:<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span>对NSUserDefaults单例对象的操作,实质上还是对PList文件 (Library/Preferences/<span class="variable">&lt;Application BundleIdentifier&gt;</span>.plist)的读写,只是Apple帮我们封装好了 读写方法。<span class="keyword">*</span>
-</code></pre><h3 id="Plist">Plist</h3>
-<p>&gt;</p>
-<ul>
-<li>NSUserDefaults只能读写Library/Preferences/<application bundleidentifier="">.plist这个 文件</application></li>
-<li>PList文件是XML格式的,只能存放固定数据格式的对象 </li>
-<li>PList文件支持的数据格式有NSString, NSNumber, Boolean, NSDate, NSData, NSArray,和NSDictionary。其中,Boolean格式事实上以[NSNumber numberOfBool:YES/NO];这样的形式表示。NSNumber支持float和int两种格式。</li>
-</ul>
-<ol>
-<li>创建文件路径</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)setUpPlist</div><div class="line">{</div><div class="line">	<span class="built_in">NSFileManager</span> *fileManager = [<span class="built_in">NSFileManager</span> defaultManager];</div><div class="line">	<span class="built_in">NSString</span> *documentDirectory = NSSearchPathForDirectorieInDomains(NSDocumentDirectory,NSUserDomainMask,<span class="literal">YES</span>)[<span class="number">0</span>];</div><div class="line">	<span class="keyword">self</span><span class="variable">.filePath</span> = [documentDirectory stringByAppendingPathComponent:<span class="string">@"test.plist"</span>];	</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<ol>
-<li>写入plist文件</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)saveData</div><div class="line">{</div><div class="line">	<span class="built_in">NSMutableDictionary</span> *dict = [<span class="built_in">NSMutableDictionary</span> dictionary];</div><div class="line">	￼dict[<span class="string">@"textField"</span>] = _textField<span class="variable">.text</span>;</div><div class="line">	￼<span class="keyword">if</span> (![dict writeToFile:_path atomically:<span class="literal">YES</span>]) {</div><div class="line">		￼<span class="built_in">NSLog</span>(<span class="string">@"Error!!!"</span>);</div><div class="line">		<span class="keyword">return</span>;			</div><div class="line">	￼}</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<ol>
-<li>plist文件的读取</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">	- (void)loadData</div><div class="line">	{</div><div class="line">		NSMutableDictionary *dict = [NSMutableDictionary</div><div class="line">￼dictionaryWithContentsOfFile:_path];</div><div class="line">		￼NSString *content = dict[@<span class="string">"textField"</span>];</div><div class="line">￼		if (content && content.length &gt; 0) {</div><div class="line">		￼_textField.text = content;</div><div class="line">￼		}</div><div class="line">	}</div></pre></td></tr></table></figure>
-
-<h3 id="Archiver&amp;Unarchiver">Archiver&amp;Unarchiver</h3>
-<p>&gt;</p>
-<ul>
-<li>NSUserDefaults和Plist文件支持常用数据类型,但是不支持自定义的数据对象 </li>
-<li>Cocoa提供了NSCoding和NSKeyArchiver两个工具类,可以把我们自定义的对象编码 成二进制数据流,然后存进文件里面</li>
-</ul>
-<ol>
-<li><p>NSCoding协议</p>
-<hr>
-</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//解档，解码。解档之后会生成一个该类的对象（解码后对模型的属性赋值）</span></div><div class="line">- (id)initWithCoder:(<span class="type">NSCoder</span> *)aDecoder</div><div class="line">{</div><div class="line">	<span class="keyword">self</span> = [<span class="keyword">super</span> <span class="keyword">init</span>];</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">self</span>) {</div><div class="line">		<span class="keyword">self</span>.name = [aDecoder decodeObjectForKey:kNameKey];</div><div class="line">		<span class="keyword">self</span>.age = [aDecoder decodeIntForKey:kAgeKey];</div><div class="line">		<span class="keyword">self</span>.studyID = [aDecoder decodeObjectForKey:kStudyIDKey];</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="keyword">self</span>;</div><div class="line">￼}</div></pre></td></tr></table></figure>
-
-
-
-
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//归档，编码 （将模型的属性编码）</span></div><div class="line">- (id)initWithCoder:(<span class="type">NSCoder</span> *)aDecoder</div><div class="line">{</div><div class="line">	<span class="keyword">self</span> = [<span class="keyword">super</span> <span class="keyword">init</span>];</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">self</span>) {</div><div class="line">		<span class="keyword">self</span>.name = [aDecoder decodeObjectForKey:kNameKey];</div><div class="line">		<span class="keyword">self</span>.age = [aDecoder decodeIntForKey:kAgeKey];</div><div class="line">		<span class="keyword">self</span>.studyID = [aDecoder decodeObjectForKey:kStudyIDKey];</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> <span class="keyword">self</span>;</div><div class="line">￼}</div></pre></td></tr></table></figure>
-
-
-<pre><code><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span><span class="literal">-</span>
-</code></pre><ol>
-<li>保存数据</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">￼- (void)saveData{</div><div class="line">    _student = [[YMStudent alloc] init];</div><div class="line">	￼_student.name = _name.text;</div><div class="line">	￼_student.age = [_age.text intValue];</div><div class="line">	￼_student.studyID = _studyID.text;</div><div class="line">	￼if ([NSKeyedArchiver archiveRootObject:_student toFile:self.filePath]) {</div><div class="line">	￼	NSLog(@<span class="string">"Archive successfully!"</span>);</div><div class="line">	￼}</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<ol>
-<li>读取数据</li>
-</ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">￼- (void)loadData{</div><div class="line">    <span class="variable">_student =</span> [NSKeyedUnarchiver unarchiveObjectWithFile:self.filePAth];</div><div class="line">  		￼<span class="keyword">if</span> (student != nil) {</div><div class="line">		_name.<span class="variable">text =</span> student.name;</div><div class="line">		_age.<span class="variable">text =</span> ￼[@(student.age) stringValue];</div><div class="line">		_studyID.<span class="variable">text =</span> ￼student.studyID;</div><div class="line">	￼	NSLog(@<span class="string">"Archive successfully!"</span>);</div><div class="line">	￼}</div><div class="line">}</div></pre></td></tr></table></figure>
-
-
-<h3 id="SQLite">SQLite</h3>
-<p><a href="http://www.sqlite.org" target="_blank" rel="external">SQLite</a></p>
-<h4 id="SQLite_shell_command">SQLite shell command</h4>
-<p><a href="http://www.sqlite.org/cli.html" target="_blank" rel="external">SQLite shell command</a></p>
-<h4 id="SQLite_usage">SQLite usage</h4>
-<p>创建数据库连接对象: sqlite3</p>
-<p>创建预编译语句对象:sqlite3_stmt</p>
-<ol>
-<li><p>打开数据</p>
-<p> <strong>sqlite3_open()</strong></p>
-</li>
-<li><p>将SQL语句转换为预编译语句对象</p>
-<p> <strong>sqlite3_prepare_v2()</strong></p>
-</li>
-<li><p>执行预编译语句，每次处理一次，不需要返回值的语句（如INSERT,UPDATE,DELETE）,只需要执行该函数即可</p>
-<p> <strong>sqlite3_step()</strong></p>
-</li>
-<li><p>获取数据库中得不同类型的值</p>
-<ul>
-<li>sqlite3_column_blob()</li>
-<li>sqlite3_column_bytes()</li>
-<li>sqlite3_column_bytes16()</li>
-<li>sqlite3_column_count()  </li>
-<li>sqlite3_column_double()  </li>
-<li>sqlite3_column_int()  </li>
-<li>sqlite3_column_int64()  </li>
-<li>sqlite3_column_text()        </li>
-<li>sqlite3_column_text16()</li>
-<li>sqlite3_column_type()            </li>
-<li>sqlite3_column_value()</li>
-</ul>
-</li>
-<li><p>销毁有sqlite3_prepare_v2()函数创建的预处理语句对象</p>
-<p> <strong>sqlite3_finalize()</strong></p>
-</li>
-<li><p>关闭数据库(即销毁数据库连接对象)</p>
-<p> <strong>sqlite3_close()</strong></p>
-<h3 id="FMDB">FMDB</h3>
-<p>&gt;</p>
-</li>
-</ol>
-<p><a href="https://github.com/ccgus/fmdb" target="_blank" rel="external">FMDB Document</a></p>
-<p><a href="http://ccgus.github.io/fmdb/html/index.html" target="_blank" rel="external">Download FMDB</a></p>
-<p>FMDB数据库操作类对sqlite3的操作进行了便利的封装并保证了多线程下的安全地操作数据库</p>
-<h5 id="FEMDB有三个主要的类">FEMDB有三个主要的类</h5>
-<ol>
-<li>FMDatabase - 表示一分单独的SQLite数据库，用来执行SQLite的命令</li>
-<li>FMResultSet - 表示FMDatabase执行查询结果集</li>
-<li>FMDatabaseQueue - 在多线程中执行多个查询或更新使用该类是线程安全的</li>
-</ol>
-<h4 id="数据库的创建">数据库的创建</h4>
-<p>#define kDBFileName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@”database.sqlite”</p>
-<pre><code><span class="constant">NSString *docPath</span> = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,￼NSUserDomainMask, YES)[<span class="number">0</span>];
-<span class="constant">NSString *DBPath</span> = [docPath stringByAppendingPathComponent:kDBFileName];
-<span class="constant">FMDatabase *database</span> = [FMDatabase databaseWithPath:DBPath];
-</code></pre><h4 id="打开数据库">打开数据库</h4>
-<pre><code><span class="function">if</span>(!<span class="attr_selector">[database open]</span>){
-    <span class="function">NSLog</span>(<span class="at_rule">@<span class="string">"Open database failed !"</span>);</span>
-    return;
-}
-</code></pre><h4 id="执行更新">执行更新</h4>
-<ul>
-<li><strong>executeUpdate</strong></li>
-</ul>
-<p>一切不是SELECT命令的命令都是为更新。包括CREATE，UPDATE，INSERT，ALTER等。</p>
-<p>执行结果返回一个BOOL值。YES表示成功，NO表示失败。可以调用 -lastErrorMessage和 -lastErrorCode方法获取更多的信息。</p>
-<h4 id="执行查询">执行查询</h4>
-<ul>
-<li><strong>executeQuery</strong></li>
-</ul>
-<p>执行结果返回FMResultSet对象，失败返回nil。同样可以调用-lastErrorMessage和 -lastErrorCode方法获取更多的信息。获得的FMResultSet对象rs后，既是只有一条记录，一样使用[rs next];</p>
-<pre><code>eg: FMResultSet *<span class="variable">rs =</span> [db executeQuery:@<span class="string">"SELECT Name, Age, FROM PersonList"</span>];
-while ([rs next]) {
-    ￼NSString *<span class="variable">name =</span> [rs stringForColumn:@<span class="string">"Name"</span>];
-    ￼int <span class="variable">age =</span> [rs intForColumn:@<span class="string">"Age"</span>];
-}
-</code></pre><h5 id="FMResultSet根据类型提取数据">FMResultSet根据类型提取数据</h5>
-<pre><code>-<span class="ruby"> <span class="symbol">objectForColumnName:</span>
-</span>￼- longForColumn:
-￼- nlongLongIntForColumn:
-￼- boolForColumn:
-￼- doubleForColumn:
-￼- stringForColumn:
-￼- dateForColumn:
-￼- dataForColumn:
-￼- dataNoCopyForColumn:
-￼- UTF8StringForColumnName:
-￼
-</code></pre><p><code>以上方法，都有个{type}ForColumnIndex:版本，根据column的位置提取数据</code></p>
-<p>有些时候,只是需要query某一个row里特定的一个数值(比如只是要找John的年龄),FMDB 提供了几个比较简便的方法。这些方法定义在FMDatabaseAdditions.h,如果要使用,记得先 import进来</p>
-<pre><code>//找地址
-NSString *address = [db stringForQuery:@"<span class="operator"><span class="keyword">SELECT</span> Address <span class="keyword">FROM</span> PersonList ￼<span class="keyword">WHERE</span> Name = ?<span class="string">",@"</span>John”];</span>
-￼NSString *address = [db stringForQuery:@"<span class="operator"><span class="keyword">SELECT</span> Address <span class="keyword">FROM</span> PersonList <span class="keyword">WHERE</span> Name = ?<span class="string">",@"</span>John”];</span>
-￼//找年齡
-￼int age = [db intForQuery:@"<span class="operator"><span class="keyword">SELECT</span> Age <span class="keyword">FROM</span> PersonList <span class="keyword">WHERE</span> Name     = ?<span class="string">",@"</span>John”];</span>
-</code></pre><h4 id="关闭数据库">关闭数据库</h4>
-<ul>
-<li><strong>[FMDatabase close];</strong></li>
-</ul>
-<h4 id="数据库的批量操作">数据库的批量操作</h4>
-<p><strong>使用FMDatabase 的executeStatements:或者executeStatements:withResultBlock:(是否需 要返回结果)</strong></p>
-<pre><code>NSString *sql = @"<span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> bulktest1 (id <span class="built_in">integer</span> <span class="keyword">primary</span> <span class="keyword">key</span> ￼autoincrement, x <span class="built_in">text</span>);</span>"
-"<span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> bulktest2 (id <span class="built_in">integer</span> <span class="keyword">primary</span> <span class="keyword">key</span> autoincrement, y <span class="built_in">text</span>);</span>"
-"<span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> bulktest3 (id <span class="built_in">integer</span> <span class="keyword">primary</span> <span class="keyword">key</span> autoincrement, z <span class="built_in">text</span>);</span>"
-"<span class="operator"><span class="keyword">insert</span> <span class="keyword">into</span> bulktest1 (x) <span class="keyword">values</span> (<span class="string">'XXX'</span>);</span>"
-"<span class="operator"><span class="keyword">insert</span> <span class="keyword">into</span> bulktest2 (y) <span class="keyword">values</span> (<span class="string">'YYY'</span>);</span>"
-"<span class="operator"><span class="keyword">insert</span> <span class="keyword">into</span> bulktest3 (z) <span class="keyword">values</span> (<span class="string">'ZZZ'</span>);</span>";
-￼success = [database executeStatements:sql];
-</code></pre><p>或者</p>
-<pre><code>sql = @"<span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">as</span> <span class="keyword">count</span> <span class="keyword">from</span> bulktest1;</span>"
-}];
-￼"<span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">as</span> <span class="keyword">count</span> <span class="keyword">from</span> bulktest2;</span>"
-￼"<span class="operator"><span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">as</span> <span class="keyword">count</span> <span class="keyword">from</span> bulktest3;</span>";
-￼success = [self.db executeStatements:sql withResultBlock:^int(NSDictionary ￼*dictionary) {
-￼NSInteger count = [dictionary[@"count"] integerValue];
-￼XCTAssertEqual(count, 1, @"expected one record for dictionary %@",
-￼dictionary);
-￼return 0;
-}];
-</code></pre><h4 id="参数绑定">参数绑定</h4>
-<pre><code><span class="keyword">*</span><span class="keyword">*</span>INSERT INTO myTable VALUES (?, ?, ?)<span class="keyword">*</span><span class="keyword">*</span>    
-</code></pre><p>问号只是占位,执行操作可以使用NSArray, NSDictionary, or a va_list来匹配参数<br>你也可以选择使用命名参数语法:INSERT INTO myTable VALUES (:id, :name, :value)<br>参数名必须以冒名开头。SQLite本身支持其他字符($,@),Dictionary key的内部实现是冒号 开头。注意你的NSDictionary key不要包含冒号</p>
-<pre><code><span class="constant">NSDictionary *argsDict</span> = @{@<span class="string">"name"</span>:@<span class="string">"Jason"</span>};
-[db executeUpdate:@<span class="string">"INSERT INTO myTable VALUES (:name)"</span>withParameterDictionary:argsDict];
-</code></pre><h4 id="FMDatabaseQueue_及线程安全">FMDatabaseQueue 及线程安全</h4>
-<p><code>不能使⽤用同⼀个FMDatabase在不同线程中操作,多线程的操作是通过FMDatabaseQueue实现</code></p>
-<p><strong>首先创建队列,然后把单任务包装到事务里,串行执行</strong></p>
-<pre><code>FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:aPath];
-[queue inDatabase:^(FMDatabase *db) {
-[db executeUpdate:@<span class="string">"INSERT INTO myTable VALUES (?)"</span>, [NSNumber numberWithInt:<span class="number">1</span>]];
-[db executeUpdate:@<span class="string">"INSERT INTO myTable VALUES (?)"</span>, [NSNumber numberWithInt:<span class="number">2</span>]];
-[db executeUpdate:@<span class="string">"INSERT INTO myTable VALUES (?)"</span>, [NSNumber numberWithInt:<span class="number">3</span>]];
-FMResultSet *rs = [db executeQuery:@<span class="string">"select * from foo"</span>];
-<span class="keyword">while</span>([rs <span class="keyword">next</span>]) {
-<span class="keyword">...</span>
-}
-</code></pre><p><strong>事务的回滚:(当前的队列的操作的取消）</strong></p>
-<pre><code>[queue inTransaction:^(FMDatabase *db, BOOL *<span class="operator"><span class="keyword">rollback</span>) { 
-[db executeUpdate:@<span class="string">"INSERT INTO myTable VALUES (?)"</span>, [NSNumber numberWithInt:<span class="number">1</span>]];</span>
-[db executeUpdate:@"<span class="operator"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> myTable <span class="keyword">VALUES</span> (?)<span class="string">", [NSNumber numberWithInt:2]];
-[db executeUpdate:@"</span><span class="keyword">INSERT</span> <span class="keyword">INTO</span> myTable <span class="keyword">VALUES</span> (?)<span class="string">", [NSNumber numberWithInt:3]];
-if (whoopsSomethingWrongHappened) {
-}
-*rollback = YES;
-return;
-// etc...
-[db executeUpdate:@"</span><span class="keyword">INSERT</span> <span class="keyword">INTO</span> myTable <span class="keyword">VALUES</span> (?)<span class="string">", [NSNumber
-numberWithInt:4]];
-￼}];</span></span>
-</code></pre><p>￼<strong>FMDatabaseQueue会在同一个队列里 <code>同步</code>执行任务, GCD也会按它接收的块的顺序来执行</strong></p>
-<h2 id="关于Setting_Bundles">关于Setting Bundles</h2>
-<p>&gt;</p>
-<ul>
-<li>Setting Bundle的概念更多地应该是在App的配置选择上</li>
-<li>Setting Bundle可以给用户提供一个从《设置》应用里去配置应用程序的方式 </li>
-<li>从开发者的角度来看,一般需要频繁修改的配置选项,如游戏的音量和控制选项等最好 放到app内部的设置页里,而类似于邮箱应用中的邮件地址和服务器的设置等不需要频 繁更改的配置项可以放到Setting Bundle里 </li>
-<li>从《设置》应用中进行设置,实际上是操作iOS配置系统中的应用程序域(Application Domain),是持久的</li>
-</ul>
-<p><strong>iOS的配置系统中存在如下一些域,将来查询时严格按照如下列出域的顺序进行查找</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"><strong>Domain</strong></th>
-<th style="text-align:left"><strong>State</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">NSArgumentDomain</td>
-<td style="text-align:left">volatile(易失的)</td>
-</tr>
-<tr>
-<td style="text-align:left">Application（Identified by the app’s identifier）</td>
-<td style="text-align:left">persistent(持久的)</td>
-</tr>
-<tr>
-<td style="text-align:left">NSGlobalDomain</td>
-<td style="text-align:left">persistent</td>
-</tr>
-<tr>
-<td style="text-align:left">Languages(Identified by the language names)</td>
-<td style="text-align:left">volatile</td>
-</tr>
-<tr>
-<td style="text-align:left">NSRegisterationDomain</td>
-<td style="text-align:left">volatile</td>
-</tr>
-</tbody>
-</table>
-<p><strong>registerDefaults:方法是在NSRegistrationDomain域上进行配置的,所以仅仅是存在于 内存中的,易失的</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/12/02/data-persistence/" data-id="licmif602beyjq5o" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-AFNetworking" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/11/29/AFNetworking/" class="article-date">
-  <time datetime="2014-11-29T13:55:09.000Z" itemprop="datePublished">Nov 29 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/29/AFNetworking/">AFNetworking</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="下载AFNetworking开源代码">下载AFNetworking开源代码</h2>
-<p>点击链接：<a href="https://github.com/AFNetworking/AFNetworking/archive/master.zip" target="_blank" rel="external">AFNetworking</a></p>
-<h1 id="Architecture">Architecture</h1>
-<hr>
-<h2 id="NSURLConnection">NSURLConnection</h2>
-<ul>
-<li>AFURLConnectioinOperatioin</li>
-<li>AFHTTPRequestOperation</li>
-<li>AFHTTPRequestOperationManager</li>
-</ul>
-<h2 id="NSURLSession(iOS_7_/Mac_OS_10-9)">NSURLSession(iOS 7 /Mac OS 10.9)</h2>
-<ul>
-<li>AFURLSessionManager</li>
-<li>AFHTTPSessionManager</li>
-</ul>
-<h2 id="Serialization">Serialization</h2>
-<ul>
-<li><p><strong>AFURLRequestSerialization</strong></p>
-<ul>
-<li><p>AFHTTPRequestSerialization</p>
-</li>
-<li><p>AFJSONRequestSerialization</p>
-</li>
-<li><p>AFPropertyListRequestSerialization</p>
-</li>
-</ul>
-</li>
-<li><p><strong>AFURLResponseSerialization</strong></p>
-<ul>
-<li><p>AFHTTPResponseSerialization</p>
-</li>
-<li><p>AFJSONResponseSerialization</p>
-</li>
-<li><p>AFXMLParserResponseSerialization</p>
-</li>
-<li><p>AFXMLDocumentResponseSerialization (<code>MAC OS X</code>)</p>
-</li>
-<li><p>AFPropertyListResponseSerialization</p>
-</li>
-<li><p>AFImageResponseSerializer</p>
-</li>
-<li><p>AFCompoundResponseSerializer</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Additional_Functionality">Additional Functionality</h2>
-<ul>
-<li>AFSecurityPolicy</li>
-<li>AFNetworkReachabilityManager</li>
-</ul>
-<hr>
-<h1 id="Usage">Usage</h1>
-<p>#define kBaseURL        @”<a href="http://afnetworking.sinaapp.com" target="_blank" rel="external">http://afnetworking.sinaapp.com</a>“</p>
-<hr>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">requestSerializer</span> 默认是 <span class="attr_selector">[AFHTTPRequestSerializer serializer]</span>;</div><div class="line"></div><div class="line"><span class="tag">responseSerializer</span> 默认是 <span class="attr_selector">[AFJSONResponseSerializer serializer]</span>;</div></pre></td></tr></table></figure>
-
-<h2 id="AFHTTPRequestOperation">AFHTTPRequestOperation</h2>
-<pre><code>NSString *<span class="variable">urlStr =</span> [kBaseURL stringByAppendingPathComponent:@<span class="string">"request_get.json"</span>];
-NSDictionary *<span class="variable">parameters =</span> @{@<span class="string">"foo"</span>:@<span class="string">"bar"</span>};
-NSURLRequest *<span class="variable">request =</span> [[AFHTTPRequestSerializer serializer] requestWithMethod:@<span class="string">"GET"</span> URLString:urlStr parameters:parameters error:nil];
-AFHTTPRequestOperation *<span class="variable">op =</span> [[AFHTTPRequestOperation alloc]initWithRequest:request];
-op.<span class="variable">responseSerializer =</span> [AFJSONResponseSerializer serializer];
-[op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-    NSLog(@<span class="string">"response object : %@"</span>,responseObject);
-} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@<span class="string">"Error : %@"</span>,error);
-}];
-[[NSOperationQueue mainQueue] addOperation:op];
------------------------------------------------------    
-结果：
-    Success:
-    response object : {
-        <span class="variable">data =</span>     {
-            <span class="variable">foo =</span> bar;
-        };
-        <span class="variable">success =</span> <span class="number">1</span>;
-    }
-    Error:{
-            <span class="string">"errors"</span>:<span class="string">"Parameter error!"</span>,
-            <span class="string">"success"</span>:<span class="constant">false</span>
-    }
------------------------------------------------------    
-</code></pre><h2 id="AFHTTPRequestOperationManager">AFHTTPRequestOperationManager</h2>
-<h3 id="GET_Request"><code>GET</code> Request</h3>
-<pre><code>NSString *<span class="variable">urlStr =</span> [kBaseURL stringByAppendingPathComponent:@<span class="string">"request_get.json"</span>];
-NSDictionary *<span class="variable">parameters =</span> @{@<span class="string">"foo"</span>:@<span class="string">"bar"</span>};
-AFHTTPRequestOperationManager *<span class="variable">manager =</span> [AFHTTPRequestOperationManager manager];
-[manager GET:urlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    NSLog(@<span class="string">"response object : %@"</span>,responseObject);
-} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@<span class="string">"Error : %@"</span>,error);
-}];
------------------------------------------------------    
-结果：
-    Success: 
-    response object : {
-        <span class="variable">data =</span>     {
-            <span class="variable">foo =</span> bar;
-        };
-        <span class="variable">success =</span> <span class="number">1</span>;
-    }
-    Error:{
-            <span class="string">"errors"</span>:<span class="string">"Parameter error!"</span>,
-            <span class="string">"success"</span>:<span class="constant">false</span>
-    }
------------------------------------------------------        
-</code></pre><h3 id="POST_URL-Form-Request"><code>POST</code> URL-Form-Request</h3>
-<pre><code><span class="built_in">NSString</span> *httpUrlStr = [kBaseURL stringByAppendingPathComponent:<span class="string">@"request_post_body_http.json"</span>];
-<span class="built_in">NSDictionary</span> *parameters = @{<span class="string">@"foo"</span>:<span class="string">@"bar"</span>};
-AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-[manager POST:httpUrlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, <span class="keyword">id</span> responseObject) {
-    <span class="built_in">NSLog</span>(<span class="string">@"response object : %@"</span>,responseObject);
-} failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span> *error) {
-    <span class="built_in">NSLog</span>(<span class="string">@"Error : %@"</span>,error);
-}];
-
-<span class="built_in">NSString</span> *jsonUrlStr = [kBaseURL stringByAppendingPathComponent:<span class="string">@"request_post_body_json.json"</span>];
-[manager POST:jsonUrlStr parameters:parameters success:^(AFHTTPRequestOperation *operation, <span class="keyword">id</span> responseObject) {
-    <span class="built_in">NSLog</span>(<span class="string">@"Response object : %@"</span>,responseObject);
-} failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span> *error) {
-    <span class="built_in">NSLog</span>(<span class="string">@"Error : %@"</span>,error);
-}];
------------------------------------------------------    
-结果：
-    Success: 
-    response object : {
-        data =     {
-            foo = bar;
-        };
-        success = <span class="number">1</span>;
-    }
-    Error:{
-            <span class="string">"errors"</span>:<span class="string">"Parameter error!"</span>,
-            <span class="string">"success"</span>:<span class="literal">false</span>
-    }
------------------------------------------------------
-</code></pre><h3 id="POST_Multi-Part-Request"><code>POST</code> Multi-Part-Request</h3>
-<pre><code><span class="built_in">NSString</span> *urlStr = [kBaseURL stringByAppendingPathComponent:<span class="string">@"upload2server.json"</span>];
-<span class="built_in">NSDictionary</span> *parameters = @{<span class="string">@"foo"</span>:<span class="string">@"bar"</span>};
-AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-[manager POST:urlStr parameters:parameters constructingBodyWithBlock:^(<span class="keyword">id</span>&lt;AFMultipartFormData&gt; formData) {
-    <span class="built_in">NSURL</span> *fileURL = [[<span class="built_in">NSBundle</span> mainBundle] URLForResource:<span class="string">@"b_Aquarius"</span> withExtension:<span class="string">@"jpg"</span>];
-    [formData appendPartWithFileURL:fileURL name:<span class="string">@"image"</span> fileName:<span class="string">@"constellation.jpg"</span> mimeType:<span class="string">@"image/jpeg"</span> error:<span class="literal">nil</span>];
-    fileURL = [[<span class="built_in">NSBundle</span> mainBundle] URLForResource:<span class="string">@"b_Aries"</span> withExtension:<span class="string">@"png"</span>];
-    [formData appendPartWithFileURL:fileURL name:<span class="string">@"image"</span> fileName:<span class="string">@"constellation.png"</span> mimeType:<span class="string">@"image/png"</span> error:<span class="literal">nil</span>];
-} success:^(AFHTTPRequestOperation *operation, <span class="keyword">id</span> responseObject) {
-    <span class="built_in">NSLog</span>(<span class="string">@"Response object : %@"</span>,responseObject);
-} failure:^(AFHTTPRequestOperation *operation, <span class="built_in">NSError</span> *error) {
-    <span class="built_in">NSLog</span>(<span class="string">@"Error : %@"</span>,error);
-}];
------------------------------------------------------
-结果：
-    Success: 
-    Response object : {
-        data =     (
-                    {
-                name = <span class="string">"constellation.jpg"</span>;
-                url = <span class="string">"http://afnetworking-userdomain.stor.sinaapp.com/constellation.jpg"</span>;
-            },
-                    {
-                name = <span class="string">"constellation.png"</span>;
-                url = <span class="string">"http://afnetworking-userdomain.stor.sinaapp.com/constellation.png"</span>;
-            }
-        );
-        success = <span class="number">1</span>;
-    }
------------------------------------------------------
-</code></pre><hr>
-<h2 id="AFURLSessionManager">AFURLSessionManager</h2>
-<h3 id="Creating_a_Download_Task">Creating a Download Task</h3>
-<p>/#define kDownloadUrl             @”<a href="http://music.baidu.com/data/music/file?link=http://yinyueshiting.baidu.com/data2/music/346495/3464861417179661128.mp3?xcode=91aea20a92711d3d83f3f76a0952eb4b63b77ba183a87289&amp;song_id=346486" target="_blank" rel="external">http://music.baidu.com/data/music/file?link=http://yinyueshiting.baidu.com/data2/music/346495/3464861417179661128.mp3?xcode=91aea20a92711d3d83f3f76a0952eb4b63b77ba183a87289&amp;song_id=346486</a>“  <code>kDownloadUrl 是下载链接</code></p>
-<pre><code><span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:kDownloadUrl];
-<span class="built_in">NSURLRequest</span> *request = [<span class="built_in">NSURLRequest</span> requestWithURL:url];
-AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-NSProgress *progress = <span class="literal">nil</span>;
-NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:&amp;progress destination:^<span class="built_in">NSURL</span> *(<span class="built_in">NSURL</span> *targetPath, NSURLResponse *response) {
-    <span class="built_in">NSString</span> *filePath = <span class="string">@"/Users/qingyun/Desktop"</span>;
-    <span class="built_in">NSString</span> *newFielPath = [filePath stringByAppendingPathComponent:response<span class="variable">.suggestedFilename</span>];
-    <span class="built_in">NSLog</span>(<span class="string">@"name : %@"</span>,response<span class="variable">.suggestedFilename</span>);
-    <span class="keyword">return</span> [<span class="built_in">NSURL</span> fileURLWithPath:newFielPath];
-} completionHandler:^(NSURLResponse *response, <span class="built_in">NSURL</span> *filePath, <span class="built_in">NSError</span> *error) {
-    <span class="keyword">if</span> (error) {
-        <span class="built_in">NSLog</span>(<span class="string">@"Error : %@"</span>,error);
-    }<span class="keyword">else</span>{
-        <span class="built_in">NSLog</span>(<span class="string">@"File path : %@"</span>,filePath);
-    }
-}];
-[downloadTask resume];
------------------------------------------------------
-结果：
-Success: File path : file:<span class="comment">///Users/qingyun/Desktop/Only%20Love.mp3</span>
------------------------------------------------------
-</code></pre><h3 id="Creation_a_Upload_Task">Creation a Upload Task</h3>
-<pre><code>    NSString *urlStr = [kBaseURL stringByAppendingPathComponent:@<span class="string">"upload2server.json"</span>];
-NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]];
-AFURLSessionManager *manager = <span class="string">[[AFURLSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]]</span>;
-NSProgress *progress = <span class="keyword">nil</span>;
-NSString *filePath = @<span class="string">"file:///Users/qingyun/Desktop/xml&amp;json.pdf"</span>;
-NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:[NSURL fileURLWithPath:filePath] progress:&amp;progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *<span class="built_in">error</span>) {
-    <span class="keyword">if</span> (<span class="built_in">error</span>) {
-        NSLog(@<span class="string">"Error : %@"</span>,<span class="built_in">error</span>);
-    }<span class="keyword">else</span>{
-        NSLog(@<span class="string">"Response objecct : %@"</span>,responseObject);
-    }
-}];
-[uploadTask resume];
-<span class="comment">-----------------------------------------------------    </span>
-结果：
-  Success：Response objecct : {
-success = <span class="number">1</span>;
-}
-<span class="comment">-----------------------------------------------------</span>
-</code></pre><h3 id="Creation_a_Upload_Task_For_Multi-Part_Request,_With_Progress">Creation a Upload Task For Multi-Part Request, With Progress</h3>
-<pre><code><span class="built_in">NSString</span> *urlStr = [kBaseURL stringByAppendingPathComponent:<span class="string">@"upload2server.json"</span>];
-<span class="built_in">NSURLRequest</span> *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:<span class="string">@"POST"</span> URLString:urlStr parameters:<span class="literal">nil</span> constructingBodyWithBlock:^(<span class="keyword">id</span>&lt;AFMultipartFormData&gt; formData) {
-    <span class="built_in">NSURL</span> *fileURL = [[<span class="built_in">NSBundle</span> mainBundle] URLForResource:<span class="string">@"b_Cancer"</span> withExtension:<span class="string">@"png"</span>];
-    [formData appendPartWithFileURL:fileURL name:<span class="string">@"image"</span> fileName:<span class="string">@"Cancer.png"</span> mimeType:<span class="string">@"image/png"</span> error:<span class="literal">nil</span>];
-
-    fileURL = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"file://Users/qingyun/Desktop/xml&amp;json.pdf"</span>];
-    [formData appendPartWithFileURL:fileURL name:<span class="string">@"image"</span> error:<span class="literal">nil</span>];
-} error:<span class="literal">nil</span>];
-NSProgress *progress = <span class="literal">nil</span>;
-AFURLSessionManager *manager = [[AFURLSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&amp;progress completionHandler:^(NSURLResponse *response, <span class="keyword">id</span> responseObject, <span class="built_in">NSError</span> *error) {
-    <span class="keyword">if</span> (error) {
-        <span class="built_in">NSLog</span>(<span class="string">@"Error : %@"</span>,error);
-    }<span class="keyword">else</span>{
-        <span class="built_in">NSLog</span>(<span class="string">@"Response objecct : %@"</span>,responseObject);
-    }
-}];
-[uploadTask resume];
------------------------------------------------------    
-结果：
-Success:Response objecct : {
-        data =     (
-                    {
-                name = <span class="string">"Cancer.png"</span>;
-                url = <span class="string">"http://afnetworking-userdomain.stor.sinaapp.com/Cancer.png"</span>;
-            }
-        );
-        success = <span class="number">1</span>;
-    }
------------------------------------------------------
-</code></pre><h3 id="Creation_a_Data_Task">Creation a Data Task</h3>
-<pre><code>NSURL *url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:@<span class="string">"response.json"</span>]];
-NSURLRequest *request = [NSURLRequest requestWithURL:url];
-AFURLSessionManager *manager = <span class="string">[[AFURLSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]]</span>;
-NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *<span class="built_in">error</span>) {
-    <span class="keyword">if</span> (<span class="built_in">error</span>) {
-        NSLog(@<span class="string">"Error : %@"</span>,<span class="built_in">error</span>);
-    }<span class="keyword">else</span>{
-        NSLog(@<span class="string">"response object : %@"</span>,responseObject);
-    }
-}];
-[dataTask resume];
-<span class="comment">-----------------------------------------------------</span>
-结果：
-Success： response object : {
-data = <span class="string">"This is a json data."</span>;
-success = <span class="number">1</span>;
-}
-<span class="comment">-----------------------------------------------------</span>
-</code></pre><hr>
-<h2 id="AFHTTPSessionManager">AFHTTPSessionManager</h2>
-<h3 id="GET_Request-1"><code>GET</code> Request</h3>
-<pre><code>NSString *<span class="variable">urlStr =</span> [kBaseURL stringByAppendingPathComponent:@<span class="string">"request_get.json"</span>];
-NSDictionary *<span class="variable">parameters =</span> @{@<span class="string">"foo"</span>:@<span class="string">"bar"</span>};
-AFHTTPSessionManager *<span class="variable">manager =</span> [AFHTTPSessionManager manager];
-NSURLSessionDataTask *<span class="variable">dataTask =</span> [manager GET:urlStr parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-    NSLog(@<span class="string">"response object : %@"</span>,responseObject);
-} failure:^(NSURLSessionDataTask *task, NSError *error) {
-    NSLog(@<span class="string">"Error : %@"</span>,error);
-}];
-[dataTask resume];
-----------------------------------------------------
-结果：
-Success :response object : {
-    <span class="variable">data =</span>     {
-        <span class="variable">foo =</span> bar;
-    };
-    <span class="variable">success =</span> <span class="number">1</span>;
-}
-----------------------------------------------------
-</code></pre><h3 id="POSTRequest"><code>POST</code>Request</h3>
-<pre><code>NSString *<span class="variable">urlStr =</span> [kBaseURL stringByAppendingPathComponent:@<span class="string">"request_post_body_http.json"</span>];
-NSDictionary *<span class="variable">parameters =</span> @{@<span class="string">"foo"</span>:@<span class="string">"bar"</span>};
-AFHTTPSessionManager *<span class="variable">manager =</span> [AFHTTPSessionManager manager];
-NSURLSessionDataTask *<span class="variable">dataTask =</span> [manager POST:urlStr parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-    NSLog(@<span class="string">"response object : %@"</span>,responseObject);
-} failure:^(NSURLSessionDataTask *task, NSError *error) {
-    NSLog(@<span class="string">"Error : %@"</span>,error);
-}];
-[dataTask resume];
------------------------------------------------------
-结果：
-Success:response object : {
-    <span class="variable">data =</span>     {
-        <span class="variable">foo =</span> bar;
-    };
-    <span class="variable">success =</span> <span class="number">1</span>;
-}
------------------------------------------------------
-</code></pre><h3 id="HEADRequest"><code>HEAD</code>Request</h3>
-<pre><code>NSString <span class="keyword">*</span>urlStr = [kBaseURL stringByAppendingPathComponent:<span class="comment">@"request_post_body_http.json"];</span>
-NSDictionary <span class="keyword">*</span>parameters = <span class="comment">@{@"foo":@"bar"};</span>
-AFHTTPSessionManager <span class="keyword">*</span>manager = [AFHTTPSessionManager manager];
-NSURLSessionDataTask <span class="keyword">*</span>dataTask = [manager HEAD:urlStr parameters:parameters success:^(NSURLSessionDataTask <span class="keyword">*</span>task) {
-    NSLog(<span class="comment">@"Task : %@",task);</span>
-} failure:^(NSURLSessionDataTask <span class="keyword">*</span>task, NSError <span class="keyword">*</span>error) {
-    NSLog(<span class="comment">@"Task : %@ Error : %@",task,error);</span>
-}];
-[dataTask resume];
-----------------------------------------------------
-结果：
-Success： Task : <span class="variable">&lt;__NSCFLocalDataTask: 0x8d77b10&gt;</span> { completed }
-----------------------------------------------------
-</code></pre><hr>
-<h2 id="AFNetworkReachabilityManager">AFNetworkReachabilityManager</h2>
-<pre><code>/*
- *AFNetworkReachabilityStatusNotReachable     = <span class="number">0</span>,
- *AFNetworkReachabilityStatusReachableViaWWAN = <span class="number">1</span>,
- *AFNetworkReachabilityStatusReachableViaWiFi = <span class="number">2</span>
- */
-NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string">"2G/3G/4G"</span>,@<span class="string">"wi-fi"</span>];
-
-[AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
-[self.manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-    UIAlertView *alert = <span class="string">[[UIAlertView alloc]initWithTitle:@"网络检测" message:[NSString stringWithFormat:@"%@",array[status]]</span> delegate:<span class="keyword">nil</span> cancelButtonTitle:@<span class="string">"确定"</span> otherButtonTitles:<span class="keyword">nil</span>, <span class="keyword">nil</span>];
-    [alert show];
-
-}];
-
-<span class="comment">-----</span>
-[manager startMonitoring];
-[manager stopMonitoring];
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/11/29/AFNetworking/" data-id="xqcy6fuu1ovkqg5m" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AFNetworking/">AFNetworking</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -1803,7 +1275,7 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Local-Romote-Notification/">Local/Romote Notification</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVN/">SVN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIScorllView/">UIScorllView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VIM-Sed/">VIM_Sed</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML-JSON/">XML&JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode调试/">Xcode调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/background-task/">background_task</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/certificate/">certificate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AFNetworking/">AFNetworking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWK/">AWK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Persistence/">Data Persistence</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grep/">Grep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Local-Romote-Notification/">Local/Romote Notification</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SVN/">SVN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UIScorllView/">UIScorllView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI-Notes/">UI_Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VIM-Sed/">VIM_Sed</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML-JSON/">XML&JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xcode调试/">Xcode调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/accelerator-key/">accelerator-key</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/background-task/">background_task</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/certificate/">certificate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cocoaPods/">cocoaPods</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kinds-of-viewControllers/">kinds of viewControllers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oc/">oc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/set-up-blog/">set up blog</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1812,7 +1284,7 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AFNetworking/" style="font-size: NaNpx;">AFNetworking</a><a href="/tags/Data-Persistence/" style="font-size: NaNpx;">Data Persistence</a><a href="/tags/Local-Romote-Notification/" style="font-size: NaNpx;">Local/Romote Notification</a><a href="/tags/SVN/" style="font-size: NaNpx;">SVN</a><a href="/tags/UIScorllView/" style="font-size: NaNpx;">UIScorllView</a><a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/VIM-Sed/" style="font-size: NaNpx;">VIM_Sed</a><a href="/tags/XML-JSON/" style="font-size: NaNpx;">XML&JSON</a><a href="/tags/Xcode调试/" style="font-size: NaNpx;">Xcode调试</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/background-task/" style="font-size: NaNpx;">background_task</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/certificate/" style="font-size: NaNpx;">certificate</a><a href="/tags/cocoaPods/" style="font-size: NaNpx;">cocoaPods</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/kinds-of-viewControllers/" style="font-size: NaNpx;">kinds of viewControllers</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
+      <a href="/tags/AFNetworking/" style="font-size: NaNpx;">AFNetworking</a><a href="/tags/AWK/" style="font-size: NaNpx;">AWK</a><a href="/tags/Data-Persistence/" style="font-size: NaNpx;">Data Persistence</a><a href="/tags/Grep/" style="font-size: NaNpx;">Grep</a><a href="/tags/Local-Romote-Notification/" style="font-size: NaNpx;">Local/Romote Notification</a><a href="/tags/SVN/" style="font-size: NaNpx;">SVN</a><a href="/tags/UIScorllView/" style="font-size: NaNpx;">UIScorllView</a><a href="/tags/UI-Notes/" style="font-size: NaNpx;">UI_Notes</a><a href="/tags/VIM-Sed/" style="font-size: NaNpx;">VIM_Sed</a><a href="/tags/XML-JSON/" style="font-size: NaNpx;">XML&JSON</a><a href="/tags/Xcode调试/" style="font-size: NaNpx;">Xcode调试</a><a href="/tags/accelerator-key/" style="font-size: NaNpx;">accelerator-key</a><a href="/tags/background-task/" style="font-size: NaNpx;">background_task</a><a href="/tags/c/" style="font-size: NaNpx;">c</a><a href="/tags/certificate/" style="font-size: NaNpx;">certificate</a><a href="/tags/cocoaPods/" style="font-size: NaNpx;">cocoaPods</a><a href="/tags/git/" style="font-size: NaNpx;">git</a><a href="/tags/kinds-of-viewControllers/" style="font-size: NaNpx;">kinds of viewControllers</a><a href="/tags/oc/" style="font-size: NaNpx;">oc</a><a href="/tags/set-up-blog/" style="font-size: NaNpx;">set up blog</a>
     </div>
   </div>
 
@@ -1821,7 +1293,7 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -1833,6 +1305,14 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
       <ul>
         
           <li>
+            <a href="/2015/02/10/shel-command-grep/">shel_command_grep</a>
+          </li>
+        
+          <li>
+            <a href="/2015/02/04/shell-command-awk/">shell_command_awk</a>
+          </li>
+        
+          <li>
             <a href="/2015/02/03/vim-command-sed/">vim_command_sed</a>
           </li>
         
@@ -1842,14 +1322,6 @@ NSArray *array = @[@<span class="string">"不可达"</span>,@<span class="string
         
           <li>
             <a href="/2015/01/31/Local-Romote-Notification/">Local/Romote_Notification</a>
-          </li>
-        
-          <li>
-            <a href="/2015/01/30/LLDB/">LLDB</a>
-          </li>
-        
-          <li>
-            <a href="/2015/01/30/background-task/">background_task</a>
           </li>
         
       </ul>

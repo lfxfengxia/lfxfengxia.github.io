@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: git | SayingWhy’s Blog</title>
+  <title>Tag: Grep | SayingWhy’s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="SayingWhy’s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/git/">
+<meta property="og:url" content="http://yoursite.com/tags/Grep/">
 <meta property="og:site_name" content="SayingWhy’s Blog">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -67,10 +67,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-git-base-operation" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shel-command-grep" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/10/23/git-base-operation/" class="article-date">
-  <time datetime="2014-10-23T11:50:57.000Z" itemprop="datePublished">Oct 23 2014</time>
+    <a href="/2015/02/10/shel-command-grep/" class="article-date">
+  <time datetime="2015-02-10T02:12:47.000Z" itemprop="datePublished">Feb 10 2015</time>
 </a>
     
   </div>
@@ -81,7 +81,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/23/git-base-operation/">git-base-operation</a>
+      <a class="article-title" href="/2015/02/10/shel-command-grep/">shel_command_grep</a>
     </h1>
   
 
@@ -89,95 +89,108 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://www.52nx.net/article/UploadPic/2011-9/201191510414021305.png" alt="image"></p>
-<h3 id="基本操作">基本操作</h3>
-<h4 id="创建一个裸仓库">创建一个裸仓库</h4>
-<p><code>git init --bare</code></p>
-<h4 id="初始化基本仓库">初始化基本仓库</h4>
-<p><code>git init</code></p>
-<h4 id="配置作者信息">配置作者信息</h4>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --<span class="keyword">global</span> user.name <span class="string">"liufengxia"</span></div><div class="line">git config --<span class="keyword">global</span> usr.emil <span class="number">1874962073</span>@<span class="number">163</span>.<span class="keyword">com</span></div></pre></td></tr></table></figure>
+        <h1 id="作用">作用</h1>
+<p>Linux系统中grep命令是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹 配的行打印出来。grep全称是Global Regular Expression Print，表示全局正则表达式版本，它的使用权限是所有用户。</p>
+<h1 id="格式">格式</h1>
+<p>grep [options]</p>
+<p>options 主要参数：</p>
+<ol>
+<li>－c：只输出匹配行的计数。</li>
+<li>－I：不区分大 小写(只适用于单字符)。</li>
+<li>－h：查询多文件时不显示文件名。</li>
+<li>－l：查询多文件时只输出包含匹配字符的文件名。</li>
+<li>－n：显示匹配行及 行号。</li>
+<li>－s：不显示不存在或无匹配文本的错误信息。</li>
+<li>－v：显示不包含匹配文本的所有行。</li>
+<li>-E 使用扩展正则表达式</li>
+<li>pattern正则表达式主要参数：</li>
+<li>\： 忽略正则表达式中特殊字符的原有含义。</li>
+<li>^：匹配正则表达式的开始行。</li>
+<li>$: 匹配正则表达式的结束行。</li>
+<li>\&lt;：从匹配正则表达 式的行开始。</li>
+<li>>：到匹配正则表达式的行结束。</li>
+<li>[ ]：单个字符，如[A]即A符合要求 。</li>
+<li>[ - ]：范围，如[A-Z]，即A、B、C一直到Z都符合要求 。</li>
+<li>。：所有的单个字符。</li>
+<li>* ：有字符，长度可以为0。</li>
+</ol>
+<h1 id="grep命令的简单实例">grep命令的简单实例</h1>
+<ol>
+<li><p>$ grep ‘test’ d*</p>
+<p> 显示当前目录下所有以d开头的文件中包含test的行</p>
+</li>
+<li><p>$ grep ‘test’ file1 file2 file3</p>
+<p> 显示指定文件file1，file2，file3中包含test的行</p>
+</li>
+<li><p>$ grep ‘[a-z]{5}‘ file</p>
+<p> 显示指定文件file中至少包含连续5个小写字母的行</p>
+</li>
+<li><p>$ grep ‘w(es)t.*\1’ file</p>
+<p> 如果west被匹配，则es就被存储到内存中，并标记为1，然后搜索任意个字符(.*)，这些字符后面紧跟着 另外一个es(\1)，找到就显示该行。如果用egrep或grep -E，就不用”\”号进行转义，直接写成’w(es)t.*\1′就可以了。</p>
+</li>
+</ol>
+<p>5.简单实例</p>
+<pre><code><span class="comment"># grep 'the' size.txt </span>
+<span class="operator">the</span> test <span class="built_in">file</span> 
+their are <span class="built_in">files</span> 
 
-<h4 id="添加文件到暂存区（跟踪文件）">添加文件到暂存区（跟踪文件）</h4>
-<p><code>git add [filename]</code></p>
-<p><code>git add *</code> // 跟踪所有已跟踪过又修改的文件</p>
-<h4 id="移除文件">移除文件</h4>
-<p><code>git rm [filename]</code></p>
-<h4 id="重命名一个文件">重命名一个文件</h4>
-<p><code>git mv [oldname] [newname]</code></p>
-<h4 id="提交暂存区">提交暂存区</h4>
-<p><code>git commit -m &quot;description information&quot;</code>//   git commmit 只提交在暂存区的内容</p>
-<p><code>git commit －a －m &quot;description information&quot;</code>//  将跟踪过又修改的为放入暂存跟踪后直接提交，已放入暂存区的也直接一起提交</p>
-<h4 id="查看工作目录的状态">查看工作目录的状态</h4>
-<p><code>git status</code></p>
-<h4 id="查看提交历史记录">查看提交历史记录</h4>
-<p><code>git log</code></p>
-<h4 id="查看文件改变">查看文件改变</h4>
-<p><code>git diff</code> //默认比较工作区下的文件与最近一次提交的不同</p>
-<p><code>git diff -- stash</code>//比较暂存区下的文件与最近一次提交的不同</p>
-<h3 id="撤销操作">撤销操作</h3>
-<h4 id="撤销加入暂存区的操作">撤销加入暂存区的操作</h4>
-<p><code>git reset -- [filename]</code></p>
-<h4 id="撤销修改的操作">撤销修改的操作</h4>
-<p><code>git checkout -- [filename]</code></p>
-<h4 id="将本地的修改放进回收站">将本地的修改放进回收站</h4>
-<p><code>git stash</code></p>
-<h4 id="从回收站中恢复本地的修改">从回收站中恢复本地的修改</h4>
-<p><code>git stash apply</code></p>
-<h3 id="Tag操作">Tag操作</h3>
-<h4 id="查看tag">查看tag</h4>
-<p><code>git tag</code></p>
-<h4 id="创建tag">创建tag</h4>
-<p><code>git tag -a tagname -m &quot;tag description information&quot;</code></p>
-<h4 id="显示tag信息">显示tag信息</h4>
-<p><code>git show tagname</code></p>
-<h4 id="对之前的提交打tag">对之前的提交打tag</h4>
-<p><code>git tag -a tagname -m &quot;tag description information&quot; commit-num</code></p>
-<h3 id="分支操作">分支操作</h3>
-<h4 id="查看分支">查看分支</h4>
-<p>// 默认查看本地分支</p>
-<p><code>git branch</code></p>
-<p>// 查看本地以及远端分支</p>
-<p><code>git branch -a</code></p>
-<p>// 查看远端分支</p>
-<p><code>git branch -r</code></p>
-<h4 id="创建分支">创建分支</h4>
-<p><code>git branch newbranchname</code></p>
-<h4 id="删除分支">删除分支</h4>
-<p><code>git branch -d/D branchname</code></p>
-<h4 id="切换分支">切换分支</h4>
-<p><code>git checkout branchname</code></p>
-<h4 id="创建分支并切换到新建的分支下">创建分支并切换到新建的分支下</h4>
-<p><code>git branch checkout -b newbranch</code></p>
-<h4 id="合并分支">合并分支</h4>
-<p><code>git merge branchname branchname</code></p>
-<h4 id="rebase操作">rebase操作</h4>
-<p><code>git rebase branchname branchname</code></p>
-<h3 id="远端仓库操作">远端仓库操作</h3>
-<h4 id="克隆一个远端仓库">克隆一个远端仓库</h4>
-<p><code>git clone URL/repodirectory</code></p>
-<h4 id="添加远端仓库">添加远端仓库</h4>
-<p><code>git remote add reponame URL/repodirectory</code></p>
-<h4 id="更新远端仓库的分支和数据">更新远端仓库的分支和数据</h4>
-<p><code>git fetch</code>   //默认更新远端master分支</p>
-<p><code>git fetch reponame branchname</code>     //更新指定远端的分支</p>
-<h4 id="获取并合并远端仓库的分支到当前分支">获取并合并远端仓库的分支到当前分支</h4>
-<p><code>git pull reponame branchname</code></p>
-<p>eg: git pull origin master</p>
-<h4 id="上传本地分支和数据到远端仓库">上传本地分支和数据到远端仓库</h4>
-<p><code>git push reponame  branchname</code></p>
-<p>eg: git push origin master</p>
-<h4 id="跟踪远端仓库上的分支">跟踪远端仓库上的分支</h4>
-<p><code>git checkout —track origin/testbranch</code></p>
-<p><code>git checkout -b test origin/testbranch</code></p>
+<span class="comment"># grep '\&lt;the' size.txt </span>
+<span class="operator">the</span> test <span class="built_in">file</span> 
+their are <span class="built_in">files</span> 
+
+<span class="comment"># grep 'the\&gt;' size.txt </span>
+<span class="operator">the</span> test <span class="built_in">file</span> 
+
+<span class="comment"># grep '\&lt;the\&gt;' size.txt </span>
+<span class="operator">the</span> test <span class="built_in">file</span> 
+
+I<span class="comment"># grep '\&lt;[Tt]he\&gt;' size.txt </span>
+<span class="operator">the</span> test <span class="built_in">file</span>
+</code></pre><h1 id="grep命令的复杂实例">grep命令的复杂实例</h1>
+<ol>
+<li><p>$ grep xm ~/Desktop/*</p>
+<p> 在’~/Desktop’目录下搜索带字符串’xm’的文件,结果如下：</p>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">./xmpp.txt~:<span class="preprocessor">&lt;?</span>xmlversion=<span class="string">'1.0'</span><span class="preprocessor">?&gt;</span></div><div class="line">./xmpp.txt~:xmlns=<span class="string">'jabber:client'</span></div><div class="line">./xmpp.txt~:xmlns:stream=<span class="string">'http_etherx_jabber_org/streams'</span></div><div class="line">grep: ./you-第三阶段: Is <span class="operator">a</span> <span class="built_in">directory</span></div><div class="line">grep: ./服装搭配资料: Is <span class="operator">a</span> <span class="built_in">directory</span></div><div class="line">grep: ./毕设: Is <span class="operator">a</span> <span class="built_in">directory</span></div><div class="line">Binary <span class="built_in">file</span> ./毕设文档.docx matches</div><div class="line">Binary <span class="built_in">file</span> ./王志飞论文.doc matches</div><div class="line">grep: ./简历: Is <span class="operator">a</span> <span class="built_in">directory</span></div><div class="line">grep: ./课件: Is <span class="operator">a</span> <span class="built_in">directory</span></div><div class="line">grep: ./项目: Is <span class="operator">a</span> <span class="built_in">directory</span></div></pre></td></tr></table></figure>
+
+<pre><code>默认情况下，’<span class="keyword">grep</span>’只搜索当前目录。如果 此目录下有许多子目录，’<span class="keyword">grep</span>’会以如下形式列出：
+</code></pre><p>grep: sound: Is a directory</p>
+<pre><code>明确要求搜索子目录：<span class="keyword">grep</span> -r
+或忽略子目录：<span class="keyword">grep</span> -d skip
+
+如果有很多 输出时，您可以通过管道将其转到’less’上阅读：
+$ <span class="keyword">grep</span> magic <span class="regexp">/usr/</span>src<span class="regexp">/Linux/</span>Documentation<span class="comment">/* | less</span>
+</code></pre><ol>
+<li><p>命令行参数</p>
+<p> grep -i pattern files ：不区分大小写地搜索。默认情况区分大小写，</p>
+<p> grep -l pattern files ：只列出匹配的文件名，</p>
+<p> grep -L pattern files ：列出不匹配的文件名，</p>
+<p> grep -w pattern files ：只匹配整个单词，而不是字符串的一部分(如匹配’magic’，而不是’magical’)，</p>
+<p> grep -C number pattern files ：匹配的上下文分别显示[number]行，</p>
+<p> grep pattern1 | pattern2 files ：显示匹配 pattern1 或 pattern2 的行，</p>
+<p> grep pattern1 files | grep pattern2 ：显示既匹配 pattern1 又匹配 pattern2 的行。</p>
+<p> grep -n pattern files  即可显示行号信息</p>
+<p> grep -c pattern files  即可查找总行数</p>
+<p> 这里还有些用于搜索的特殊符号：</p>
+<p> \&lt; 和 > 分别标注单词的开始与结尾。</p>
+<p> 例如：</p>
+<p> grep man * 会匹配 ‘Batman’、’manic’、’man’等，</p>
+<p> grep ‘\&lt;man’ * 匹配’manic’和’man’，但不是’Batman’，</p>
+<p> grep ‘\<man\>’ 只匹配’man’，而不是’Batman’或’manic’等其他的字符串。</man\></p>
+<p> ‘^’：指匹配的字符串在行首，</p>
+<p> ‘$’：指匹配的字符串在行 尾，</p>
+<h1 id="grep命令参数">grep命令参数</h1>
+</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/23/git-base-operation/" data-id="jjcd5kox4zsujlcu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/02/10/shel-command-grep/" data-id="tifq3dawbhd4rq28" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grep/">Grep</a></li></ul>
 
     </footer>
   </div>
